@@ -11,10 +11,10 @@ public class tourtrongnuoc extends tour {
         this.dacsan = dacsan;
     }
 
-    public tourtrongnuoc(tourtrongnuoc ttnn) {
-        super(ttnn);
-        this.tinhthanh = ttnn.tinhthanh;
-        this.dacsan = ttnn.dacsan;
+    public tourtrongnuoc(tourtrongnuoc ttn) {
+        super(ttn);
+        this.tinhthanh = ttn.tinhthanh;
+        this.dacsan = ttn.dacsan;
     }
 
     public String getTinhthanh() {

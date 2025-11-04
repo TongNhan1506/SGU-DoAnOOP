@@ -37,11 +37,11 @@ import java.io.BufferedReader;
 
 
     public void nhapDsCTHD(){
-        System.out.println("Nhap so luong chi tiet hoa don: ");
+        System.out.println("Nhap so luong chi tiet hop dong: ");
         N = Integer.parseInt(sc.nextLine());
         ds=new cthd[N];
         for(int i=0;i<N;i++){
-            System.out.println("Nhap thong tin chi tiet hoa don thu "+(i+1)+": ");
+            System.out.println("Nhap thong tin chi tiet hop dong thu "+(i+1)+": ");
             ds[i]=new cthd();
             ds[i].nhap();
         }
@@ -90,7 +90,7 @@ public void timTheoMakh(String makh) {
     }
 
     if (!found) {
-        System.out.println(" Khong tim thay chi tiet hoa don nao cua khach hang co ma: " + makh);
+        System.out.println("❌ Khong tim thay chi tiet hop dong nao cua khach hang co ma: " + makh);
     }
 }
 
@@ -105,7 +105,7 @@ public void timTheoMakh(String makh) {
 public void xoaCTHDcots(String mahd) {
     int idx = timtheoma(mahd);
     if (idx == -1) {
-        System.out.println(" Khong tim thay chi tiet hoa don voi ma: " + mahd);
+        System.out.println("❌ Khong tim thay chi tiet hop dong voi ma: " + mahd);
         return;
     }
 
@@ -116,13 +116,13 @@ public void xoaCTHDcots(String mahd) {
     ds = Arrays.copyOf(ds, N - 1);
     N--;
 
-    System.out.println(" Da xoa chi tiet hoa don (tham so) co ma: " + mahd);
+    System.out.println("✅ Da xoa chi tiet hop dong (tham so) co ma: " + mahd);
 }
 
 
 public int thongKeMaHD(String mahd) {
     if (N == 0) {
-        System.out.println(" Danh sach chi tiet hoa don rong!");
+        System.out.println("❌ Danh sach chi tiet hop dong rong!");
         return 0;
     }
     int count = 0;
@@ -132,9 +132,9 @@ public int thongKeMaHD(String mahd) {
         }
     }
     if (count == 0) {
-        System.out.println(" Khong tim thay chi tiet hoa don co ma: " + mahd);
+        System.out.println("❌ Khong tim thay chi tiet hop dong co ma: " + mahd);
     } else {
-        System.out.println(" Ma hoa don '" + mahd + "' xuat hien " + count + " lan trong danh sach.");
+        System.out.println("✅ Ma hop dong '" + mahd + "' xuat hien " + count + " lan trong danh sach.");
     }
     return count;
 }
@@ -144,19 +144,19 @@ public int thongKeMaHD(String mahd) {
 
 
 public void suaCTHDkots() {
-    System.out.print("Nhap ma hoa don can sua: ");
+    System.out.print("Nhap ma hop dong can sua: ");
     String mahd = sc.nextLine();
     int idx = timtheoma(mahd);
 
     if (idx == -1) {
-        System.out.println(" Khong tim thay chi tiet hoa don voi ma: " + mahd);
+        System.out.println("❌ Khong tim thay chi tiet hop dong voi ma: " + mahd);
         return;
     }
 
     cthd ct = ds[idx];
     int chon;
     do {
-        System.out.println("\n===== SUA CHI TIET hoa don =====");
+        System.out.println("\n===== SUA CHI TIET HOP DONG =====");
         System.out.println("1. Sua ma khach hang");
         System.out.println("2. Sua ma ke hoach tour");
         System.out.println("0. Thoat");
@@ -173,15 +173,15 @@ public void suaCTHDkots() {
                 ct.setMakhtour(sc.nextLine());
                 break;
             case 0:
-                System.out.println(" Da thoat sua thong tin.");
+                System.out.println("⬅ Da thoat sua thong tin.");
                 break;
             default:
-                System.out.println(" Lua chon khong hop le!");
+                System.out.println("❌ Lua chon khong hop le!");
         }
     } while (chon != 0);
 
     ds[idx] = ct;
-    System.out.println(" Da cap nhat chi tiet hoa don co ma: " + mahd);
+    System.out.println("✅ Da cap nhat chi tiet hop dong co ma: " + mahd);
 }
 
 
@@ -189,14 +189,14 @@ public void suaCTHDcots(String mahd) {
     int idx = timtheoma(mahd);
 
     if (idx == -1) {
-        System.out.println(" Khong tim thay chi tiet hoa don voi ma: " + mahd);
+        System.out.println("❌ Khong tim thay chi tiet hop dong voi ma: " + mahd);
         return;
     }
 
     cthd ct = ds[idx];
     int chon;
     do {
-        System.out.println("\n===== SUA CHI TIET hoa don (THAM SO) =====");
+        System.out.println("\n===== SUA CHI TIET HOP DONG (THAM SO) =====");
         System.out.println("1. Sua ma khach hang");
         System.out.println("2. Sua ma ke hoach tour");
         System.out.println("0. Thoat");
@@ -213,15 +213,15 @@ public void suaCTHDcots(String mahd) {
                 ct.setMakhtour(sc.nextLine());
                 break;
             case 0:
-                System.out.println(" Da thoat sua thong tin.");
+                System.out.println("⬅ Da thoat sua thong tin.");
                 break;
             default:
-                System.out.println(" Lua chon khong hop le!");
+                System.out.println("❌ Lua chon khong hop le!");
         }
     } while (chon != 0);
 
     ds[idx] = ct;
-    System.out.println(" Da cap nhat chi tiet hoa don (tham so) co ma: " + mahd);
+    System.out.println("✅ Da cap nhat chi tiet hop dong (tham so) co ma: " + mahd);
 }
 
     public void docFile(String file){
@@ -229,10 +229,10 @@ public void suaCTHDcots(String mahd) {
             FileInputStream fis = new FileInputStream(file);
             BufferedReader br=new BufferedReader(new InputStreamReader(fis));
             int n=0;
-            ds= new cthd[100];
+            ds= new cthd[0];
             String line="";
             while((line=br.readLine())!=null){
-                String[] part=line.split("\\|");
+                String[] part=line.split(",");
                 
                 if(part.length>=3){
                     String mahd=part[0];
@@ -259,7 +259,7 @@ public void suaCTHDcots(String mahd) {
                 cthd c=ds[i];
                 String line="";
 
-                line=String.join("\\|",
+                line=String.join(",",
                 c.getMahd(),
                 c.getMakh(),
                 c.getMakhtour());
