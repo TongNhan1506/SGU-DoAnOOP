@@ -1,10 +1,10 @@
-KH001|Nguyen|Van A|1990-05-15|Nam|123 Le Loi, Q1, TP. HCM|0905123456
-KH002|Tran|Thi B|1995-11-20|Nu|456 Hai Ba Trung, Ha Noi|0912654321
-KH003|Le|Minh C|1988-01-30|Nam|789 Nguyen Van Linh, Da Nang|0988777666
-KH004|Pham|Hoai An|2001-07-22|Nu|11 Bach Dang, Can Tho|0933444555
-KH005|Vo|Thanh D|1992-03-10|Nam|55 Ly Thuong Kiet, Hue|0905111222
-KH006|Do|Ngoc E|1998-12-05|Nu|22 Tran Phu, Nha Trang|0977888999
-KH007|Huynh|Tuan F|1985-09-18|Nam|33 Vo Van Tan, Q3, TP. HCM|0909121212
-KH008|Dang|Thu Ha|1993-02-14|Nu|88 Hang Bai, Hoan Kiem, Ha Noi|0911222333
-KH009|Hoang|Van G|1999-06-08|Nam|99 Pham Van Dong, Da Nang|0905678678
-KH010|Bui|Kim Chi|2000-08-25|Nu|10 Nguyen Trai, Q5, TP. HCM|0908555444
+KH001|Nguyen Van|An|1990-05-15|Nam|123 Le Loi, Q1, TP. HCM|0905123456
+KH002|Tran Thi|Bich|1995-11-20|Nu|456 Hai Ba Trung, Ha Noi|0912654321
+KH003|Le Minh|Tuan|1988-01-30|Nam|789 Nguyen Van Linh, Da Nang|0988777666
+KH004|Pham Hoai|An|2001-07-22|Nu|11 Bach Dang, Can Tho|0933444555
+KH005|Vo Thanh|Nhan|1992-03-10|Nam|55 Ly Thuong Kiet, Hue|0905111222
+KH006|Do Ngoc|Linh|1998-12-05|Nu|22 Tran Phu, Nha Trang|0977888999
+KH007|Huynh Tan|Phat|1985-09-18|Nam|33 Vo Van Tan, Q3, TP. HCM|0909121212
+KH008|Dang Thu|Ha|1993-02-14|Nu|88 Hang Bai, Hoan Kiem, Ha Noi|0911222333
+KH009|Hoang Van|Giang|1999-06-08|Nam|99 Pham Van Dong, Da Nang|0905678678
+KH010|Bui Kim|Chi|2000-08-25|Nu|10 Nguyen Trai, Q5, TP. HCM|0908555444
