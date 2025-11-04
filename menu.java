@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class menu {
     private static Scanner sc = new Scanner(System.in);
+    private static dscthoadon dscthd=new dscthoadon();
     private static dsHDV dshdv = new dsHDV();
     private static dskhachhang dskh = new dskhachhang();
     private static dstour dst = new dstour();
@@ -9,9 +10,25 @@ public class menu {
     private static dsctkhtour dsctkt = new dsctkhtour();
     private static dshopdong dshd = new dshopdong();
     private static dshoadon dshoadon = new dshoadon();
+    private static dsdanhgiatour dsdgt=new dsdanhgiatour();
+    private static dsnhahang dsnh=new dsnhahang();
+
+    private static void loaddulieu(){
+        dst.docFile("dstour.txt");
+        dsctkt.docFile("dsctkhtour.txt");
+        dshd.docFile("dshopdong.txt");
+        dshoadon.docFile("dshoadon.txt");
+        dskht.docFile("dskehoachtour.txt");
+        dskh.docFile("dskhachhang.txt");
+        dshdv.docFile("dshdv.txt");
+        dscthd.docFile("dscthoadon.txt");
+        dsdgt.docFile("dsdanhgiatour.txt");
+        dsnh.docFile("dsnhahang.txt");
+    }
 
     public static void main(String[] args) {
         khoiTao();
+        loaddulieu();
         int chon = -1;
         
         while (chon != 0) {
@@ -576,3 +593,4 @@ public class menu {
         } while (chon != 0);
     }
 }
+    
