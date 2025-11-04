@@ -1,67 +1,72 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 public class dsnhahang {
     private nhahang[] ds;
-    private int soNH;
+    private int N;
     Scanner sc = new Scanner(System.in);
 
     public dsnhahang() {
-        soNH = 0;
+        N = 0;
         ds = new nhahang[0];
     }
 
-    public dsnhahang(nhahang[] ds, int soNH) {
+    public dsnhahang(nhahang[] ds, int N) {
         this.ds = ds;
-        this.soNH = soNH;
+        this.N = N;
     }
 
     public dsnhahang(dsnhahang dsn) {
         this.ds = dsn.ds;
-        this.soNH = dsn.soNH;
+        this.N = dsn.N;
     }
 
     public nhahang[] getDs() {
         return ds;
     }
 
-    public int getSoNH() {
-        return soNH;
+    public int getN() {
+        return N;
     }
 
     public void setDs(nhahang[] ds) {
         this.ds = ds;
     }
 
-    public void setSoNH(int soNH) {
-        this.soNH = soNH;
+    public void setN(int N) {
+        this.N = N;
     }
 
     
     public void nhapDsNH() {
         System.out.print("Nhap so luong nha hang: ");
-        soNH = Integer.parseInt(sc.nextLine());
-        ds = new nhahang[soNH];
-        for (int i = 0; i < soNH; i++) {
+        N = Integer.parseInt(sc.nextLine());
+        ds = new nhahang[N];
+        for (int i = 0; i < N; i++) {
             System.out.println("\nNhap thong tin nha hang thu " + (i + 1) + ": ");
             ds[i] = new nhahang();
             ds[i].nhap();
         }
-        soNH = ds.length;
+        N = ds.length;
     }
 
    
     public void xuatDsNH() {
         System.out.printf("%-15s %-20s %-25s %-15s %-15s\n",
                 "MaNH", "TenNhaHang", "DiaChi", "SoDT", "MaKHTour");
-        for (int i = 0; i < soNH; i++) {
+        for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
     }
 
   
     public int timTheoMa(String manh) {
-        for (int i = 0; i < soNH; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getManh().equalsIgnoreCase(manh)) {
                 return i;
             }
@@ -80,7 +85,7 @@ public class dsnhahang {
         boolean found = false;
         System.out.printf("%-15s %-20s %-25s %-15s %-15s\n",
                 "MaNH", "TenNhaHang", "DiaChi", "SoDT", "MaKHTour");
-        for (int i = 0; i < soNH; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
                 ds[i].xuat();
                 found = true;
@@ -102,7 +107,7 @@ public class dsnhahang {
         System.out.println("- Prefix ma ke hoach tour: '" + prefix + "'");
         System.out.printf("%-15s %-20s %-25s %-15s %-15s\n",
                 "MaNH", "TenNhaHang", "DiaChi", "SoDT", "MaKHTour");
-        for (int i = 0; i < soNH; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getMakhtour().toLowerCase().startsWith(prefix.toLowerCase())) {
                 ds[i].xuat();
                 count++;
@@ -121,16 +126,16 @@ public class dsnhahang {
     public void themNHKhongTs() {
         nhahang n = new nhahang();
         n.nhap();
-        ds = Arrays.copyOf(ds, soNH + 1);
-        ds[soNH] = n;
-        soNH++;
+        ds = Arrays.copyOf(ds, N + 1);
+        ds[N] = n;
+        N++;
         System.out.println("✅ Da them nha hang moi!");
     }
 
     public void themNHCoTs(nhahang n) {
-        ds = Arrays.copyOf(ds, soNH + 1);
-        ds[soNH] = new nhahang(n);
-        soNH++;
+        ds = Arrays.copyOf(ds, N + 1);
+        ds[N] = new nhahang(n);
+        N++;
         System.out.println("✅ Da them nha hang (tham so) thanh cong!");
     }
 
@@ -141,11 +146,11 @@ public class dsnhahang {
             System.out.println("❌ Khong tim thay nha hang co ma: " + manh);
             return;
         }
-        for (int i = idx; i < soNH - 1; i++) {
+        for (int i = idx; i < N - 1; i++) {
             ds[i] = ds[i + 1];
         }
-        ds = Arrays.copyOf(ds, soNH - 1);
-        soNH--;
+        ds = Arrays.copyOf(ds, N - 1);
+        N--;
         System.out.println("✅ Da xoa nha hang co ma: " + manh);
     }
 
@@ -158,7 +163,7 @@ public class dsnhahang {
 
     public int thongKeTheoMaKHTour(String makhtour) {
         int count = 0;
-        for (int i = 0; i < soNH; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
                 count++;
             }
@@ -180,7 +185,7 @@ public void thongKeTheoMaKHTour() {
     System.out.println("\nDanh sach nha hang:");
     System.out.printf("%-15s %-20s %-25s %-15s %-15s\n",
             "MaNH", "TenNhaHang", "DiaChi", "SoDT", "MaKHTour");
-    for (int i = 0; i < soNH; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
             ds[i].xuat();
         }
@@ -237,5 +242,57 @@ public void thongKeTheoMaKHTour() {
 
         ds[idx] = n;
         System.out.println("✅ Da cap nhat thong tin nha hang co ma: " + manh);
+    }
+    public void docFile(String file){
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            
+            int n=0;
+            ds=new nhahang[n];
+            String line;
+            while((line = br.readLine())!=null){
+                String[] part=line.split(",");
+
+                if(part.length>=7){
+                    String ma = part[0].trim();
+                    String ten = part[1].trim();
+                    String dc = part[2].trim();
+                    String sdt = part[3].trim();
+                    String makht=part[4].trim();
+                    ds[n++]=new nhahang(ma, ten, dc, sdt, makht);
+                }
+            }
+            N=n;
+            ds=Arrays.copyOf(ds,N);
+            br.close();
+            System.out.println("Da doc "+N+" nha hang tu file"+file);
+        } catch ( Exception e) {
+            System.out.println("Loi khong doc duoc file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void ghiFile(String file){
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            for(int i=0;i<N;i++){
+                nhahang n =ds[i];
+                String line ="";
+                
+                line=String.join(",",
+                n.getManh(),
+                n.getTennh(),
+                n.getDiachi(),
+                n.getSodt(),
+                n.getMakhtour());
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Da ghi "+N+" nha hang vao file");
+        } catch(Exception e){
+            System.out.println("Loi ghi file "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

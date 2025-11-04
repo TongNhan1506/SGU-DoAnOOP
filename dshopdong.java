@@ -1,6 +1,11 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 class dshopdong {
     private hopdong[] ds;
     private int N;
@@ -156,5 +161,57 @@ public void thongKeTheoMaTour() {
 
         ds[idx] = h;
         System.out.println("✅ Da cap nhat thong tin hop dong co ma: " + mahd);
+    }
+    public void docFile(String file){
+        try {
+            FileInputStream fis =new FileInputStream(file);
+            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            int n=0;
+            ds=new hopdong[n];
+            
+            String line;
+            while((line=br.readLine())!=null){
+                String[] part=line.split(",");
+
+                if(part.length>=4){
+                    String mahd=part[0].trim();
+                    String matour=part[1].trim();
+                    String makh=part[2].trim();
+                    String dieukhoan=part[3].trim();
+                    
+                     ds[n++]=new hopdong(mahd, matour, makh, dieukhoan);
+                }
+            }
+            br.close();
+            
+            N=n;
+            ds=Arrays.copyOf(ds,N);
+            System.out.println("Da doc "+N+" hop dong tu file "+file);
+        } catch(Exception e){
+            System.out.println("Loi ko doc duoc file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void ghiFile(String file){
+        try {
+            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            for(int i=0; i<N;i++){
+                hopdong h=ds[i];
+
+                String line="";
+                line=String.join(",",
+                h.getMahd(),
+                h.getMatour(),
+                h.getMakh(),
+                h.getDieukhoan());
+                bw.write(line);
+                bw.newLine();
+            }  
+            bw.close();
+            System.out.println("Da ghi "+N+" hop dong vao file "+file);
+        }catch(Exception e){
+            System.out.println("Loi ghi file: "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

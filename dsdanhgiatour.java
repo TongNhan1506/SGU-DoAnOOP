@@ -1,62 +1,67 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 public class dsdanhgiatour {
     private danhgiatour[] ds;
-    private int soDG;
+    private int N;
     Scanner sc = new Scanner(System.in);
 
     public dsdanhgiatour() {
-        soDG = 0;
+        N = 0;
         ds = new danhgiatour[0];
     }
 
     public dsdanhgiatour(dsdanhgiatour dsdg) {
         this.ds = dsdg.ds;
-        this.soDG = dsdg.soDG;
+        this.N = dsdg.N;
     }
 
     public danhgiatour[] getDs() {
         return ds;
     }
 
-    public int getSoDG() {
-        return soDG;
+    public int getN() {
+        return N;
     }
 
     public void setDs(danhgiatour[] ds) {
         this.ds = ds;
     }
 
-    public void setSoDG(int soDG) {
-        this.soDG = soDG;
+    public void setN(int N) {
+        this.N = N;
     }
 
     // ====== NHẬP DANH SÁCH ======
     public void nhapDsDG() {
         System.out.print("Nhap so luong danh gia: ");
-        soDG = Integer.parseInt(sc.nextLine());
-        ds = new danhgiatour[soDG];
-        for (int i = 0; i < soDG; i++) {
+        N = Integer.parseInt(sc.nextLine());
+        ds = new danhgiatour[N];
+        for (int i = 0; i < N; i++) {
             System.out.println("\nNhap danh gia thu " + (i + 1) + ": ");
             ds[i] = new danhgiatour();
             ds[i].nhap();
         }
-        soDG = ds.length;
+        N = ds.length;
     }
 
     // ====== XUẤT DANH SÁCH ======
     public void xuatDsDG() {
         System.out.printf("%-10s %-12s %-20s %-6s %-30s\n",
                 "MaDG", "MaKHTour", "TenKH", "Sao", "NhanXet");
-        for (int i = 0; i < soDG; i++) {
+        for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
     }
 
     // ====== TÌM THEO MÃ ======
     public int timTheoMa(String madg) {
-        for (int i = 0; i < soDG; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getMadg().equalsIgnoreCase(madg)) {
                 return i;
             }
@@ -76,7 +81,7 @@ public void timTheoMaKHTour(String makhtour) {
     System.out.printf("%-10s %-12s %-20s %-6s %-30s\n",
             "MaDG", "MaKHTour", "TenKH", "Sao", "NhanXet");
 
-    for (int i = 0; i < soDG; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
             ds[i].xuat();
             found = true;
@@ -92,9 +97,9 @@ public void timTheoMaKHTour(String makhtour) {
 
     // ====== THÊM (CÓ THAM SỐ) ======
     public void themDGCoTs(danhgiatour dg) {
-        ds = Arrays.copyOf(ds, soDG + 1);
-        ds[soDG] = new danhgiatour(dg); // dùng constructor sao chép để an toàn
-        soDG++;
+        ds = Arrays.copyOf(ds, N + 1);
+        ds[N] = new danhgiatour(dg); // dùng constructor sao chép để an toàn
+        N++;
         System.out.println("✅ Da them danh gia (tham so) thanh cong!");
     }
 
@@ -105,18 +110,18 @@ public void timTheoMaKHTour(String makhtour) {
             System.out.println("❌ Khong tim thay danh gia co ma: " + madg);
             return;
         }
-        for (int i = idx; i < soDG - 1; i++) {
+        for (int i = idx; i < N - 1; i++) {
             ds[i] = ds[i + 1];
         }
-        ds = Arrays.copyOf(ds, soDG - 1);
-        soDG--;
+        ds = Arrays.copyOf(ds, N - 1);
+        N--;
         System.out.println("✅ Da xoa danh gia co ma: " + madg);
     }
 
   
     // ====== THỐNG KÊ THEO MÃ KẾ HOẠCH TOUR ======
 public void thongKeTheoMaKHTour() {
-    if (soDG == 0) {
+    if (N == 0) {
         System.out.println("❌ Danh sach danh gia rong!");
         return;
     }
@@ -127,7 +132,7 @@ public void thongKeTheoMaKHTour() {
     int count = 0;
     int tongSao = 0;
 
-    for (int i = 0; i < soDG; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
             count++;
             tongSao += ds[i].getSao();
@@ -197,5 +202,57 @@ public void thongKeTheoMaKHTour() {
 
         ds[idx] = dg;
         System.out.println("✅ Da cap nhat danh gia co ma: " + madg);
+    }
+    public void docFile(String file){
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            int n=0;
+            ds=new danhgiatour[n];
+            String line="";
+            while((line=br.readLine())!=null){
+                String[] part=line.split(",");
+
+                if(part.length>=5){
+                    String madg=part[0];
+                    String makhtour=part[1];
+                    String tenkh=part[2];
+                    int sao=Integer.parseInt(part[3]);
+                    String nhanxet=part[4];
+
+                    ds[n++]=new danhgiatour(madg,makhtour,tenkh,sao,nhanxet);
+                }
+            }
+            br.close();
+                N=n;
+                ds=Arrays.copyOf(ds,N);
+        }
+        catch(Exception e){
+            System.out.println("Da doc "+N+" danh gia tour tu file "+file);
+            e.printStackTrace();
+        }
+    }
+    public void ghiFile(String file){
+        try{
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            for(int i=0;i<N;i++){
+                danhgiatour d=ds[i];
+                String line="";
+                line=String.join(",",
+                d.getMadg(),
+                d.getMakhtour(),
+                d.getTenkh(),
+                String.valueOf(d.getSao()),
+                d.getTenkh());
+                bw.write(line);
+                bw.newLine();
+            }
+        bw.close();
+        System.out.println("Da ghi "+N+"vao file "+file);
+        }
+        catch(Exception e){
+            System.out.println("Loi ghi file "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

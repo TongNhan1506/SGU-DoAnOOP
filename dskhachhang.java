@@ -1,42 +1,47 @@
 import java.util.Scanner;
 import java.util.Arrays;
 import java.time.LocalDate;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 class dskhachhang {
     private khachhang[] ds;
-    private int n;
+    private int N;
     Scanner sc = new Scanner(System.in);
 
     public dskhachhang() {
         ds = new khachhang[100];
-        n = 0;
+        N = 0;
     }
-    public dskhachhang(khachhang[] ds, int n) {
+    public dskhachhang(khachhang[] ds, int N) {
         this.ds = ds;
-        this.n = n;
+        this.N = N;
     }
     public dskhachhang(dskhachhang dskh) {
         this.ds = dskh.ds;
-        this.n = dskh.n;
+        this.N = dskh.N;
     }
     public khachhang[] getDs() {
         return ds;
     }
     public int getN() {
-        return n;
+        return N;
     }
     public void setDs(khachhang[] ds) {
         this.ds = ds;
     }
-    public void setN(int n) {
-        this.n = n;
+    public void setN(int N) {
+        this.N = N;
     }
     
     public void nhapds() {
         System.out.print("Nhap so luong khach hang: ");
-        n = Integer.parseInt(sc.nextLine());
-        ds = new khachhang[n];
-        for (int i = 0; i < n; i++) {
+        N = Integer.parseInt(sc.nextLine());
+        ds = new khachhang[N];
+        for (int i = 0; i < N; i++) {
             System.out.println("Nhap khach hang thu " + (i + 1) + ":");
             ds[i] = new khachhang();
             ds[i].nhap();
@@ -44,28 +49,28 @@ class dskhachhang {
     }
 
     public void xuatds() {
-        if (n == 0) {
+        if (N == 0) {
             System.out.println("Danh sach rong.");
             return;
         }
         System.out.printf("%-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
                 "MaKH", "Ho", "Ten", "NgaySinh", "GioiTinh", "DiaChi", "SDT");
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
     }
 
     
     public void themKhachCoTs(khachhang k) {
-        ds = Arrays.copyOf(ds, n + 1);
-        ds[n] = new khachhang(k);
-        n++;
+        ds = Arrays.copyOf(ds, N + 1);
+        ds[N] = new khachhang(k);
+        N++;
         System.out.println("✅ Da them khach hang (tham so) thanh cong!");
     }
 
    
     public int timTheoMakh(String makh) {
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < N; i++) {
             if (ds[i].getMakh().equalsIgnoreCase(makh)) return i;
         }
         return -1;
@@ -82,7 +87,7 @@ class dskhachhang {
     System.out.println("\n=== KET QUA TIM KIEM THEO TEN: " + ten + " ===");
     System.out.printf("%-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
             "MaKH", "Ho", "Ten", "NgaySinh", "GioiTinh", "DiaChi", "SDT");
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getTen().equalsIgnoreCase(ten)) {
             ds[i].xuat();
             found = true;
@@ -100,11 +105,11 @@ class dskhachhang {
             System.out.println("❌ Khong tim thay khach hang voi ma: " + makh);
             return;
         }
-        for (int i = idx; i < n - 1; i++) {
+        for (int i = idx; i < N - 1; i++) {
             ds[i] = ds[i + 1];
         }
-        ds = Arrays.copyOf(ds, n - 1);
-        n--;
+        ds = Arrays.copyOf(ds, N - 1);
+        N--;
         System.out.println("✅ Da xoa khach hang bang tham so: " + makh);
     }
 
@@ -126,7 +131,7 @@ class dskhachhang {
 
     
 public void thongKeMaKH() {
-    if (n == 0) {
+    if (N == 0) {
         System.out.println("❌ Danh sach khach hang rong!");
         return;
     }
@@ -135,7 +140,7 @@ public void thongKeMaKH() {
     String makh = sc.nextLine();
 
     int count = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMakh().equalsIgnoreCase(makh)) {
             count++;
         }
@@ -217,5 +222,60 @@ public void thongKeMaKH() {
         ds[idx] = k;
         System.out.println("Da cap nhat thong tin khach hang.");
     }
+    public void docFile(String file){
+        try {
+            FileInputStream fis=new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            int n=0;
+            ds=new khachhang[n];
+            String line="";
+            while((line=br.readLine())!=null){
+                String[] part=line.split(",");
+                if(part.length>=7){
+                    String ma=part[0];
+                    String ho=part[1];
+                    String ten=part[2];
+                    LocalDate ngaysinh=LocalDate.parse(part[3]);
+                    String gioitinh=part[4];
+                    String diachi=part[5];
+                    String sdt=part[6];
 
+                    ds[n++]=new khachhang(ma, ho, ten, ngaysinh, gioitinh, diachi, sdt);
+                }
+            }
+            br.close();
+            N=n;
+            ds=Arrays.copyOf(ds, n);
+            System.out.println("Da doc "+N+" khach hang tu file "+file);
+        }catch(Exception e){
+            System.out.println("Loi doc file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void ghiFile(String file){
+        try{
+            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            for(int i=0;i<N;i++){
+                khachhang k=ds[i];
+                String line="";
+
+                line=String.join(",",
+                k.getMakh(),
+                k.getHo(),
+                k.getTen(),
+                String.valueOf(k.getNgaysinh()),
+                k.getGioitinh(),
+                k.getDiachi(),
+                k.getSdt());
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Da ghi "+N+" khach hang vao file "+file);
+        }
+        catch(Exception e){
+            System.out.println("Loi ghi file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

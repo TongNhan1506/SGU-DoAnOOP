@@ -13,6 +13,12 @@ class ctkhtour{
         this.tienan = tienan;
         this.tieno = tieno;
     }
+    public ctkhtour(String makhtour,String ngaychi,String tienan,String tieno){
+        this.makhtour=makhtour;
+        this.ngaychi=ngaychi;
+        this.tienan=tienan;
+        this.tieno=tieno;
+    }
     public ctkhtour(ctkhtour ct){
         this.makhtour = ct.makhtour;
         this.ngaychi = ct.ngaychi;

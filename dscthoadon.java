@@ -1,52 +1,58 @@
 import java.util.Scanner;
+import java.io.FileInputStream;
 import java.util.Arrays;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
  class dscthoadon{
     private cthd[] ds;
-    private int n;
+    private int N;
     public dscthoadon(){
         ds = new cthd[100];
-        n=0;
+        N=0;
     }
     public dscthoadon(cthd[] ds,int n){
         this.ds=ds;
-        this.n=n;
+        this.N=n;
     }
     public dscthoadon(dscthoadon dsct){
         this.ds=dsct.ds;
-        this.n=dsct.n;
+        this.N=dsct.N;
     }
     public cthd[] getDs() {
         return ds;
     }
     public int getN() {
-        return n;
+        return N;
     }
     public void setDs(cthd[] ds) {
         this.ds = ds;
     }
-    public void setN(int n) {
-        this.n = n;
+    public void setN(int N) {
+        this.N = N;
     }
     Scanner sc = new Scanner(System.in);
 
 
     public void nhapDsCTHD(){
         System.out.println("Nhap so luong chi tiet hop dong: ");
-        n = Integer.parseInt(sc.nextLine());
-        ds=new cthd[n];
-        for(int i=0;i<n;i++){
+        N = Integer.parseInt(sc.nextLine());
+        ds=new cthd[N];
+        for(int i=0;i<N;i++){
             System.out.println("Nhap thong tin chi tiet hop dong thu "+(i+1)+": ");
             ds[i]=new cthd();
             ds[i].nhap();
         }
-        n=ds.length;
+        N=ds.length;
     }
 
 
 
     public void xuatDsCTHD(){
         System.out.printf("%-15s %-15s %-15s\n","Ma HD","Ma KH","Ma Ke Hoach Tour");
-        for(int i=0;i<n;i++){
+        for(int i=0;i<N;i++){
             ds[i].xuat();
         }
     }
@@ -54,7 +60,7 @@ import java.util.Arrays;
 
 
     public int timtheoma(String mahd){
-        for(int i=0;i<n;i++){
+        for(int i=0;i<N;i++){
             if(ds[i].getMahd().equals(mahd)){
             return i;}
         }
@@ -76,7 +82,7 @@ public void timTheoMakh(String makh) {
     System.out.println("\n=== KET QUA TIM KIEM THEO MA KHACH HANG: " + makh + " ===");
     System.out.printf("%-15s %-15s %-15s\n", "Ma HD", "Ma KH", "Ma Ke Hoach Tour");
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMakh().equalsIgnoreCase(makh)) {
             ds[i].xuat();
             found = true;
@@ -90,9 +96,9 @@ public void timTheoMakh(String makh) {
 
 
     public void themcthdcots(cthd k){
-        ds=Arrays.copyOf(ds,n+1);
-        ds[n]=new cthd(k);
-        n++;
+        ds=Arrays.copyOf(ds,N+1);
+        ds[N]=new cthd(k);
+        N++;
         System.out.println("Da them xong");
     }
 
@@ -103,24 +109,24 @@ public void xoaCTHDcots(String mahd) {
         return;
     }
 
-    for (int i = idx; i < n - 1; i++) {
+    for (int i = idx; i < N - 1; i++) {
         ds[i] = ds[i + 1];
     }
 
-    ds = Arrays.copyOf(ds, n - 1);
-    n--;
+    ds = Arrays.copyOf(ds, N - 1);
+    N--;
 
     System.out.println("✅ Da xoa chi tiet hop dong (tham so) co ma: " + mahd);
 }
 
 
 public int thongKeMaHD(String mahd) {
-    if (n == 0) {
+    if (N == 0) {
         System.out.println("❌ Danh sach chi tiet hop dong rong!");
         return 0;
     }
     int count = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         if (ds[i].getMahd().equalsIgnoreCase(mahd)) {
             count++;
         }
@@ -218,5 +224,54 @@ public void suaCTHDcots(String mahd) {
     System.out.println("✅ Da cap nhat chi tiet hop dong (tham so) co ma: " + mahd);
 }
 
+    public void docFile(String file){
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            int n=0;
+            ds= new cthd[0];
+            String line="";
+            while((line=br.readLine())!=null){
+                String[] part=line.split(",");
+                
+                if(part.length>=3){
+                    String mahd=part[0];
+                    String makh=part[1];
+                    String makhtour=part[2];
 
+                    ds[n++]=new cthd(mahd, makh, makhtour);
+                }
+
+            }
+            br.close();
+            N=n;
+            ds=Arrays.copyOf(ds,N);
+            System.out.println("Da doc "+N+" chi tiet hoa don tu file "+file);
+        }catch(Exception e){
+            System.out.println("Loi khong doc duoc file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void ghiFile(String file){
+        try{
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            for(int i=0;i<N;i++){
+                cthd c=ds[i];
+                String line="";
+
+                line=String.join(",",
+                c.getMahd(),
+                c.getMakh(),
+                c.getMakhtour());
+
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Da ghi "+N+" chi tiet hoa don vao file "+file);
+        }catch(Exception e){
+            System.out.println("Loi ghi file "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
