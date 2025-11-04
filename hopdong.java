@@ -13,6 +13,12 @@ class hopdong{
         this.makh = kh.getMakh();
         this.dieukhoan = dieukhoan;
     }
+    public hopdong(String mahd,String matour,String makh,String dieukhoan){
+        this.mahd=mahd;
+        this.matour=matour;
+        this.makh=makh;
+        this.dieukhoan=dieukhoan;
+    }
     public hopdong(hopdong h){
         this.mahd = h.mahd;
         this.matour = h.matour;

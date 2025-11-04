@@ -19,7 +19,13 @@ class danhgiatour {
         this.nhanxet = nhanxet;
     }
 
-   
+    public danhgiatour(String madg,String makhtour,String tenkh,int sao,String nhanxet){
+        this.madg=madg;
+        this.makhtour=makhtour;
+        this.tenkh=tenkh;
+        this.sao=sao;
+        this.nhanxet=nhanxet;
+    }
     public danhgiatour(danhgiatour dg) {
         this.madg = dg.madg;
         this.makhtour = dg.makhtour;
