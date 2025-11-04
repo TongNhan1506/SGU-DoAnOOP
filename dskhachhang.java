@@ -65,7 +65,7 @@ class dskhachhang {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new khachhang(k);
         N++;
-        System.out.println(" Da them khach hang (tham so) thanh cong!");
+        System.out.println("✅ Da them khach hang (tham so) thanh cong!");
     }
 
    
@@ -94,7 +94,7 @@ class dskhachhang {
         }
     }
     if (!found) {
-        System.out.println(" Khong tim thay khach hang nao co ten: " + ten);
+        System.out.println("❌ Khong tim thay khach hang nao co ten: " + ten);
     }
 }
 
@@ -102,7 +102,7 @@ class dskhachhang {
     public void xoaKhach(String makh) {
         int idx = timTheoMakh(makh);
         if (idx == -1) {
-            System.out.println(" Khong tim thay khach hang voi ma: " + makh);
+            System.out.println("❌ Khong tim thay khach hang voi ma: " + makh);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -110,7 +110,7 @@ class dskhachhang {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println(" Da xoa khach hang bang tham so: " + makh);
+        System.out.println("✅ Da xoa khach hang bang tham so: " + makh);
     }
 
     public khachhang timKhachHang(String makh) {
@@ -132,7 +132,7 @@ class dskhachhang {
     
 public void thongKeMaKH() {
     if (N == 0) {
-        System.out.println(" Danh sach khach hang rong!");
+        System.out.println("❌ Danh sach khach hang rong!");
         return;
     }
 
@@ -147,9 +147,9 @@ public void thongKeMaKH() {
     }
 
     if (count == 0)
-        System.out.println(" Khong tim thay khach hang co ma: " + makh);
+        System.out.println("❌ Khong tim thay khach hang co ma: " + makh);
     else
-        System.out.println(" Ma khach hang '" + makh + "' xuat hien " + count + " lan trong danh sach.");
+        System.out.println("✅ Ma khach hang '" + makh + "' xuat hien " + count + " lan trong danh sach.");
 }
 
 
@@ -227,10 +227,10 @@ public void thongKeMaKH() {
             FileInputStream fis=new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             int n=0;
-            ds=new khachhang[100];
+            ds=new khachhang[n];
             String line="";
             while((line=br.readLine())!=null){
-                String[] part=line.split("\\|");
+                String[] part=line.split(",");
                 if(part.length>=7){
                     String ma=part[0];
                     String ho=part[1];
@@ -245,7 +245,7 @@ public void thongKeMaKH() {
             }
             br.close();
             N=n;
-            ds=Arrays.copyOf(ds, N);
+            ds=Arrays.copyOf(ds, n);
             System.out.println("Da doc "+N+" khach hang tu file "+file);
         }catch(Exception e){
             System.out.println("Loi doc file "+e.getMessage());
@@ -259,7 +259,7 @@ public void thongKeMaKH() {
                 khachhang k=ds[i];
                 String line="";
 
-                line=String.join("\\|",
+                line=String.join(",",
                 k.getMakh(),
                 k.getHo(),
                 k.getTen(),
