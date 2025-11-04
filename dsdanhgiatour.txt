@@ -1,0 +1,10 @@
+DG001|KHT001|Nguyen Van A|5|Tour rat tuyet voi, HDV nhiet tinh.
+DG002|KHT002|Tran Thi B|4|Khach san tot, nhung lich trinh hoi day dac.
+DG003|KHT003|Le Minh C|5|Moi thu deu on, se quay lai.
+DG004|KHT004|Pham Hoai An|3|An uong khong hop khau vi lam, bi delay o san bay.
+DG005|KHT005|Vo Thanh D|5|Phu Quoc bien dep, hai san tuoi.
+DG006|KHT006|Do Ngoc E|4|Sa Pa lanh nhung ma vui.
+DG007|KHT007|Huynh Tuan F|5|Singapore sach se, HDV chuyen nghiep.
+DG008|KHT009|Hoang Van G|4|Do an Han Quoc ngon, nhung di bo nhieu.
+DG009|KHT011|Le Minh C|5|Di Da Nang lan 2 voi cong ty nay van rat hai long.
+DG010|KHT001|Dang Thu Ha|4|Khach san o KHT001 view dep.

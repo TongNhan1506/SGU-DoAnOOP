@@ -89,7 +89,7 @@ public void timTheoMaKHTour(String makhtour) {
     }
 
     if (!found) {
-        System.out.println("❌ Khong co danh gia nao thuoc ma ke hoach tour: " + makhtour);
+        System.out.println(" Khong co danh gia nao thuoc ma ke hoach tour: " + makhtour);
     }
 }
 
@@ -100,14 +100,14 @@ public void timTheoMaKHTour(String makhtour) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new danhgiatour(dg); // dùng constructor sao chép để an toàn
         N++;
-        System.out.println("✅ Da them danh gia (tham so) thanh cong!");
+        System.out.println(" Da them danh gia (tham so) thanh cong!");
     }
 
     // ====== XÓA (CÓ THAM SỐ) ======
     public void xoaDGCoTs(String madg) {
         int idx = timTheoMa(madg);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay danh gia co ma: " + madg);
+            System.out.println(" Khong tim thay danh gia co ma: " + madg);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -115,14 +115,14 @@ public void timTheoMaKHTour(String makhtour) {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa danh gia co ma: " + madg);
+        System.out.println(" Da xoa danh gia co ma: " + madg);
     }
 
   
     // ====== THỐNG KÊ THEO MÃ KẾ HOẠCH TOUR ======
 public void thongKeTheoMaKHTour() {
     if (N == 0) {
-        System.out.println("❌ Danh sach danh gia rong!");
+        System.out.println(" Danh sach danh gia rong!");
         return;
     }
 
@@ -140,11 +140,11 @@ public void thongKeTheoMaKHTour() {
     }
 
     if (count == 0) {
-        System.out.println("❌ Khong co danh gia nao thuoc ma ke hoach tour: " + makhtour);
+        System.out.println(" Khong co danh gia nao thuoc ma ke hoach tour: " + makhtour);
     } else {
         double tbSao = (double) tongSao / count;
-        System.out.println("✅ Ma ke hoach tour '" + makhtour + "' co tong " + count + " danh gia.");
-        System.out.printf("⭐ Trung binh so sao: %.2f\n", tbSao);
+        System.out.println(" Ma ke hoach tour '" + makhtour + "' co tong " + count + " danh gia.");
+        System.out.printf(" Trung binh so sao: %.2f\n", tbSao);
     }
 }
 
@@ -155,7 +155,7 @@ public void thongKeTheoMaKHTour() {
         String madg = sc.nextLine();
         int idx = timTheoMa(madg);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay danh gia co ma: " + madg);
+            System.out.println(" Khong tim thay danh gia co ma: " + madg);
             return;
         }
 
@@ -193,25 +193,25 @@ public void thongKeTheoMaKHTour() {
                     dg.setMakhtour(sc.nextLine());
                     break;
                 case 0:
-                    System.out.println("⬅ Thoat sua thong tin.");
+                    System.out.println(" Thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = dg;
-        System.out.println("✅ Da cap nhat danh gia co ma: " + madg);
+        System.out.println(" Da cap nhat danh gia co ma: " + madg);
     }
     public void docFile(String file){
         try {
             FileInputStream fis = new FileInputStream(file);
             BufferedReader br=new BufferedReader(new InputStreamReader(fis));
             int n=0;
-            ds=new danhgiatour[n];
+            ds=new danhgiatour[100];
             String line="";
             while((line=br.readLine())!=null){
-                String[] part=line.split(",");
+                String[] part=line.split("\\|");
 
                 if(part.length>=5){
                     String madg=part[0];
@@ -238,7 +238,7 @@ public void thongKeTheoMaKHTour() {
             for(int i=0;i<N;i++){
                 danhgiatour d=ds[i];
                 String line="";
-                line=String.join(",",
+                line=String.join("\\|",
                 d.getMadg(),
                 d.getMakhtour(),
                 d.getTenkh(),
