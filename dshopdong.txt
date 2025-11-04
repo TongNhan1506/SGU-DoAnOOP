@@ -1,0 +1,12 @@
+HD001|T001|KH001|Dieu khoan chung ap dung cho tour Da Nang.
+HD002|T002|KH002|Dieu khoan tour Nhat Ban, bao gom visa va bao hiem.
+HD003|T003|KH003|Dieu khoan tour Ha Long trong ngay, khong hoan huy.
+HD004|T004|KH004|Dieu khoan tour Thai Lan, yeu cau ho chieu con han.
+HD005|T005|KH005|Dieu khoan tour Phu Quoc, bao gom ve may bay noi dia.
+HD006|T006|KH006|Dieu khoan tour Sa Pa, bao gom ve xe lua khu hoi.
+HD007|T007|KH007|Dieu khoan tour Singapore, tu tuc hanh ly ca nhan.
+HD008|T008|KH008|Dieu khoan tour Hue, bao gom an trua dac san.
+HD009|T009|KH009|Dieu khoan tour Han Quoc, yeu cau visa K-ETA.
+HD010|T010|KH010|Dieu khoan tour Mien Tay, bao gom chi phi thuyen be.
+HD011|T001|KH003|Dieu khoan chung ap dung cho tour Da Nang.
+HD012|T004|KH001|Dieu khoan tour Thai Lan, yeu cau ho chieu con han.

@@ -1,0 +1,14 @@
+NH001|Ngon Villa Danang|106 Nguyen Van Thoai, Da Nang|02363911068|KHT001
+NH002|Gonpachi Opera City|3-60-11 Sendagaya, Tokyo|0357851088|KHT002
+NH003|Hong Hanh 3|442 Nguyen Van Cu, Ha Long|02033845084|KHT003
+NH004|Cabbages & Condoms|10 Sukhumvit 12, Bangkok|022294610|KHT004
+NH005|Xin Chao Seafood|66 Tran Hung Dao, Phu Quoc|02973999918|KHT005
+NH006|O Quy Ho Restaurant|QL4D, Sa Pa|02143871588|KHT006
+NH007|JUMBO Seafood Gallery|290 Orchard Road, Singapore|064400171|KHT007
+NH008|Tinh Gia Vien|20/3 Le Thanh Ton, Hue|02343522243|KHT008
+NH009|Tosokchon Samgyetang|5 Jahamun-ro 5-gil, Seoul|027377444|KHT009
+NH010|Nam Bo Restaurant|1 Ngo Quyen, Can Tho|02923819819|KHT010
+NH011|A Phu Restaurant|15 Fansipan, Sa Pa|02143871535|KHT006
+NH012|Blue Elephant|233 S Sathon Rd, Bangkok|026739353|KHT004
+NH013|Quan Com Hue Ba Cham|41 Nguyen Tri Phuong, Da Nang|02363821011|KHT011
+NH014|Somtum Der|5 5 Sala Daeng Rd, Bangkok|026324499|KHT012

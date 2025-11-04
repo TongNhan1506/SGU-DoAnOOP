@@ -1,0 +1,10 @@
+TN|T001|Tour Da Nang 3N2D|5000000|CMND/CCCD|Ha Noi|Da Nang|Da Nang|Banh trang cuon thit heo
+NN|T002|Tour Nhat Ban 5N4D|35000000|Passport/Visa|TP. Ho Chi Minh|Tokyo|Nhat Ban|JPY
+TN|T003|Tour Ha Long 1 Ngay|1200000|Khong can|Ha Noi|Ha Long|Quang Ninh|Cha muc
+NN|T004|Tour Thai Lan 4N3D|8000000|Passport|Da Nang|Bangkok|Thai Lan|THB
+TN|T005|Tour Phu Quoc 4N3D|7500000|CMND/CCCD|TP. Ho Chi Minh|Phu Quoc|Kien Giang|Goi ca trich
+TN|T006|Tour Sa Pa 2N1D|2800000|Ao am|Ha Noi|Sa Pa|Lao Cai|Thang co
+NN|T007|Tour Singapore 3N2D|11500000|Passport|TP. Ho Chi Minh|Singapore|Singapore|SGD
+TN|T008|Tour Hue 1 Ngay|900000|CMND|Da Nang|Hue|Thua Thien Hue|Com hen
+NN|T009|Tour Han Quoc 5N4D|22000000|Passport/Visa|Ha Noi|Seoul|Han Quoc|KRW
+TN|T010|Tour Mien Tay 2N1D|3100000|CMND|TP. Ho Chi Minh|Can Tho|Can Tho|Lau mam
