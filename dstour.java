@@ -1,6 +1,11 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 public class dstour {
     private tour[] ds;
     private int N;
@@ -188,4 +193,91 @@ public class dstour {
         ds[idx] = t;
         System.out.println("✅ Da cap nhat tour co ma: " + matour);
     }
+    public void docFile(String file) {
+    try {
+        FileInputStream fis = new FileInputStream(file);
+        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        
+        int n = 0;
+        ds = new tour[n]; // cấp phát tạm 100 phần tử
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(",");
+
+            if (parts.length >= 9) {
+                String loai = parts[0].trim();
+                String ma = parts[1].trim();
+                String ten = parts[2].trim();
+                int gia = Integer.parseInt(parts[3].trim());
+                String thutuc = parts[4].trim();
+                String diadiem = parts[5].trim();
+                String diadiemden =parts[6].trim();
+                String qg_or_tt = parts[6].trim();
+                String ds_or_nt = parts[7].trim();
+
+                if (loai.equalsIgnoreCase("TN")) {
+                    ds[n++] = new tourtrongnuoc(ma, ten, gia, thutuc, diadiem,diadiemden, qg_or_tt, ds_or_nt);
+                } else if (loai.equalsIgnoreCase("NN")) {
+                    ds[n++] = new tournuocngoai(ma, ten, gia, thutuc, diadiem,diadiemden, qg_or_tt, ds_or_nt);
+                }
+            }
+        }
+
+        N = n;
+        ds = Arrays.copyOf(ds, N); 
+        br.close();
+
+        System.out.println("Da doc " + N + " tour tu file "+file);
+    } catch (Exception e) {
+        System.out.println("Loi khong doc duoc file: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+    public void ghiFile(String file) {
+    try {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+
+        for (int i = 0; i < N; i++) {
+            tour t = ds[i];
+            String line = "";
+
+            if (t instanceof tourtrongnuoc) {
+                tourtrongnuoc tn = (tourtrongnuoc) t;
+                line = String.join(", ",
+                        "TN",
+                        tn.getMatour(),
+                        tn.getTentour(),
+                        String.valueOf(tn.getDongia()),
+                        tn.getThutuc(),
+                        tn.getDiadiemKH(),
+                        tn.getTinhthanh(),
+                        tn.getDacsan()
+                );
+            } else if (t instanceof tournuocngoai) {
+                tournuocngoai nn = (tournuocngoai) t;
+                line = String.join(", ",
+                        "NN",
+                        nn.getMatour(),
+                        nn.getTentour(),
+                        String.valueOf(nn.getDongia()),
+                        nn.getThutuc(),
+                        nn.getDiadiemKH(),
+                        nn.getQuocgia(),
+                        nn.getNgoaite()
+                );
+            }
+
+            bw.write(line);
+            bw.newLine();
+        }
+
+        bw.close();
+        System.out.println("Da ghi "+N+" tour vao file "+file);
+    } catch (Exception e) {
+        System.out.println("Loi ghi file: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
 }

@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-
 interface ITour {
     void nhap();
     void xuat();
@@ -12,17 +11,19 @@ abstract class tour implements ITour {
     private int dongia;
     private String thutuc;
     private String diadiemKH;
+    private String diadiemden;
     protected Scanner sc = new Scanner(System.in);
 
     public tour() {
     }
 
-    public tour(String matour, String tentour, int dongia, String thutuc, String diadiemKH) {
+    public tour(String matour, String tentour, int dongia, String thutuc, String diadiemKH,String diadiemden) {
         this.matour = matour;
         this.tentour = tentour;
         this.dongia = dongia;
         this.thutuc = thutuc;
         this.diadiemKH = diadiemKH;
+        this.diadiemden=diadiemden;
     }
 
     public tour(tour t) {
@@ -31,6 +32,7 @@ abstract class tour implements ITour {
         this.dongia = t.dongia;
         this.thutuc = t.thutuc;
         this.diadiemKH = t.diadiemKH;
+        this.diadiemden=t.diadiemden;
     }
 
     public String getMatour() {
@@ -52,7 +54,9 @@ abstract class tour implements ITour {
     public String getDiadiemKH() {
         return diadiemKH;
     }
-
+    public String getDiaden(){
+        return diadiemden;
+    }
     public void setMatour(String matour) {
         this.matour = matour;
     }
@@ -72,7 +76,9 @@ abstract class tour implements ITour {
     public void setDiadiemKH(String diadiemKH) {
         this.diadiemKH = diadiemKH;
     }
-
+    public void SetDiadiemden(String diadiemden){
+        this.diadiemden=diadiemden;
+    }
     public void nhap() {
         System.out.println("Nhap ma tour: ");
         matour = sc.nextLine();
@@ -85,112 +91,13 @@ abstract class tour implements ITour {
         thutuc = sc.nextLine();
         System.out.println("Nhap dia diem KH: ");
         diadiemKH = sc.nextLine();
+        System.out.println("Nhap dia diem den ");
+        diadiemden=sc.nextLine();
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-15s %-10s\n",
-                matour, tentour, dongia, thutuc, diadiemKH);
+        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s\n",
+                matour, tentour, dongia, thutuc, diadiemKH,diadiemden);
     }
 }
 
-class tournuocngoai extends tour {
-    private String quocgia;
-    private String ngoaite;
-
-    public tournuocngoai() {
-    }
-
-    public tournuocngoai(tour t, String quocgia, String ngoaite) {
-        super(t);
-        this.quocgia = quocgia;
-        this.ngoaite = ngoaite;
-    }
-
-    public tournuocngoai(tournuocngoai tnnn) {
-        super(tnnn);
-        this.quocgia = tnnn.quocgia;
-        this.ngoaite = tnnn.ngoaite;
-    }
-
-    public String getQuocgia() {
-        return quocgia;
-    }
-
-    public String getNgoaite() {
-        return ngoaite;
-    }
-
-    public void setQuocgia(String quocgia) {
-        this.quocgia = quocgia;
-    }
-
-    public void setNgoaite(String ngoaite) {
-        this.ngoaite = ngoaite;
-    }
-
-    @Override
-    public void nhap() {
-        super.nhap();
-        System.out.println("Nhap quoc gia: ");
-        quocgia = sc.nextLine();
-        System.out.println("Nhap ngoai te: ");
-        ngoaite = sc.nextLine();
-    }
-
-    @Override
-    public void xuat() {
-        super.xuat();
-        System.out.printf("%-15s %-15s\n", quocgia, ngoaite);
-    }
-}
-
-class tourtrongnuoc extends tour {
-    private String tinhthanh;
-    private String dacsan;
-
-    public tourtrongnuoc() {
-    }
-
-    public tourtrongnuoc(tour t, String tinhthanh, String dacsan) {
-        super(t);
-        this.tinhthanh = tinhthanh;
-        this.dacsan = dacsan;
-    }
-
-    public tourtrongnuoc(tourtrongnuoc ttnn) {
-        super(ttnn);
-        this.tinhthanh = ttnn.tinhthanh;
-        this.dacsan = ttnn.dacsan;
-    }
-
-    public String getTinhthanh() {
-        return tinhthanh;
-    }
-
-    public String getDacsan() {
-        return dacsan;
-    }
-
-    public void setTinhthanh(String tinhthanh) {
-        this.tinhthanh = tinhthanh;
-    }
-
-    public void setDacsan(String dacsan) {
-        this.dacsan = dacsan;
-    }
-
-    @Override
-    public void nhap() {
-        super.nhap();
-        System.out.println("Nhap tinh thanh: ");
-        tinhthanh = sc.nextLine();
-        System.out.println("Nhap dac san: ");
-        dacsan = sc.nextLine();
-    }
-
-    @Override
-    public void xuat() {
-        super.xuat();
-        System.out.printf("%-15s %-15s\n", tinhthanh, dacsan);
-    }
-}

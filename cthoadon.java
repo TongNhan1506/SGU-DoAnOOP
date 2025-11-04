@@ -5,11 +5,19 @@ class cthd{
     private String makhtour;
     public cthd(){
     }
-    public cthd(hopdong h,khachhang kh,kehoachtour kht,String mahd, String makh, String makhtour) {
+    
+    public cthd(hoadon h,khachhang kh,kehoachtour kht,String mahd, String makh, String makhtour) {
         this.mahd = h.getMahd();
         this.makh = kh.getMakh();
         this.makhtour = kht.getMakhtour();
     }
+
+    public cthd(String mahd,String makh,String makhtour){
+        this.mahd=mahd;
+        this.makh=makh;
+        this.makhtour=makhtour;
+    }
+
     public cthd(cthd ct){
         this.mahd = ct.mahd;
         this.makh = ct.makh;
@@ -35,7 +43,7 @@ class cthd{
     }
     Scanner sc = new Scanner(System.in);
     public void nhap(){
-        System.out.println("Nhap ma hop dong: ");
+        System.out.println("Nhap ma hoa don: ");
         mahd = sc.nextLine();
         System.out.println("Nhap ma khach hang: ");
         makh = sc.nextLine();
