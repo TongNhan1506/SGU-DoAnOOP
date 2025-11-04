@@ -6,7 +6,7 @@ public class menu {
     private static dskhachhang dskh = new dskhachhang();
     private static dstour dst = new dstour();
     private static dskehoachtour dskht = new dskehoachtour();
-    private static dsctkhtour dsctkht = new dsctkhtour();
+    private static dsctkhtour dsctkt = new dsctkhtour();
     private static dshopdong dshd = new dshopdong();
     private static dshoadon dshoadon = new dshoadon();
 
@@ -86,7 +86,9 @@ public class menu {
                             System.out.println("3. Them chi tiet ke hoach tour");
                             System.out.println("4. Nhap chi tiet ke hoach tour");
                             System.out.println("5. Nhap hop dong");
-                            System.out.println("6. Thong ke tien");
+                            System.out.println("6. Thong ke theo loai tour");
+                            System.out.println("7. Doc file");
+                            System.out.println("8. Ghi file");
                             System.out.println("0. Quay lai menu chinh");
                             System.out.print("Nhap lua chon cua ban: ");
                             subChon = Integer.parseInt(sc.nextLine());
@@ -99,23 +101,27 @@ public class menu {
                                     dst.xuatDstour();
                                     break;
                                 case 3: {
+                                    dskehoachtour dskht = new dskehoachtour();
                                     dskht.nhapDsKHT();
                                     dskht.xuatDsKHT();
                                     break;
                                 }
                                 case 4: {
-                                    dsctkht.nhapds();
-                                    dsctkht.xuatds();
+                                    dsctkhtour dsctkhtour = new dsctkhtour();
+                                    dsctkhtour.nhapds();
+                                    dsctkhtour.xuatds();
                                     break;
                                 }
                                 case 5: {
-                                    dshd.nhapDshopdong();
-                                    dshd.xuatDshopdong();
+                                    dshopdong dsHopDong = new dshopdong();
+                                    dsHopDong.nhapDshopdong();
+                                    dsHopDong.xuatDshopdong();
                                     break;
                                 }
-                                case 6:
-                                    System.out.println("Chuc nang dang phat trien...");
+                                case 6:{
+                                    dst.thongKeTheoLoaiTour();
                                     break;
+                                }
                                 case 0:
                                     break;
                                 default:
@@ -139,17 +145,17 @@ public class menu {
         sc.close();
     }
 
-    public static void khoiTao() {
+    private static void khoiTao() {
         dshdv = new dsHDV();
         dskh = new dskhachhang();
-        dst = new dstour();
+        dst = new dstour() {};
         dskht = new dskehoachtour();
-        dsctkht = new dsctkhtour();
+        dsctkt = new dsctkhtour();
         dshd = new dshopdong();
         dshoadon = new dshoadon();
     }
 
-    public void quanLyHDV() {
+    private static void quanLyHDV() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HUONG DAN VIEN =====");
@@ -206,7 +212,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void quanLyKhachHang() {
+    private static void quanLyKhachHang() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY KHACH HANG =====");
@@ -256,7 +262,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void quanLyTour() {
+    private static void quanLyTour() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY TOUR DU LICH =====");
@@ -298,7 +304,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void quanLyDanhSachTour() {
+    private static void quanLyDanhSachTour() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY DANH SACH TOUR =====");
@@ -414,7 +420,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void quanLyHopDong() {
+    private static void quanLyHopDong() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOP DONG =====");
@@ -464,7 +470,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void quanLyHoaDon() {
+    private static void quanLyHoaDon() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOA DON =====");
@@ -524,7 +530,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public void thongKeDoanhThu() {
+    private static void thongKeDoanhThu() {
         int chon;
         do {
             System.out.println("\n===== THONG KE DOANH THU =====");

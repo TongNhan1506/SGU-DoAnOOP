@@ -27,7 +27,16 @@ class HDV {
         this.diachi = diachi;
         this.sdt = sdt;
     }
-
+    public HDV(String mahdv,String makhtour,String ho,String ten,LocalDate ngaysinh,String gioitinh,String diachi,String sdt){
+        this.mahdv=mahdv;
+        this.makhtour=makhtour;
+        this.ho=ho;
+        this.ten=ten;
+        this.ngaysinh=ngaysinh;
+        this.gioitinh=gioitinh;
+        this.diachi=diachi;
+        this.sdt=sdt;
+    }
     public HDV(HDV h) {
         this.mahdv = h.mahdv;
         this.makhtour = h.makhtour;

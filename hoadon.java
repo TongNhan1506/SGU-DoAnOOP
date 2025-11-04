@@ -18,6 +18,12 @@ class hoadon {
         this.tongtien = tongtien;
     }
 
+    public hoadon(String mahoadon,String makh,String makhtour,int tongtien){
+        this.mahoadon=mahoadon;
+        this.makh=makh;
+        this.makhtour=makhtour;
+        this.tongtien=tongtien;
+    }
     public hoadon(hoadon hd) {
         this.mahoadon = hd.mahoadon;
         this.makh = hd.makh;

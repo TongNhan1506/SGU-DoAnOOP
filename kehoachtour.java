@@ -34,7 +34,7 @@ class kehoachtour {
     public kehoachtour() {
     }
 
-    public kehoachtour(tour t, String makhtour, LocalDate ngaydi, LocalDate ngayve, int dongia, int tongsove,
+    public kehoachtour(tour t, String makhtour,String matour, LocalDate ngaydi, LocalDate ngayve, int dongia, int tongsove,
             int soveconlai, int tongchi, int tongan, int tongo, int tongdilai, String mahdv, int tongtienve) {
         this.makhtour = makhtour;
         this.matour = t.getMatour();
@@ -50,7 +50,23 @@ class kehoachtour {
         this.mahdv = mahdv;
         this.tongtienve = tongtienve;
     }
+    public kehoachtour(String makhtour,String matour,LocalDate ngaydi,LocalDate ngayve,int dongia,int tongsove,int soveconlai,
+            int tongchi,int tongan,int tongo,int tongdilai,int tongtienve,String mahdv){
+        this.makhtour=makhtour;
+        this.matour=matour;
+        this.ngaydi=ngaydi;
+        this.ngayve=ngayve;
+        this.dongia=dongia;
+        this.tongsove=tongsove;
+        this.soveconlai=soveconlai;
+        this.tongchi=tongchi;
+        this.tongan=tongan;
+        this.tongo=tongo;
+        this.tongdilai=tongdilai;
+        this.mahdv=mahdv;
+        this.tongtienve=tongtienve;
 
+    }
     public kehoachtour(kehoachtour kht) {
         this.makhtour = kht.makhtour;
         this.matour = kht.matour;
