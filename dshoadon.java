@@ -72,7 +72,7 @@ public class dshoadon {
             }
         }
         if (!found) {
-            System.out.println(" Khong co hoa don nao thuoc ve khach hang co ma: " + makh);
+            System.out.println("❌ Khong co hoa don nao thuoc ve khach hang co ma: " + makh);
         }
     }
 
@@ -80,13 +80,13 @@ public class dshoadon {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new hoadon(h);
         N++;
-        System.out.println(" Da them hoa don (tham so) thanh cong!");
+        System.out.println("✅ Da them hoa don (tham so) thanh cong!");
     }
 
     public void xoaHDCoTs(String mahoadon) {
         int idx = timTheoMa(mahoadon);
         if (idx == -1) {
-            System.out.println(" Khong tim thay hoa don co ma: " + mahoadon);
+            System.out.println("❌ Khong tim thay hoa don co ma: " + mahoadon);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -94,7 +94,7 @@ public class dshoadon {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println(" Da xoa hoa don co ma: " + mahoadon);
+        System.out.println("✅ Da xoa hoa don co ma: " + mahoadon);
     }
 
     public void thongKeTheoMaKH() {
@@ -111,10 +111,10 @@ public class dshoadon {
         }
 
         if (dem == 0) {
-            System.out.println(" Khong co hoa don nao thuoc ve khach hang co ma: " + makh);
+            System.out.println("❌ Khong co hoa don nao thuoc ve khach hang co ma: " + makh);
         } else {
-            System.out.println(" Khach hang co ma " + makh + " co " + dem + " hoa don.");
-            System.out.println(" Tong tien cua khach hang nay: " + tongTien);
+            System.out.println("✅ Khach hang co ma " + makh + " co " + dem + " hoa don.");
+            System.out.println("💰 Tong tien cua khach hang nay: " + tongTien);
         }
     }
 
@@ -123,7 +123,7 @@ public class dshoadon {
         String mahoadon = sc.nextLine();
         int idx = timTheoMa(mahoadon);
         if (idx == -1) {
-            System.out.println(" Khong tim thay hoa don co ma: " + mahoadon);
+            System.out.println("❌ Khong tim thay hoa don co ma: " + mahoadon);
             return;
         }
 
@@ -152,15 +152,15 @@ public class dshoadon {
                     h.setTongtien(Integer.parseInt(sc.nextLine()));
                     break;
                 case 0:
-                    System.out.println(" Thoat sua thong tin.");
+                    System.out.println("⬅ Thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println(" Lua chon khong hop le!");
+                    System.out.println("❌ Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = h;
-        System.out.println(" Da cap nhat thong tin hoa don co ma: " + mahoadon);
+        System.out.println("✅ Da cap nhat thong tin hoa don co ma: " + mahoadon);
     }
     public void docFile(String file){
         try {
@@ -168,11 +168,11 @@ public class dshoadon {
             BufferedReader br=new BufferedReader(new InputStreamReader(fis));
             
             int n=0;
-            ds=new hoadon[100];
+            ds=new hoadon[n];
             String line="";
             while((line=br.readLine())!=null){
 
-                String[] part=line.split("\\|");
+                String[] part=line.split(",");
                 if(part.length>=4){
                     String mahoadon=part[0].trim();
                     String makh=part[1].trim();
@@ -198,7 +198,7 @@ public class dshoadon {
                 hoadon h=ds[i];
                 String line="";
 
-                line=String.join("\\|",
+                line=String.join(",",
                 h.getMahd(),
                 h.getMakh(),
                 h.getMakhtour(),

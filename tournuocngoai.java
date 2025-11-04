@@ -11,10 +11,10 @@ public class tournuocngoai extends tour {
         this.ngoaite = ngoaite;
     }
 
-    public tournuocngoai(tournuocngoai tnnn) {
-        super(tnnn);
-        this.quocgia = tnnn.quocgia;
-        this.ngoaite = tnnn.ngoaite;
+    public tournuocngoai(tournuocngoai tnn) {
+        super(tnn);
+        this.quocgia = tnn.quocgia;
+        this.ngoaite = tnn.ngoaite;
     }
 
     public String getQuocgia() {
