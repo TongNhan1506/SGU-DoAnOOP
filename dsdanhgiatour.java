@@ -226,9 +226,10 @@ public void thongKeTheoMaKHTour() {
             br.close();
                 N=n;
                 ds=Arrays.copyOf(ds,N);
+                System.out.println("Da doc "+N+" danh gia tour tu file "+file);
         }
         catch(Exception e){
-            System.out.println("Da doc "+N+" danh gia tour tu file "+file);
+            System.out.println("Loi doc file "+e.getMessage());
             e.printStackTrace();
         }
     }
@@ -238,12 +239,12 @@ public void thongKeTheoMaKHTour() {
             for(int i=0;i<N;i++){
                 danhgiatour d=ds[i];
                 String line="";
-                line=String.join(",",
+                line=String.join("|",
                 d.getMadg(),
                 d.getMakhtour(),
                 d.getTenkh(),
                 String.valueOf(d.getSao()),
-                d.getTenkh());
+                d.getNhanxet());
                 bw.write(line);
                 bw.newLine();
             }

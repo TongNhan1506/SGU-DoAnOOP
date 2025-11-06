@@ -37,9 +37,14 @@ public class dshoadon {
         }
         N = ds.length;
     }
-
+    public int getN(){
+        return N;
+    }
+    public hoadon[] getDs(){
+        return ds;
+    }
     public void xuatDsHD() {
-        System.out.printf("%-10s %-10s %-12s %-10s\n", "MaHD", "MaKH", "MaKHTour", "TongTien");
+        System.out.printf("%-10s %-10s %-12s %-10s %-10s\n", "MaHD", "MaKH", "MaKHTour", "SoVe", "TongTien");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
@@ -77,10 +82,17 @@ public class dshoadon {
     }
 
     public void themHDCoTs(hoadon h) {
+        for(int i=0;i<N;i++){
+            if(ds[i].getMahd().equalsIgnoreCase(h.getMahd())){
+                System.out.println(" Ma hoa don da ton tai, khong the them!");
+                return;
+            }
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new hoadon(h);
         N++;
-        System.out.println("✅ Da them hoa don (tham so) thanh cong!");
+        System.out.println(" Da them hoa don (tham so) thanh cong!");
+
     }
 
     public void xoaHDCoTs(String mahoadon) {
@@ -118,9 +130,7 @@ public class dshoadon {
         }
     }
 
-    public void suaHD() {
-        System.out.print("Nhap ma hoa don can sua: ");
-        String mahoadon = sc.nextLine();
+    public void suaHD(String mahoadon) {
         int idx = timTheoMa(mahoadon);
         if (idx == -1) {
             System.out.println("❌ Khong tim thay hoa don co ma: " + mahoadon);
@@ -133,7 +143,8 @@ public class dshoadon {
             System.out.println("\n===== SUA THONG TIN HOA DON =====");
             System.out.println("1. Sua ma khach hang");
             System.out.println("2. Sua ma ke hoach tour");
-            System.out.println("3. Sua tong tien");
+            System.out.println("3. Sua so ve");
+            System.out.println("4. Sua tong tien");
             System.out.println("0. Thoat");
             System.out.print("Nhap lua chon: ");
             chon = Integer.parseInt(sc.nextLine());
@@ -148,6 +159,10 @@ public class dshoadon {
                     h.setMakhtour(sc.nextLine());
                     break;
                 case 3:
+                    System.out.print("Nhap so ve moi: ");
+                    h.setSove(Integer.parseInt(sc.nextLine()));
+                    break;
+                case 4:
                     System.out.print("Nhap tong tien moi: ");
                     h.setTongtien(Integer.parseInt(sc.nextLine()));
                     break;
@@ -177,9 +192,10 @@ public class dshoadon {
                     String mahoadon=part[0].trim();
                     String makh=part[1].trim();
                     String makhtour=part[2].trim();
-                    int tongtien=Integer.parseInt(part[3].trim());
+                    int sove=Integer.parseInt(part[3].trim());
+                    int tongtien=Integer.parseInt(part[4].trim());
 
-                    ds[n++]=new hoadon(mahoadon, makh, makhtour, tongtien);
+                    ds[n++]=new hoadon(mahoadon, makh, makhtour, sove, tongtien);
                 }
             }
             br.close();
@@ -198,10 +214,11 @@ public class dshoadon {
                 hoadon h=ds[i];
                 String line="";
 
-                line=String.join(",",
+                line=String.join("|",
                 h.getMahd(),
                 h.getMakh(),
                 h.getMakhtour(),
+                String.valueOf(h.getSove()),
                 String.valueOf(h.getTongtien()));
                 bw.write(line);
                 bw.newLine();
