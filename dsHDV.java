@@ -69,7 +69,7 @@ class dsHDV {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = h;
         N++;
-        System.out.println(" Da them HDV moi!");
+        System.out.println("✅ Da them HDV moi!");
     }
 
     public void themHDVCoTs(HDV h) {
@@ -107,7 +107,7 @@ public void timTheoTen(String ten) {
         }
     }
     if (!found) {
-        System.out.println(" Khong tim thay HDV co ten: " + ten);
+        System.out.println("❌ Khong tim thay HDV co ten: " + ten);
     }
 }
 
@@ -115,7 +115,7 @@ public void timTheoTen(String ten) {
     public void xoaHDVCoTs(String mahdv) {
         int idx = timTheoMa(mahdv);
         if (idx == -1) {
-            System.out.println(" Khong tim thay HDV co ma: " + mahdv);
+            System.out.println("❌ Khong tim thay HDV co ma: " + mahdv);
             return;
         }
 
@@ -124,14 +124,14 @@ public void timTheoTen(String ten) {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println(" Da xoa HDV co ma: " + mahdv);
+        System.out.println("✅ Da xoa HDV co ma: " + mahdv);
     }
 
 
   
 public void thongKeTheoMaTour() {
     if (N == 0) {
-        System.out.println(" Danh sach HDV rong!");
+        System.out.println("❌ Danh sach HDV rong!");
         return;
     }
 
@@ -151,9 +151,9 @@ public void thongKeTheoMaTour() {
     }
 
     if (count == 0) {
-        System.out.println(" Khong co HDV nao thuoc tour co ma: " + maTour);
+        System.out.println("❌ Khong co HDV nao thuoc tour co ma: " + maTour);
     } else {
-        System.out.println(" Tong so HDV phu trach tour '" + maTour + "': " + count);
+        System.out.println("✅ Tong so HDV phu trach tour '" + maTour + "': " + count);
     }
 }
 
@@ -163,7 +163,7 @@ public void thongKeTheoMaTour() {
         String maHDV = sc.nextLine();
         int idx = timTheoMa(maHDV);
         if (idx == -1) {
-            System.out.println(" Khong tim thay HDV co ma: " + maHDV);
+            System.out.println("❌ Khong tim thay HDV co ma: " + maHDV);
             return;
         }
 
@@ -217,7 +217,7 @@ public void thongKeTheoMaTour() {
         } while (chon != 0);
 
         ds[idx] = h;
-        System.out.println(" Da cap nhat thong tin HDV co ma: " + maHDV);
+        System.out.println("✅ Da cap nhat thong tin HDV co ma: " + maHDV);
     }
     public void docFile(String file){
         try {
@@ -225,13 +225,13 @@ public void thongKeTheoMaTour() {
             BufferedReader br=new BufferedReader(new InputStreamReader(fis));
 
             int n=0;
-            ds=new HDV[100];
+            ds=new HDV[n];
 
             String line="";
             while((line=br.readLine())!=null){
-                String[] part=line.split("\\|");
+                String[] part=line.split(",");
 
-                if(part.length>=7){
+                if(part.length>=8){
                     String mahdv=part[0];
                     String makhtour=part[1];
                     String ho=part[2];

@@ -92,7 +92,7 @@ public class dsnhahang {
             }
         }
         if (!found) {
-            System.out.println(" Khong co nha hang nao thuoc ma ke hoach tour: " + makhtour);
+            System.out.println("❌ Khong co nha hang nao thuoc ma ke hoach tour: " + makhtour);
         }
     }
    
@@ -115,7 +115,7 @@ public class dsnhahang {
         }
 
         if (count == 0) {
-            System.out.println(" Khong co nha hang nao thuoc prefix ma ke hoach tour: " + prefix);
+            System.out.println("❌ Khong co nha hang nao thuoc prefix ma ke hoach tour: " + prefix);
         } else {
             System.out.println("\n- Tong so nha hang thuoc prefix ma ke hoach tour '" + prefix + "': " + count);
         }
@@ -129,21 +129,21 @@ public class dsnhahang {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = n;
         N++;
-        System.out.println(" Da them nha hang moi!");
+        System.out.println("✅ Da them nha hang moi!");
     }
 
     public void themNHCoTs(nhahang n) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new nhahang(n);
         N++;
-        System.out.println(" Da them nha hang (tham so) thanh cong!");
+        System.out.println("✅ Da them nha hang (tham so) thanh cong!");
     }
 
   
     public void xoaNHCoTs(String manh) {
         int idx = timTheoMa(manh);
         if (idx == -1) {
-            System.out.println(" Khong tim thay nha hang co ma: " + manh);
+            System.out.println("❌ Khong tim thay nha hang co ma: " + manh);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -151,7 +151,7 @@ public class dsnhahang {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println(" Da xoa nha hang co ma: " + manh);
+        System.out.println("✅ Da xoa nha hang co ma: " + manh);
     }
 
     public void xoaNHKhongTs() {
@@ -176,7 +176,7 @@ public void thongKeTheoMaKHTour() {
 
     int count = thongKeTheoMaKHTour(makhtour);
     if (count == 0) {
-        System.out.println(" Khong co nha hang nao thuoc ma ke hoach tour: " + makhtour);
+        System.out.println("❌ Khong co nha hang nao thuoc ma ke hoach tour: " + makhtour);
         return;
     }
 
@@ -298,25 +298,24 @@ public void thongKeTheoMaKHTour() {
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             
             int n=0;
-            ds=new nhahang[100];
+            ds=new nhahang[n];
             String line;
             while((line = br.readLine())!=null){
-                String[] part=line.split("\\|");
+                String[] part=line.split(",");
 
-                if(part.length>=4){
+                if(part.length>=7){
                     String ma = part[0].trim();
                     String ten = part[1].trim();
                     String dc = part[2].trim();
                     String sdt = part[3].trim();
                     String makht=part[4].trim();
-                    ds[n]=new nhahang(ma, ten, dc, sdt, makht);
-                    n++;
+                    ds[n++]=new nhahang(ma, ten, dc, sdt, makht);
                 }
             }
             N=n;
             ds=Arrays.copyOf(ds,N);
             br.close();
-            System.out.println("Da doc "+N+" nha hang tu file "+file);
+            System.out.println("Da doc "+N+" nha hang tu file"+file);
         } catch ( Exception e) {
             System.out.println("Loi khong doc duoc file "+e.getMessage());
             e.printStackTrace();

@@ -244,18 +244,18 @@ public class dskehoachtour {
         } while (chon != 0);
 
         ds[idx] = k;
-        System.out.println(" Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
+        System.out.println("✅ Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
     }
     public void docFile(String file){
         try {
         FileInputStream fis=new FileInputStream(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         int n=0;
-        ds= new kehoachtour[100];
+        ds= new kehoachtour[n];
         
         String line;
         while((line = br.readLine())!=null){
-            String[] part=line.split("\\|");
+            String[] part=line.split(",");
 
             if(part.length>=12){
                 String ma=part[0];
