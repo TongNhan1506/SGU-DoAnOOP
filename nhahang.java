@@ -10,6 +10,7 @@ class nhahang {
     public nhahang() {
     }
 
+    
     public nhahang(String manh, String tennh, String diachi, String sodt, String makhtour) {
         this.manh = manh;
         this.tennh = tennh;

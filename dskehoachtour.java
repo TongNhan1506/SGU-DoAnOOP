@@ -91,7 +91,7 @@ public class dskehoachtour {
             }
         }
         if (!found) {
-            System.out.println(" Khong co hop dong nao thuoc tour co ma: " + matour);
+            System.out.println("❌ Khong co hop dong nao thuoc tour co ma: " + matour);
         }
     }
 
@@ -99,13 +99,13 @@ public class dskehoachtour {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new kehoachtour(k);
         N++;
-        System.out.println(" Da them ke hoach tour (tham so) thanh cong!");
+        System.out.println("✅ Da them ke hoach tour (tham so) thanh cong!");
     }
 
     public void xoaKHTCoTs(String makhtour) {
         int idx = timTheoMa(makhtour);
         if (idx == -1) {
-            System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
+            System.out.println("❌ Khong tim thay ke hoach tour co ma: " + makhtour);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -113,7 +113,7 @@ public class dskehoachtour {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println(" Da xoa ke hoach tour co ma: " + makhtour);
+        System.out.println("✅ Da xoa ke hoach tour co ma: " + makhtour);
     }
 
     public void thongketheosove(){
@@ -246,7 +246,7 @@ public class dskehoachtour {
         } while (chon != 0);
 
         ds[idx] = k;
-        System.out.println(" Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
+        System.out.println("✅ Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
     }
         
     public void docFile(String file){
@@ -254,11 +254,11 @@ public class dskehoachtour {
         FileInputStream fis=new FileInputStream(file);
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         int n=0;
-        ds= new kehoachtour[100];
+        ds= new kehoachtour[n];
         
         String line;
         while((line = br.readLine())!=null){
-            String[] part=line.split("\\|");
+            String[] part=line.split(",");
 
             if(part.length>=11){
                 String ma=part[0];
