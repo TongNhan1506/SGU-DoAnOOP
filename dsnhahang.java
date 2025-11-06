@@ -199,7 +199,7 @@ public void thongKeTheoMaKHTour() {
         String manh = sc.nextLine();
         int idx = timTheoMa(manh);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay nha hang co ma: " + manh);
+            System.out.println(" Khong tim thay nha hang co ma: " + manh);
             return;
         }
 
@@ -233,16 +233,65 @@ public void thongKeTheoMaKHTour() {
                     n.setMakhtour(sc.nextLine());
                     break;
                 case 0:
-                    System.out.println("⬅ Thoat sua thong tin.");
+                    System.out.println(" Thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = n;
-        System.out.println("✅ Da cap nhat thong tin nha hang co ma: " + manh);
+        System.out.println(" Da cap nhat thong tin nha hang co ma: " + manh);
     }
+
+    public void suaNH(String manh) {
+        int idx = timTheoMa(manh);
+        if (idx == -1) {
+            System.out.println(" Khong tim thay nha hang co ma: " + manh);
+            return;
+        }
+
+        nhahang n = ds[idx];
+        int chon;
+        do {
+            System.out.println("\n===== SUA THONG TIN NHA HANG =====");
+            System.out.println("1. Sua ten nha hang");
+            System.out.println("2. Sua dia chi");
+            System.out.println("3. Sua so dien thoai");
+            System.out.println("4. Sua ma ke hoach tour (khoa ngoai)");
+            System.out.println("0. Thoat");
+            System.out.print("Nhap lua chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Nhap ten nha hang moi: ");
+                    n.setTennh(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhap dia chi moi: ");
+                    n.setDiachi(sc.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Nhap so dien thoai moi: ");
+                    n.setSodt(sc.nextLine());
+                    break;
+                case 4:
+                    System.out.print("Nhap ma ke hoach tour moi: ");
+                    n.setMakhtour(sc.nextLine());
+                    break;
+                case 0:
+                    System.out.println(" Thoat sua thong tin.");
+                    break;
+                default:
+                    System.out.println(" Lua chon khong hop le!");
+            }
+        } while (chon != 0);
+
+        ds[idx] = n;
+        System.out.println(" Da cap nhat thong tin nha hang co ma: " + manh);
+    }
+
     public void docFile(String file){
         try {
             FileInputStream fis = new FileInputStream(file);

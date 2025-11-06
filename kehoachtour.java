@@ -8,15 +8,14 @@ class kehoachtour {
     private String matour;
     private LocalDate ngaydi;
     private LocalDate ngayve;
-    private int dongia;
-    private int tongsove;
-    private int soveconlai;
+    public  int soveconlai;
     private int tongchi;
     private int tongan;
     private int tongo;
     private int tongdilai;
     private String mahdv;
     private int tongtienve;
+    private tour t;
     private Scanner sc = new Scanner(System.in);
 
     public int getTongTienTheoCacKhoan() {
@@ -34,14 +33,12 @@ class kehoachtour {
     public kehoachtour() {
     }
 
-    public kehoachtour(tour t, String makhtour,String matour, LocalDate ngaydi, LocalDate ngayve, int dongia, int tongsove,
+    public kehoachtour( String makhtour,String matour, LocalDate ngaydi, LocalDate ngayve,
             int soveconlai, int tongchi, int tongan, int tongo, int tongdilai, String mahdv, int tongtienve) {
         this.makhtour = makhtour;
         this.matour = t.getMatour();
         this.ngaydi = ngaydi;
         this.ngayve = ngayve;
-        this.dongia = dongia;
-        this.tongsove = tongsove;
         this.soveconlai = soveconlai;
         this.tongchi = tongchi;
         this.tongan = tongan;
@@ -50,14 +47,12 @@ class kehoachtour {
         this.mahdv = mahdv;
         this.tongtienve = tongtienve;
     }
-    public kehoachtour(String makhtour,String matour,LocalDate ngaydi,LocalDate ngayve,int dongia,int tongsove,int soveconlai,
+    public kehoachtour(String makhtour,String matour,LocalDate ngaydi,LocalDate ngayve,int soveconlai,
             int tongchi,int tongan,int tongo,int tongdilai,int tongtienve,String mahdv){
         this.makhtour=makhtour;
         this.matour=matour;
         this.ngaydi=ngaydi;
         this.ngayve=ngayve;
-        this.dongia=dongia;
-        this.tongsove=tongsove;
         this.soveconlai=soveconlai;
         this.tongchi=tongchi;
         this.tongan=tongan;
@@ -72,8 +67,6 @@ class kehoachtour {
         this.matour = kht.matour;
         this.ngaydi = kht.ngaydi;
         this.ngayve = kht.ngayve;
-        this.dongia = kht.dongia;
-        this.tongsove = kht.tongsove;
         this.soveconlai = kht.soveconlai;
         this.tongchi = kht.tongchi;
         this.tongan = kht.tongan;
@@ -103,14 +96,6 @@ class kehoachtour {
         return ngayve;
     }
 
-    public int getDongia() {
-        return dongia;
-    }
-
-    public int getTongsove() {
-        return tongsove;
-    }
-
     public int getSoveconlai() {
         return soveconlai;
     }
@@ -135,7 +120,7 @@ class kehoachtour {
         return mahdv;
     }
 
-    public int getTongtienve() {
+    public int getTongtienve(){
         return tongtienve;
     }
 
@@ -153,14 +138,6 @@ class kehoachtour {
 
     public void setNgayve(LocalDate ngayve) {
         this.ngayve = ngayve;
-    }
-
-    public void setDongia(int dongia) {
-        this.dongia = dongia;
-    }
-
-    public void setTongsove(int tongsove) {
-        this.tongsove = tongsove;
     }
 
     public void setSoveconlai(int soveconlai) {
@@ -200,10 +177,6 @@ class kehoachtour {
         ngaydi = LocalDate.parse(sc.nextLine());
         System.out.println("Nhap ngay ve (yyyy-mm-dd): ");
         ngayve = LocalDate.parse(sc.nextLine());
-        System.out.println("Nhap don gia: ");
-        dongia = sc.nextInt();
-        System.out.println("Nhap tong so ve: ");
-        tongsove = sc.nextInt();
         System.out.println("Nhap so ve con lai: ");
         soveconlai = sc.nextInt();
         System.out.println("Nhap tong chi 1 ngay: ");
@@ -223,8 +196,8 @@ class kehoachtour {
     }
 
     public void xuat() {
-        System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi, ngayve, dongia, tongsove, soveconlai, tongchi, tongan, tongo,
+        System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
+                makhtour, matour, ngaydi, ngayve, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
     

@@ -43,110 +43,20 @@ public class menu {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
                     case 1: {
-                        int subChon;
-                        do {
-                            System.out.println("\n===== QUAN LY HUONG DAN VIEN =====");
-                            System.out.println("1. Nhap danh sach HDV");
-                            System.out.println("2. Xuat danh sach HDV");
-                            System.out.println("0. Quay lai menu chinh");
-                            System.out.print("Nhap lua chon cua ban: ");
-                            subChon = Integer.parseInt(sc.nextLine());
-                            
-                            switch (subChon) {
-                                case 1:
-                                    dshdv.nhapDshdv();
-                                    break;
-                                case 2:
-                                    dshdv.xuatDshdv();
-                                    break;
-                                case 0:
-                                    break;
-                                default:
-                                    System.out.println("Lua chon khong hop le!");
-                                    break;
-                            }
-                        } while (subChon != 0);
+                        quanLyHDV();
                         break;
                     }
                     case 2: {
-                        int subChon;
-                        do {
-                            System.out.println("\n===== QUAN LY KHACH HANG =====");
-                            System.out.println("1. Nhap khach hang");
-                            System.out.println("2. Xuat khach hang");
-                            System.out.println("0. Quay lai menu chinh");
-                            System.out.print("Nhap lua chon cua ban: ");
-                            subChon = Integer.parseInt(sc.nextLine());
-                            
-                            switch (subChon) {
-                                case 1:
-                                    dskh.nhapds();
-                                    break;
-                                case 2:
-                                    dskh.xuatds();
-                                    break;
-                                case 0:
-                                    break;
-                                default:
-                                    System.out.println("Lua chon khong hop le!");
-                                    break;
-                            }
-                        } while (subChon != 0);
+                        quanLyKhachHang();
                         break;
                     }
                     case 3: {
-                        int subChon;
-                        do {
-                            System.out.println("\n===== QUAN LY TOUR DU LICH =====");
-                            System.out.println("1. Nhap danh sach tour");
-                            System.out.println("2. Xuat danh sach tour");
-                            System.out.println("3. Them chi tiet ke hoach tour");
-                            System.out.println("4. Nhap chi tiet ke hoach tour");
-                            System.out.println("5. Nhap hop dong");
-                            System.out.println("6. Thong ke theo loai tour");
-                            System.out.println("7. Doc file");
-                            System.out.println("8. Ghi file");
-                            System.out.println("0. Quay lai menu chinh");
-                            System.out.print("Nhap lua chon cua ban: ");
-                            subChon = Integer.parseInt(sc.nextLine());
-                            
-                            switch (subChon) {
-                                case 1:
-                                    dst.nhapDstour();
-                                    break;
-                                case 2:
-                                    dst.xuatDstour();
-                                    break;
-                                case 3: {
-                                    dskehoachtour dskht = new dskehoachtour();
-                                    dskht.nhapDsKHT();
-                                    dskht.xuatDsKHT();
-                                    break;
-                                }
-                                case 4: {
-                                    dsctkhtour dsctkhtour = new dsctkhtour();
-                                    dsctkhtour.nhapds();
-                                    dsctkhtour.xuatds();
-                                    break;
-                                }
-                                case 5: {
-                                    dshopdong dsHopDong = new dshopdong();
-                                    dsHopDong.nhapDshopdong();
-                                    dsHopDong.xuatDshopdong();
-                                    break;
-                                }
-                                case 6:{
-                                    dst.thongKeTheoLoaiTour();
-                                    break;
-                                }
-                                case 0:
-                                    break;
-                                default:
-                                    System.out.println("Lua chon khong hop le!");
-                                    break;
-                            }
-                        } while (subChon != 0);
+                        quanLyTour();
                         break;
+                    }
+                    case 4:{
+                        quanLyHoaDon();
+                        break; 
                     }
                     case 0:
                         System.out.println("Cam on ban da su dung chuong trinh!");
@@ -423,7 +333,7 @@ public class menu {
                         dskht.suaKHT();
                         break;
                     case 7:
-                        dskht.thongKeTheoMaTour();
+                        dskht.thongketheosove();
                         break;
                     case 0:
                         break;
@@ -506,6 +416,10 @@ public class menu {
                 switch (chon) {
                     case 1:
                         dshoadon.nhapDsHD();
+                        for(int i=0;i<dshoadon.getN();i++){
+                            hoadon hd=dshoadon.getDs()[i];
+                            capnhatsove(hd.getMakhtour(),hd.getSove());
+                        }
                         break;
                     case 2:
                         dshoadon.xuatDsHD();
@@ -523,14 +437,30 @@ public class menu {
                     case 4:
                         hoadon hd1 = new hoadon();
                         hd1.nhap();
+                        if(dshoadon.timHD(hd1.getMahd())!=null){
+                            System.out.println(" Ma hoa don da ton tai, khong the them!");
+                            break;
+                        }
                         dshoadon.themHDCoTs(hd1);
+                        capnhatsove(hd1.getMakhtour(),hd1.getSove());
+                        dshoadon.ghiFile("dshoadon.txt");
+                        dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 5:
                         System.out.print("Nhap ma hoa don can xoa: ");
-                        dshoadon.xoaHDCoTs(sc.nextLine());
+                        String mahoadon=sc.nextLine();
+                        dshoadon.xoaHDCoTs(mahoadon);
+                        capnhatsovekhisua(mahoadon);
+                        dskht.ghiFile("dskehoachtour.txt");
+                        dshoadon.ghiFile("dshoadon.txt");
                         break;
                     case 6:
-                        dshoadon.suaHD();
+                        System.out.print("Nhap ma hoa don can sua: ");
+                        String mhd = sc.nextLine();
+                        dshoadon.suaHD(mhd);
+                        capnhatsovekhisua(mhd);
+                        dshoadon.ghiFile("dshoadon.txt");
+                        dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 7:
                         dshoadon.thongKeTheoMaKH();
@@ -564,7 +494,6 @@ public class menu {
                         System.out.println("=== THONG KE DOANH THU THEO TOUR ===");
                         System.out.print("Nhap ma tour: ");
                         String maTour = sc.nextLine();
-                        dskht.thongKeTheoMaTour();
                         break;
                     case 2:
                         System.out.println("=== THONG KE DOANH THU THEO KHACH HANG ===");
@@ -592,5 +521,25 @@ public class menu {
             }
         } while (chon != 0);
     }
+    public static void capnhatsove(String makhtour,int sove){
+        for(int i=0;i<dskht.getN();i++){
+            if(dskht.getDs()[i].getMakhtour().equalsIgnoreCase(makhtour)){
+                int soveconlai=dskht.getDs()[i].getSoveconlai();
+                dskht.getDs()[i].setSoveconlai(soveconlai - sove);
+            }
+        }
+    }    public static void capnhatsovekhisua(String mahoadon){
+        for(int i=0;i<dskht.getN();i++){
+            String makhtour=dskht.getDs()[i].getMakhtour();
+            int sovebanduoc=0;
+            for(int j=0;j<dshoadon.getN();j++){
+                String mahd=dshoadon.getDs()[i].getMahd();
+                if(dshoadon.getDs()[j].getMakhtour().equalsIgnoreCase(makhtour) && mahd==mahoadon){
+                    sovebanduoc+=dshoadon.getDs()[j].getSove();
+                }
+            }
+            int tongsove=dskht.getDs()[i].getSoveconlai();
+            dskht.getDs()[i].setSoveconlai(tongsove - sovebanduoc);
+        }
+    }
 }
-    

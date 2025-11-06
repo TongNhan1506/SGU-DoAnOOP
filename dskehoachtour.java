@@ -56,8 +56,8 @@ public class dskehoachtour {
     }
 
     public void xuatDsKHT() {
-        System.out.printf("%-10s %-10s %-12s %-12s %-8s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-                "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Don gia", "Tong ve",
+        System.out.printf("%-10s %-10s %-12s %-12s %-10s %-10s %-10s %-10s %-10s %-10s\n",
+                "MaKHT", "MaTour", "Ngay di", "Ngay ve",
                 "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
@@ -116,44 +116,24 @@ public class dskehoachtour {
         System.out.println(" Da xoa ke hoach tour co ma: " + makhtour);
     }
 
-    public void thongKeTheoMaTour() {
-        if (N == 0) {
-            System.out.println(" Danh sach ke hoach tour rong!");
-            return;
-        }
-
-        System.out.print("Nhap ma tour can thong ke: ");
-        String matour = sc.nextLine();
-
-        int dem = 0;
-        long tongDoanhThu = 0;
-
-        System.out.printf("%-10s %-10s %-12s %-12s %-8s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-                "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Don gia", "Tong ve",
+    public void thongketheosove(){
+        System.out.println("Nhap vao so ve con lai can thong ke: ");
+        int soveconlai = Integer.parseInt(sc.nextLine());
+        System.out.println("=== THONG KE KE HOACH THEO SO VE CON LAI ===");
+        System.out.printf("%-10s %-10s %-12s %-12s %-10s %-10s %-10s %-10s %-10s %-10s\n",
+                "MaKHT", "MaTour", "Ngay di", "Ngay ve",
                 "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV");
-
         for (int i = 0; i < N; i++) {
-            if (ds[i].getMatour().equalsIgnoreCase(matour)) {
+            if (ds[i].getSoveconlai() >= soveconlai) {
                 ds[i].xuat();
-                dem++;
-                tongDoanhThu += (long) ds[i].getDongia() * ds[i].getTongsove();
             }
-        }
-
-        if (dem == 0) {
-            System.out.println(" Khong co ke hoach tour nao thuoc tour co ma: " + matour);
-        } else {
-            System.out.println(" Tong so ke hoach tour cua ma tour '" + matour + "': " + dem);
-            System.out.println(" Tong doanh thu du kien: " + tongDoanhThu);
         }
     }
 
-    public void suaKHT() {
-        System.out.print("Nhap ma ke hoach tour can sua: ");
-        String makhtour = sc.nextLine();
+    public void suaKHT(String makhtour) {
         int idx = timTheoMa(makhtour);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay ke hoach tour co ma: " + makhtour);
+            System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
             return;
         }
 
@@ -163,9 +143,8 @@ public class dskehoachtour {
             System.out.println("\n===== SUA THONG TIN KE HOACH TOUR =====");
             System.out.println("1. Sua ma tour");
             System.out.println("2. Sua ngay di / ngay ve");
-            System.out.println("3. Sua don gia");
-            System.out.println("4. Sua tong ve, ve con");
-            System.out.println("5. Sua tong chi / an / o / di lai / tien ve");
+            System.out.println("3. Sua ve con");
+            System.out.println("4. Sua tong chi / an / o / di lai / tien ve");
             System.out.println("0. Thoat");
             System.out.print("Nhap lua chon: ");
             chon = Integer.parseInt(sc.nextLine());
@@ -182,16 +161,10 @@ public class dskehoachtour {
                     k.setNgayve(LocalDate.parse(sc.nextLine()));
                     break;
                 case 3:
-                    System.out.print("Nhap don gia moi: ");
-                    k.setDongia(Integer.parseInt(sc.nextLine()));
-                    break;
-                case 4:
-                    System.out.print("Nhap tong so ve moi: ");
-                    k.setTongsove(Integer.parseInt(sc.nextLine()));
                     System.out.print("Nhap so ve con lai moi: ");
                     k.setSoveconlai(Integer.parseInt(sc.nextLine()));
                     break;
-                case 5:
+                case 4:
                     System.out.print("Nhap tong chi moi: ");
                     k.setTongchi(Integer.parseInt(sc.nextLine()));
                     System.out.print("Nhap tong an moi: ");
@@ -204,16 +177,78 @@ public class dskehoachtour {
                     k.setTongtienve(Integer.parseInt(sc.nextLine()));
                     break;
                 case 0:
-                    System.out.println("⬅ Thoat sua thong tin.");
+                    System.out.println(" Thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = k;
         System.out.println(" Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
     }
+    
+    
+    public void suaKHT() {
+        System.out.print("Nhap ma ke hoach tour can sua: ");
+        String makhtour = sc.nextLine();
+        int idx = timTheoMa(makhtour);
+        if (idx == -1) {
+            System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
+            return;
+        }
+
+        kehoachtour k = ds[idx];
+        int chon;
+        do {
+            System.out.println("\n===== SUA THONG TIN KE HOACH TOUR =====");
+            System.out.println("1. Sua ma tour");
+            System.out.println("2. Sua ngay di / ngay ve");
+            System.out.println("3. Sua ve con");
+            System.out.println("4. Sua tong chi / an / o / di lai / tien ve");
+            System.out.println("0. Thoat");
+            System.out.print("Nhap lua chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Nhap ma tour moi: ");
+                    k.setMatour(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhap ngay di moi: ");
+                    k.setNgaydi(LocalDate.parse(sc.nextLine()));
+                    System.out.print("Nhap ngay ve moi: ");
+                    k.setNgayve(LocalDate.parse(sc.nextLine()));
+                    break;
+                case 3:
+                    System.out.print("Nhap so ve con lai moi: ");
+                    k.setSoveconlai(Integer.parseInt(sc.nextLine()));
+                    break;
+                case 4:
+                    System.out.print("Nhap tong chi moi: ");
+                    k.setTongchi(Integer.parseInt(sc.nextLine()));
+                    System.out.print("Nhap tong an moi: ");
+                    k.setTongan(Integer.parseInt(sc.nextLine()));
+                    System.out.print("Nhap tong o moi: ");
+                    k.setTongo(Integer.parseInt(sc.nextLine()));
+                    System.out.print("Nhap tong di lai moi: ");
+                    k.setTongdilai(Integer.parseInt(sc.nextLine()));
+                    System.out.print("Nhap tong tien ve moi: ");
+                    k.setTongtienve(Integer.parseInt(sc.nextLine()));
+                    break;
+                case 0:
+                    System.out.println(" Thoat sua thong tin.");
+                    break;
+                default:
+                    System.out.println(" Lua chon khong hop le!");
+            }
+        } while (chon != 0);
+
+        ds[idx] = k;
+        System.out.println(" Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
+    }
+        
     public void docFile(String file){
         try {
         FileInputStream fis=new FileInputStream(file);
@@ -225,22 +260,20 @@ public class dskehoachtour {
         while((line = br.readLine())!=null){
             String[] part=line.split("\\|");
 
-            if(part.length>=12){
+            if(part.length>=11){
                 String ma=part[0];
                 String mat=part[1];
                 LocalDate ngaydi=LocalDate.parse(part[2]);
                 LocalDate ngayve=LocalDate.parse(part[3]);
-                int dongia=Integer.parseInt(part[4]);
-                int tongsove=Integer.parseInt(part[5]);
-                int soveconlai= Integer.parseInt(part[6]);
-                int tongchi=Integer.parseInt(part[7]);
-                int tongan=Integer.parseInt(part[8]);
-                int tongo=Integer.parseInt(part[9]);
-                int tongdilai=Integer.parseInt(part[10]);
-                String mahdv=part[11];
-                int tongtienve=Integer.parseInt(part[12]);
-                
-                ds[n++]=new kehoachtour(ma,mat,ngaydi,ngayve,dongia,tongsove,soveconlai,tongchi,tongan,tongo,tongdilai,tongtienve,mahdv);
+                int tongsove=Integer.parseInt(part[4]);
+                int soveconlai= Integer.parseInt(part[5]);
+                int tongan=Integer.parseInt(part[6]);
+                int tongo=Integer.parseInt(part[7]);
+                int tongdilai=Integer.parseInt(part[8]);
+                int tongtienve=Integer.parseInt(part[9]);
+                String mahdv=part[10];
+               
+                ds[n++]=new kehoachtour(ma,mat,ngaydi,ngayve,tongsove,soveconlai,tongan,tongo,tongdilai,tongtienve,mahdv);
             }
         }
         br.close();
@@ -259,18 +292,17 @@ public class dskehoachtour {
                 kehoachtour k=ds[i];
                 String line="";
                 
-                line=String.join("\\|",
+                line=String.join("|",
                 k.getMakhtour(),
                 k.getMatour(),
                 String.valueOf(k.getNgaydi()),
                 String.valueOf(k.getNgayve()),
-                String.valueOf(k.getDongia()),
-                String.valueOf(k.getTongsove()),
                 String.valueOf(k.getSoveconlai()),
                 String.valueOf(k.getTongchi()),
                 String.valueOf(k.getTongan()),
                 String.valueOf(k.getTongo()),
                 String.valueOf(k.getTongdilai()),
+                String.valueOf(k.getTongtienve()),
                 k.getMahdv());
 
                 bw.write(line);

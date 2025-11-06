@@ -193,6 +193,76 @@ public class dstour {
         ds[idx] = t;
         System.out.println(" Da cap nhat tour co ma: " + matour);
     }
+    public void suaTour(String matour) {
+        int idx = timTheoMa(matour);
+        if (idx == -1) {
+            System.out.println(" Khong tim thay tour co ma: " + matour);
+            return;
+        }
+
+        tour t = ds[idx];
+        int chon;
+        do {
+            System.out.println("\n===== SUA THONG TIN TOUR =====");
+            System.out.println("1. Sua ma tour");
+            System.out.println("2. Sua ten tour");
+            System.out.println("3. Sua don gia");
+            System.out.println("4. Sua thu tuc va dia diem KH");
+            if (t instanceof tourtrongnuoc) {
+                System.out.println("5. Sua tinh thanh & dac san");
+            }
+            if (t instanceof tournuocngoai) {
+                System.out.println("5. Sua quoc gia & ngoai te");
+            }
+            System.out.println("0. Thoat");
+            System.out.print("Nhap lua chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Nhap ma tour moi: ");
+                    t.setMatour(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhap ten tour moi: ");
+                    t.setTentour(sc.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Nhap don gia moi: ");
+                    t.setDongia(Integer.parseInt(sc.nextLine()));
+                    break;
+                case 4:
+                    System.out.print("Nhap thu tuc moi: ");
+                    t.setThutuc(sc.nextLine());
+                    System.out.print("Nhap dia diem KH moi: ");
+                    t.setDiadiemKH(sc.nextLine());
+                    break;
+                case 5:
+                    if (t instanceof tourtrongnuoc) {
+                        tourtrongnuoc tn = (tourtrongnuoc) t;
+                        System.out.print("Nhap tinh thanh moi: ");
+                        tn.setTinhthanh(sc.nextLine());
+                        System.out.print("Nhap dac san moi: ");
+                        tn.setDacsan(sc.nextLine());
+                    } else if (t instanceof tournuocngoai) {
+                        tournuocngoai tq = (tournuocngoai) t;
+                        System.out.print("Nhap quoc gia moi: ");
+                        tq.setQuocgia(sc.nextLine());
+                        System.out.print("Nhap ngoai te moi: ");
+                        tq.setNgoaite(sc.nextLine());
+                    }
+                    break;
+                case 0:
+                    System.out.println(" Thoat sua thong tin tour.");
+                    break;
+                default:
+                    System.out.println(" Lua chon khong hop le!");
+            }
+        } while (chon != 0);
+
+        ds[idx] = t;
+        System.out.println(" Da cap nhat tour co ma: " + matour);
+    }
     public void docFile(String file) {
     try {
         FileInputStream fis = new FileInputStream(file);
