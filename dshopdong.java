@@ -199,7 +199,7 @@ public void thongKeTheoMaTour() {
                 hopdong h=ds[i];
 
                 String line="";
-                line=String.join("\\|",
+                line=String.join("|",
                 h.getMahd(),
                 h.getMatour(),
                 h.getMakh(),

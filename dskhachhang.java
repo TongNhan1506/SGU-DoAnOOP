@@ -259,7 +259,7 @@ public void thongKeMaKH() {
                 khachhang k=ds[i];
                 String line="";
 
-                line=String.join("\\|",
+                line=String.join("|",
                 k.getMakh(),
                 k.getHo(),
                 k.getTen(),

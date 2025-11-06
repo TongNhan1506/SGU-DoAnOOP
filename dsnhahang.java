@@ -329,7 +329,7 @@ public void thongKeTheoMaKHTour() {
                 nhahang n =ds[i];
                 String line ="";
                 
-                line=String.join("\\|",
+                line=String.join("|",
                 n.getManh(),
                 n.getTennh(),
                 n.getDiachi(),
