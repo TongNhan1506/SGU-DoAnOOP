@@ -27,15 +27,22 @@ public class menu {
             try {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
-                    case 1:
+                    case 1: {
                         quanLyHDV();
                         break;
-                    case 2:
+                    }
+                    case 2: {
                         quanLyKhachHang();
                         break;
-                    case 3:
+                    }
+                    case 3: {
                         quanLyTour();
                         break;
+                    }
+                    case 4:{
+                        quanLyHoaDon();
+                        break; 
+                    }
                     case 0:
                         System.out.println("╔════════════════════════════════════════╗");
                         System.out.println("║  Cam on ban da su dung chuong trinh!  ║");
@@ -366,7 +373,7 @@ public class menu {
                         dskht.suaKHT();
                         break;
                     case 7:
-                        dskht.thongKeTheoMaTour();
+                        dskht.thongketheosove();
                         break;
                     case 0:
                         System.out.println("⬅ Quay lai...");
@@ -535,6 +542,10 @@ public class menu {
                 switch (chon) {
                     case 1:
                         dshoadon.nhapDsHD();
+                        for(int i=0;i<dshoadon.getN();i++){
+                            hoadon hd=dshoadon.getDs()[i];
+                            capnhatsove(hd.getMakhtour(),hd.getSove());
+                        }
                         break;
                     case 2:
                         dshoadon.xuatDsHD();
@@ -557,14 +568,30 @@ public class menu {
                     case 5:
                         hoadon hd1 = new hoadon();
                         hd1.nhap();
+                        if(dshoadon.timHD(hd1.getMahd())!=null){
+                            System.out.println(" Ma hoa don da ton tai, khong the them!");
+                            break;
+                        }
                         dshoadon.themHDCoTs(hd1);
+                        capnhatsove(hd1.getMakhtour(),hd1.getSove());
+                        dshoadon.ghiFile("dshoadon.txt");
+                        dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 6:
                         System.out.print("Nhap ma hoa don can xoa: ");
-                        dshoadon.xoaHDCoTs(sc.nextLine());
+                        String mahoadon=sc.nextLine();
+                        dshoadon.xoaHDCoTs(mahoadon);
+                        capnhatsovekhisua(mahoadon);
+                        dskht.ghiFile("dskehoachtour.txt");
+                        dshoadon.ghiFile("dshoadon.txt");
                         break;
-                    case 7:
-                        dshoadon.suaHD();
+                    case 6:
+                        System.out.print("Nhap ma hoa don can sua: ");
+                        String mhd = sc.nextLine();
+                        dshoadon.suaHD(mhd);
+                        capnhatsovekhisua(mhd);
+                        dshoadon.ghiFile("dshoadon.txt");
+                        dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 8:
                         dshoadon.thongKeTheoMaKH();
@@ -598,8 +625,9 @@ public class menu {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
                     case 1:
-                        System.out.println("\n=== THONG KE DOANH THU THEO TOUR ===");
-                        dskht.thongKeTheoMaTour();
+                        System.out.println("=== THONG KE DOANH THU THEO TOUR ===");
+                        System.out.print("Nhap ma tour: ");
+                        String maTour = sc.nextLine();
                         break;
                     case 2:
                         System.out.println("\n=== THONG KE DOANH THU THEO KHACH HANG ===");
@@ -627,5 +655,26 @@ public class menu {
                 chon = -1;
             }
         } while (chon != 0);
+    }
+    public static void capnhatsove(String makhtour,int sove){
+        for(int i=0;i<dskht.getN();i++){
+            if(dskht.getDs()[i].getMakhtour().equalsIgnoreCase(makhtour)){
+                int soveconlai=dskht.getDs()[i].getSoveconlai();
+                dskht.getDs()[i].setSoveconlai(soveconlai - sove);
+            }
+        }
+    }    public static void capnhatsovekhisua(String mahoadon){
+        for(int i=0;i<dskht.getN();i++){
+            String makhtour=dskht.getDs()[i].getMakhtour();
+            int sovebanduoc=0;
+            for(int j=0;j<dshoadon.getN();j++){
+                String mahd=dshoadon.getDs()[i].getMahd();
+                if(dshoadon.getDs()[j].getMakhtour().equalsIgnoreCase(makhtour) && mahd==mahoadon){
+                    sovebanduoc+=dshoadon.getDs()[j].getSove();
+                }
+            }
+            int tongsove=dskht.getDs()[i].getSoveconlai();
+            dskht.getDs()[i].setSoveconlai(tongsove - sovebanduoc);
+        }
     }
 }
