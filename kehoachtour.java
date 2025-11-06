@@ -8,6 +8,7 @@ class kehoachtour {
     private String matour;
     private LocalDate ngaydi;
     private LocalDate ngayve;
+    private int tongsove;
     public  int soveconlai;
     private int tongchi;
     private int tongan;
@@ -33,47 +34,51 @@ class kehoachtour {
     public kehoachtour() {
     }
 
-    public kehoachtour( String makhtour,String matour, LocalDate ngaydi, LocalDate ngayve,
-            int soveconlai, int tongchi, int tongan, int tongo, int tongdilai, String mahdv, int tongtienve) {
+    public kehoachtour( String makhtour, LocalDate ngaydi, LocalDate ngayve, int tongsove,
+            int soveconlai, int tongchi, int tongan, int tongo, int tongdilai, int tongtienve, String mahdv) {
         this.makhtour = makhtour;
         this.matour = t.getMatour();
         this.ngaydi = ngaydi;
         this.ngayve = ngayve;
+        this.tongsove = tongsove;
         this.soveconlai = soveconlai;
         this.tongchi = tongchi;
         this.tongan = tongan;
         this.tongo = tongo;
         this.tongdilai = tongdilai;
-        this.mahdv = mahdv;
         this.tongtienve = tongtienve;
+        this.mahdv = mahdv;
     }
-    public kehoachtour(String makhtour,String matour,LocalDate ngaydi,LocalDate ngayve,int soveconlai,
-            int tongchi,int tongan,int tongo,int tongdilai,int tongtienve,String mahdv){
-        this.makhtour=makhtour;
-        this.matour=matour;
-        this.ngaydi=ngaydi;
-        this.ngayve=ngayve;
-        this.soveconlai=soveconlai;
-        this.tongchi=tongchi;
-        this.tongan=tongan;
-        this.tongo=tongo;
-        this.tongdilai=tongdilai;
-        this.mahdv=mahdv;
-        this.tongtienve=tongtienve;
 
+    public kehoachtour( String makhtour,String matour, LocalDate ngaydi, LocalDate ngayve, int tongsove,
+            int soveconlai, int tongchi, int tongan, int tongo, int tongdilai, int tongtienve,String mahdv) {
+        this.makhtour = makhtour;
+        this.matour = matour;
+        this.ngaydi = ngaydi;
+        this.ngayve = ngayve;
+        this.tongsove = tongsove;
+        this.soveconlai = soveconlai;
+        this.tongchi = tongchi;
+        this.tongan = tongan;
+        this.tongo = tongo;
+        this.tongdilai = tongdilai;
+        this.tongtienve = tongtienve;
+        this.mahdv = mahdv;  
     }
     public kehoachtour(kehoachtour kht) {
         this.makhtour = kht.makhtour;
         this.matour = kht.matour;
         this.ngaydi = kht.ngaydi;
         this.ngayve = kht.ngayve;
+        this.tongsove = kht.tongsove;
         this.soveconlai = kht.soveconlai;
         this.tongchi = kht.tongchi;
         this.tongan = kht.tongan;
         this.tongo = kht.tongo;
         this.tongdilai = kht.tongdilai;
-        this.mahdv = kht.mahdv;
         this.tongtienve = kht.tongtienve;
+        this.mahdv = kht.mahdv;
+        
     }
 
     public int tinhTongChiPhi() {
@@ -94,6 +99,10 @@ class kehoachtour {
 
     public LocalDate getNgayve() {
         return ngayve;
+    }
+
+    public int getTongsove() {
+        return tongsove;
     }
 
     public int getSoveconlai() {
@@ -120,7 +129,7 @@ class kehoachtour {
         return mahdv;
     }
 
-    public int getTongtienve(){
+    public int getTongtienve() {
         return tongtienve;
     }
 
@@ -138,6 +147,10 @@ class kehoachtour {
 
     public void setNgayve(LocalDate ngayve) {
         this.ngayve = ngayve;
+    }
+
+    public void setTongsove(int tongsove) {
+        this.tongsove = tongsove;
     }
 
     public void setSoveconlai(int soveconlai) {
@@ -177,6 +190,8 @@ class kehoachtour {
         ngaydi = LocalDate.parse(sc.nextLine());
         System.out.println("Nhap ngay ve (yyyy-mm-dd): ");
         ngayve = LocalDate.parse(sc.nextLine());
+        System.out.println("Nhap tong so ve: ");
+        tongsove = sc.nextInt();
         System.out.println("Nhap so ve con lai: ");
         soveconlai = sc.nextInt();
         System.out.println("Nhap tong chi 1 ngay: ");
@@ -196,8 +211,8 @@ class kehoachtour {
     }
 
     public void xuat() {
-        System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi, ngayve, soveconlai, tongchi, tongan, tongo,
+        System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
+                makhtour, matour, ngaydi, ngayve, tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
     
@@ -207,7 +222,6 @@ class kehoachtour {
         int tongTienMotNgay = getTongTienTheoNgay();
         long tongTienToanTour = tongTienMotNgay * songay;
         int tongTienCacKhoan = getTongTienTheoCacKhoan();
-
         System.out.println("\n==== THONG KE TONG TIEN SU DUNG THEO NGAY ====");
         System.out.println("Ma ke hoach tour: " + makhtour);
         System.out.println("So ngay tour: " + songay);

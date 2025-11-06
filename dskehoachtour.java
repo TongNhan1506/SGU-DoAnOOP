@@ -56,8 +56,8 @@ public class dskehoachtour {
     }
 
     public void xuatDsKHT() {
-        System.out.printf("%-10s %-10s %-12s %-12s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-                "MaKHT", "MaTour", "Ngay di", "Ngay ve",
+        System.out.printf("%-10s %-10s %-12s %-12s %-8s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
+                "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Don gia", "Tong ve",
                 "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
@@ -115,7 +115,6 @@ public class dskehoachtour {
         N--;
         System.out.println("✅ Da xoa ke hoach tour co ma: " + makhtour);
     }
-
     public void thongketheosove(){
         System.out.println("Nhap vao so ve con lai can thong ke: ");
         int soveconlai = Integer.parseInt(sc.nextLine());
@@ -129,7 +128,6 @@ public class dskehoachtour {
             }
         }
     }
-
     public void suaKHT(String makhtour) {
         int idx = timTheoMa(makhtour);
         if (idx == -1) {
@@ -248,7 +246,6 @@ public class dskehoachtour {
         ds[idx] = k;
         System.out.println("✅ Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
     }
-        
     public void docFile(String file){
         try {
         FileInputStream fis=new FileInputStream(file);
@@ -260,20 +257,20 @@ public class dskehoachtour {
         while((line = br.readLine())!=null){
             String[] part=line.split(",");
 
-            if(part.length>=11){
+            if(part.length>=12){
                 String ma=part[0];
                 String mat=part[1];
                 LocalDate ngaydi=LocalDate.parse(part[2]);
                 LocalDate ngayve=LocalDate.parse(part[3]);
                 int tongsove=Integer.parseInt(part[4]);
                 int soveconlai= Integer.parseInt(part[5]);
-                int tongan=Integer.parseInt(part[6]);
-                int tongo=Integer.parseInt(part[7]);
-                int tongdilai=Integer.parseInt(part[8]);
-                int tongtienve=Integer.parseInt(part[9]);
-                String mahdv=part[10];
-               
-                ds[n++]=new kehoachtour(ma,mat,ngaydi,ngayve,tongsove,soveconlai,tongan,tongo,tongdilai,tongtienve,mahdv);
+                int tongchi=Integer.parseInt(part[6]);
+                int tongan=Integer.parseInt(part[7]);
+                int tongo=Integer.parseInt(part[8]);
+                int tongdilai=Integer.parseInt(part[9]);
+                int tongtienve=Integer.parseInt(part[10]);
+                String mahdv=part[11];
+                ds[n++]=new kehoachtour( ma, mat, ngaydi, ngayve, tongsove,soveconlai, tongchi, tongan, tongo, tongdilai, tongtienve, mahdv);
             }
         }
         br.close();
@@ -297,6 +294,7 @@ public class dskehoachtour {
                 k.getMatour(),
                 String.valueOf(k.getNgaydi()),
                 String.valueOf(k.getNgayve()),
+                String.valueOf(k.getTongsove()),
                 String.valueOf(k.getSoveconlai()),
                 String.valueOf(k.getTongchi()),
                 String.valueOf(k.getTongan()),
@@ -304,7 +302,6 @@ public class dskehoachtour {
                 String.valueOf(k.getTongdilai()),
                 String.valueOf(k.getTongtienve()),
                 k.getMahdv());
-
                 bw.write(line);
                 bw.newLine();
             }
