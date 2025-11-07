@@ -1,6 +1,6 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 class khachhang {
     private String makh;
@@ -11,10 +11,6 @@ class khachhang {
     private String diachi;
     private String sdt;
     private Scanner sc = new Scanner(System.in);
-
-    // Định dạng ngày theo dd/MM/yyyy
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     public khachhang() {
     }
 
@@ -101,8 +97,17 @@ class khachhang {
         ho = sc.nextLine();
         System.out.println("Nhap ten: ");
         ten = sc.nextLine();
-        System.out.println("Nhap ngay sinh (dd/MM/yyyy): ");
-        ngaysinh = LocalDate.parse(sc.nextLine(), dtf);
+        
+        while(true) {
+            System.out.println("Nhap ngay sinh (dd/MM/yyyy): ");
+            try {
+                ngaysinh = LocalDate.parse(sc.nextLine(), kehoachtour.df);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Loi dinh dang ngay. Vui long nhap lai.");
+            }
+        }
+        
         System.out.println("Nhap gioi tinh: ");
         gioitinh = sc.nextLine();
         System.out.println("Nhap dia chi: ");
@@ -112,7 +117,13 @@ class khachhang {
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
-                makh, ho, ten, ngaysinh.format(dtf), gioitinh, diachi, sdt);
+        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-15s %-20s\n",
+                makh, 
+                ho, 
+                ten, 
+                ngaysinh.format(kehoachtour.df), 
+                gioitinh, 
+                sdt,
+                diachi);
     }
 }
