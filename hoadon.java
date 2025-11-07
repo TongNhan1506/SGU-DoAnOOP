@@ -1,32 +1,37 @@
 
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 class hoadon {
     private String mahoadon;
     private String makh;
     private String makhtour;
+    private LocalDate ngaylap;
     private int sove;
     private int tongtien;
     private kehoachtour kht;
     private tour t;
     private khachhang kh;
     private Scanner sc = new Scanner(System.in);
-
+    private static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public hoadon() {
     }
 
-    public hoadon(String mahoadon, String mahd, String makh, int sove, String makhtour, int tongtien) {
+    public hoadon(String mahoadon, String makh, LocalDate ngaylap, int sove, String makhtour, int tongtien) {
         this.mahoadon = mahoadon;
         this.makh = kh.getMakh();
         this.makhtour = kht.getMakhtour();
+        this.ngaylap = ngaylap;
         this.sove = sove;
         this.tongtien = sove * t.getDongia();
     }
 
-    public hoadon(String mahoadon,String makh,String makhtour,int sove,int tongtien){
+    public hoadon(String mahoadon,String makh,String makhtour,LocalDate ngaylap,int sove,int tongtien){
         this.mahoadon=mahoadon;
         this.makh=makh;
         this.makhtour=makhtour;
+        this.ngaylap=ngaylap;
         this.sove=sove;
         this.tongtien = tongtien;
     }
@@ -34,6 +39,7 @@ class hoadon {
         this.mahoadon = hd.mahoadon;
         this.makh = hd.makh;
         this.makhtour = hd.makhtour;
+        this.ngaylap = hd.ngaylap;
         this.tongtien = hd.tongtien;
         this.sove = hd.sove;
     }
@@ -48,6 +54,10 @@ class hoadon {
 
     public String getMakhtour() {
         return makhtour;
+    }
+    
+    public LocalDate getNgaylap() {
+        return ngaylap;
     }
 
     public int getTongtien() {
@@ -69,6 +79,10 @@ class hoadon {
         this.makhtour = makhtour;
     }
 
+    public void setNgaylap(LocalDate ngaylap) {
+        this.ngaylap = ngaylap;
+    }
+
     public void setTongtien(int tongtien) {
         this.tongtien = tongtien;
     }
@@ -85,6 +99,15 @@ class hoadon {
         makh = sc.nextLine();
         System.out.println("Nhap ma ke hoach tour: ");
         makhtour = sc.nextLine();
+        System.out.println("Nhap ngay lap (dd/MM/yyyy): ");
+        String dateInput = sc.nextLine();
+        try {
+            ngaylap=LocalDate.parse(dateInput, df);
+        }
+        catch(DateTimeParseException e){    
+            System.out.println("Loi dinh dang ngay khong dung "+e.getMessage());
+            e.printStackTrace();
+        }
         System.out.println("Nhap so ve: ");
         sove = sc.nextInt();
         System.out.println("Nhap tong tien: ");
@@ -93,6 +116,6 @@ class hoadon {
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-10d %-15d\n", mahoadon, makh, makhtour,sove, tongtien);
+        System.out.printf("%-10s %-10s %-10s %-10s %-10d %-15d\n", mahoadon, makh, makhtour, ngaylap.format(df), sove, tongtien);
     }
 }

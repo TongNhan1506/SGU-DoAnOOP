@@ -587,7 +587,7 @@ public class menu {
                         dskht.ghiFile("dskehoachtour.txt");
                         dshoadon.ghiFile("dshoadon.txt");
                         break;
-                    case 6:
+                    case 7:
                         System.out.print("Nhap ma hoa don can sua: ");
                         String mhd = sc.nextLine();
                         dshoadon.suaHD(mhd);
@@ -660,7 +660,7 @@ public class menu {
         } while (chon != 0);
     }
     public static void capnhatsove(String maKHTour, int soveThayDoi, String mode) {
-    // Tìm kế hoạch tour tương ứng
+
     int index = dskht.timTheoMa(maKHTour);
     if (index == -1) {
         System.out.println(" Không tìm thấy kế hoạch tour có mã: " + maKHTour);
@@ -669,14 +669,14 @@ public class menu {
 
     kehoachtour kht = dskht.getDs()[index];
 
-    // --- 1️⃣ Trường hợp thêm hóa đơn mới ---
+
     if (mode.equalsIgnoreCase("them")) {
         int soveconlai = kht.getSoveconlai() - soveThayDoi;
         if (soveconlai < 0) soveconlai = 0;
         kht.setSoveconlai(soveconlai);
     }
 
-    // --- 2️⃣ Trường hợp xóa hóa đơn ---
+
     else if (mode.equalsIgnoreCase("xoa")) {
         int soveconlai = kht.getSoveconlai() + soveThayDoi;
         if (soveconlai > kht.getTongsove())
@@ -684,9 +684,8 @@ public class menu {
         kht.setSoveconlai(soveconlai);
     }
 
-    // --- 3️⃣ Trường hợp sửa hóa đơn ---
     else if (mode.equalsIgnoreCase("sua")) {
-        // Khi sửa, ta tính lại toàn bộ vé đã bán cho kế hoạch đó
+
         int tongVeBan = 0;
         for (int j = 0; j < dshoadon.getN(); j++) {
             hoadon hd = dshoadon.getDs()[j];
@@ -699,7 +698,7 @@ public class menu {
         kht.setSoveconlai(soveconlai);
     }
 
-    // --- 4️⃣ Cập nhật lại vào danh sách ---
+
     dskht.getDs()[index] = kht;
     System.out.println("✅ Đã cập nhật số vé cho kế hoạch " + maKHTour + " (" + mode + ")");
 }
