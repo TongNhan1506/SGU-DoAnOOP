@@ -9,9 +9,12 @@ public class menu {
     private static dsctkhtour dsctkht = new dsctkhtour();
     private static dshopdong dshd = new dshopdong();
     private static dshoadon dshoadon = new dshoadon();
+    private static dscthoadon dsct=new dscthoadon();
+    private static dsdanhgiatour dsdgt=new dsdanhgiatour();
+    private static dsnhahang dsnh=new dsnhahang();
 
     public static void main(String[] args) {
-        khoiTao();
+        loadfile();
         int chon = -1;
         
         while (chon != 0) {
@@ -67,8 +70,23 @@ public class menu {
         dsctkht = new dsctkhtour();
         dshd = new dshopdong();
         dshoadon = new dshoadon();
+        dsct=new dscthoadon();
+        dsnh=new dsnhahang();
+        dsdgt=new dsdanhgiatour();
+        
     }
-
+    public static void loadfile(){
+        dshdv.docFile("dshdv.txt");
+        dskh.docFile("dskhachhang.txt");
+        dst.docFile("dstour.txt");
+        dskht.docFile("dskehoachtour.txt");
+        dsctkht.docFile("dsctkhtour.txt");
+        dshoadon.docFile("dshoadon.txt");
+        dshd.docFile("dshopdong.txt");
+        dsct.docFile("dscthoadon.txt");
+        dsdgt.docFile("dsdanhgiatour.txt");
+        dsnh.docFile("dsnhahang.txt");
+    }
     public static void quanLyHDV() {
         int chon;
         do {
@@ -425,8 +443,6 @@ public class menu {
                         }
                         break;
                     case 4:
-                        System.out.print("Nhap ngay chi can tim: ");
-                        dsctkht.timTheoNgayChi(sc.nextLine());
                         break;
                     case 5:
                         ctkhtour ctMoi = new ctkhtour();

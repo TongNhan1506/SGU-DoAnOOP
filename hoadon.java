@@ -1,7 +1,6 @@
 
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 class hoadon {
     private String mahoadon;
@@ -10,23 +9,9 @@ class hoadon {
     private LocalDate ngaylap;
     private int sove;
     private int tongtien;
-    private kehoachtour kht;
-    private tour t;
-    private khachhang kh;
     private Scanner sc = new Scanner(System.in);
-    private static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public hoadon() {
-    }
 
-    public hoadon(String mahoadon, String makh, LocalDate ngaylap, int sove, String makhtour, int tongtien) {
-        this.mahoadon = mahoadon;
-        this.makh = kh.getMakh();
-        this.makhtour = kht.getMakhtour();
-        this.ngaylap = ngaylap;
-        this.sove = sove;
-        this.tongtien = sove * t.getDongia();
-    }
-
+    public hoadon(){}
     public hoadon(String mahoadon,String makh,String makhtour,LocalDate ngaylap,int sove,int tongtien){
         this.mahoadon=mahoadon;
         this.makh=makh;
@@ -102,7 +87,7 @@ class hoadon {
         System.out.println("Nhap ngay lap (dd/MM/yyyy): ");
         String dateInput = sc.nextLine();
         try {
-            ngaylap=LocalDate.parse(dateInput, df);
+            ngaylap=LocalDate.parse(dateInput,kehoachtour.df);
         }
         catch(DateTimeParseException e){    
             System.out.println("Loi dinh dang ngay khong dung "+e.getMessage());
@@ -116,6 +101,6 @@ class hoadon {
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-10s %-10d %-15d\n", mahoadon, makh, makhtour, ngaylap.format(df), sove, tongtien);
+        System.out.printf("%-10s %-10s %-10s %-10s %-10d %-15d\n", mahoadon, makh, makhtour, ngaylap, sove, tongtien);
     }
 }

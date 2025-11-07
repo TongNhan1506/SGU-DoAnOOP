@@ -1,12 +1,10 @@
-import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 public class dskehoachtour {
     private kehoachtour[] ds;
     private int N;
@@ -91,7 +89,7 @@ public class dskehoachtour {
             }
         }
         if (!found) {
-            System.out.println("❌ Khong co hop dong nao thuoc tour co ma: " + matour);
+            System.out.println(" Khong co hop dong nao thuoc tour co ma: " + matour);
         }
     }
 
@@ -99,13 +97,13 @@ public class dskehoachtour {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new kehoachtour(k);
         N++;
-        System.out.println("✅ Da them ke hoach tour (tham so) thanh cong!");
+        System.out.println(" Da them ke hoach tour (tham so) thanh cong!");
     }
 
     public void xoaKHTCoTs(String makhtour) {
         int idx = timTheoMa(makhtour);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay ke hoach tour co ma: " + makhtour);
+            System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -113,7 +111,7 @@ public class dskehoachtour {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa ke hoach tour co ma: " + makhtour);
+        System.out.println(" Da xoa ke hoach tour co ma: " + makhtour);
     }
     public void thongketheosove(){
         System.out.println("Nhap vao so ve con lai can thong ke: ");
@@ -244,24 +242,23 @@ public class dskehoachtour {
         } while (chon != 0);
 
         ds[idx] = k;
-        System.out.println("✅ Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
+        System.out.println(" Da cap nhat thong tin ke hoach tour co ma: " + makhtour);
     }
     public void docFile(String file){
         try {
-        FileInputStream fis=new FileInputStream(file);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        BufferedReader br = new BufferedReader(new FileReader(file));
         int n=0;
-        ds= new kehoachtour[n];
+        ds= new kehoachtour[100];
         
         String line;
         while((line = br.readLine())!=null){
-            String[] part=line.split(",");
+            String[] part=line.split("\\|");
 
             if(part.length>=12){
                 String ma=part[0];
                 String mat=part[1];
-                LocalDate ngaydi=LocalDate.parse(part[2]);
-                LocalDate ngayve=LocalDate.parse(part[3]);
+                LocalDate ngaydi=LocalDate.parse(part[2],kehoachtour.df);
+                LocalDate ngayve=LocalDate.parse(part[3],kehoachtour.df);
                 int tongsove=Integer.parseInt(part[4]);
                 int soveconlai= Integer.parseInt(part[5]);
                 int tongchi=Integer.parseInt(part[6]);
@@ -284,7 +281,7 @@ public class dskehoachtour {
     }
     public void ghiFile(String file){
         try {
-            BufferedWriter bw =new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            BufferedWriter bw =new BufferedWriter(new FileWriter(file));
             for(int i=0;i<N;i++){
                 kehoachtour k=ds[i];
                 String line="";
@@ -292,8 +289,8 @@ public class dskehoachtour {
                 line=String.join("|",
                 k.getMakhtour(),
                 k.getMatour(),
-                String.valueOf(k.getNgaydi()),
-                String.valueOf(k.getNgayve()),
+                String.valueOf(k.getNgaydi().format(kehoachtour.df)),
+                String.valueOf(k.getNgayve().format(kehoachtour.df)),
                 String.valueOf(k.getTongsove()),
                 String.valueOf(k.getSoveconlai()),
                 String.valueOf(k.getTongchi()),

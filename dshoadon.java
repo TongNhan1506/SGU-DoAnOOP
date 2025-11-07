@@ -2,10 +2,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 public class dshoadon {
     private hoadon[] ds;
@@ -180,8 +178,7 @@ public class dshoadon {
     }
     public void docFile(String file){
         try {
-            FileInputStream fis=new FileInputStream(file);
-            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            BufferedReader br = new BufferedReader(new FileReader(file));
             
             int n=0;
             ds=new hoadon[100];
@@ -189,11 +186,11 @@ public class dshoadon {
             while((line=br.readLine())!=null){
 
                 String[] part=line.split("\\|");
-                if(part.length>=4){
+                if(part.length>=6){
                     String mahoadon=part[0].trim();
                     String makh=part[1].trim();
                     String makhtour=part[2].trim();
-                    LocalDate ngaylap=LocalDate.parse(part[3].trim());
+                    LocalDate ngaylap=LocalDate.parse(part[3],kehoachtour.df);
                     int sove=Integer.parseInt(part[4].trim());
                     int tongtien=Integer.parseInt(part[5].trim());
 
@@ -205,13 +202,13 @@ public class dshoadon {
             ds=Arrays.copyOf(ds,N);
             System.out.println("Da doc "+N+" hoa don tu file "+file);
         }catch(Exception e){
-            System.out.println("Loi ghi file"+e.getMessage());
+            System.out.println("Loi doc file "+e.getMessage());
             e.printStackTrace();
         }
     }
     public void ghiFile(String file){
         try{
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             for(int i=0;i<N;i++){
                 hoadon h=ds[i];
                 String line="";
@@ -220,6 +217,7 @@ public class dshoadon {
                 h.getMahd(),
                 h.getMakh(),
                 h.getMakhtour(),
+                String.valueOf(h.getNgaylap().format(kehoachtour.df)),
                 String.valueOf(h.getSove()),
                 String.valueOf(h.getTongtien()));
                 bw.write(line);

@@ -34,12 +34,13 @@ public class dstour {
     }
 
     public void xuatDstour() {
-        for (int i = 0; i < N; i++) {
-            System.out.println("Tour thu " + (i + 1) + ": ");
-            ds[i].xuat();
-            System.out.println("---------------------");
-        }
+    System.out.printf("%-10s %-20s %-10s %-15s %-15s %-15s %-15s %-15s\n", 
+            "MaTour", "TenTour", "DonGia", "ThuTuc", "DiaDiemKH", "DiaDiemDen", "Tinh/QGia", "DacSan/NgoaiTe");
+            
+    for (int i = 0; i < N; i++) {
+        ds[i].xuat();
     }
+}
 
     public int timTheoMa(String matour) {
         for (int i = 0; i < N; i++) {
@@ -53,7 +54,7 @@ public class dstour {
     public void timTheoMaTour(String matour) {
         int idx = timTheoMa(matour);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay tour co ma: " + matour);
+            System.out.println(" Khong tim thay tour co ma: " + matour);
             return;
         }
         System.out.println("=== TIM THAY TOUR ===");
@@ -79,7 +80,7 @@ public class dstour {
             }
         }
         if (!found) {
-            System.out.println("❌ Khong tim thay tour nao co ten: " + tentour);
+            System.out.println(" Khong tim thay tour nao co ten: " + tentour);
         }
     }
 
@@ -87,13 +88,13 @@ public class dstour {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = t;
         N++;
-        System.out.println("✅ Da them tour (tham so) thanh cong!");
+        System.out.println(" Da them tour thanh cong!");
     }
 
     public void xoaTourCoTs(String matour) {
         int idx = timTheoMa(matour);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay tour co ma: " + matour);
+            System.out.println(" Khong tim thay tour co ma: " + matour);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -101,7 +102,7 @@ public class dstour {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa tour co ma: " + matour);
+        System.out.println(" Da xoa tour co ma: " + matour);
     }
 
     public void thongKeTheoLoaiTour() {
@@ -116,9 +117,9 @@ public class dstour {
         }
 
         System.out.println("\n===== THONG KE THEO LOAI TOUR =====");
-        System.out.println("👉 Tour trong nuoc: " + demTrongNuoc);
-        System.out.println("👉 Tour nuoc ngoai: " + demNuocNgoai);
-        System.out.println("👉 Tong cong: " + N);
+        System.out.println(" Tour trong nuoc: " + demTrongNuoc);
+        System.out.println(" Tour nuoc ngoai: " + demNuocNgoai);
+        System.out.println(" Tong cong: " + N);
     }
 
     public void suaTour() {
@@ -126,7 +127,7 @@ public class dstour {
         String matour = sc.nextLine();
         int idx = timTheoMa(matour);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay tour co ma: " + matour);
+            System.out.println(" Khong tim thay tour co ma: " + matour);
             return;
         }
 
@@ -183,15 +184,15 @@ public class dstour {
                     }
                     break;
                 case 0:
-                    System.out.println("⬅ Thoat sua thong tin tour.");
+                    System.out.println(" Thoat sua thong tin tour.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = t;
-        System.out.println("✅ Da cap nhat tour co ma: " + matour);
+        System.out.println(" Da cap nhat tour co ma: " + matour);
     }
     public void suaTour(String matour) {
         int idx = timTheoMa(matour);
@@ -269,11 +270,11 @@ public class dstour {
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
         
         int n = 0;
-        ds = new tour[n]; // cấp phát tạm 100 phần tử
+        ds = new tour[100]; 
         String line;
 
         while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",");
+            String[] parts = line.split("\\|");
 
             if (parts.length >= 9) {
                 String loai = parts[0].trim();
@@ -283,8 +284,8 @@ public class dstour {
                 String thutuc = parts[4].trim();
                 String diadiem = parts[5].trim();
                 String diadiemden =parts[6].trim();
-                String qg_or_tt = parts[6].trim();
-                String ds_or_nt = parts[7].trim();
+                String qg_or_tt = parts[7].trim();
+                String ds_or_nt = parts[8].trim();
 
                 if (loai.equalsIgnoreCase("TN")) {
                     ds[n++] = new tourtrongnuoc(ma, ten, gia, thutuc, diadiem,diadiemden, qg_or_tt, ds_or_nt);
@@ -314,7 +315,7 @@ public class dstour {
 
             if (t instanceof tourtrongnuoc) {
                 tourtrongnuoc tn = (tourtrongnuoc) t;
-                line = String.join(", ",
+                line = String.join("|",
                         "TN",
                         tn.getMatour(),
                         tn.getTentour(),
@@ -326,7 +327,7 @@ public class dstour {
                 );
             } else if (t instanceof tournuocngoai) {
                 tournuocngoai nn = (tournuocngoai) t;
-                line = String.join(", ",
+                line = String.join("|",
                         "NN",
                         nn.getMatour(),
                         nn.getTentour(),

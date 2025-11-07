@@ -1,8 +1,8 @@
-
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
-class HDV {
+class hdv {
     private String mahdv;
     private String makhtour;
     private String ho;
@@ -11,33 +11,26 @@ class HDV {
     private String gioitinh;
     private String diachi;
     private String sdt;
+    
+    private kehoachtour kht;
     private Scanner sc = new Scanner(System.in);
 
-    public HDV() {
+    public hdv() {
     }
 
-    public HDV(kehoachtour khtour, String mahdv, String makhtour, String ho, String ten, 
-            LocalDate ngaysinh, String gioitinh, String diachi, String sdt) {
+    public hdv(String mahdv, String makhtour, String ho, String ten, LocalDate ngaysinh, String gioitinh, String diachi, String sdt) {
         this.mahdv = mahdv;
-        this.makhtour = khtour.getMakhtour();
+        this.makhtour = makhtour;
         this.ho = ho;
         this.ten = ten;
         this.ngaysinh = ngaysinh;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
         this.sdt = sdt;
+        this.kht = null;
     }
-    public HDV(String mahdv,String makhtour,String ho,String ten,LocalDate ngaysinh,String gioitinh,String diachi,String sdt){
-        this.mahdv=mahdv;
-        this.makhtour=makhtour;
-        this.ho=ho;
-        this.ten=ten;
-        this.ngaysinh=ngaysinh;
-        this.gioitinh=gioitinh;
-        this.diachi=diachi;
-        this.sdt=sdt;
-    }
-    public HDV(HDV h) {
+
+    public hdv(hdv h) {
         this.mahdv = h.mahdv;
         this.makhtour = h.makhtour;
         this.ho = h.ho;
@@ -46,93 +39,69 @@ class HDV {
         this.gioitinh = h.gioitinh;
         this.diachi = h.diachi;
         this.sdt = h.sdt;
+        this.kht = h.kht;
     }
 
-    public String getMahdv() {
-        return mahdv;
-    }
+    public String getMahdv() { return mahdv; }
+    public String getMakhtour() { return makhtour; }
+    public String getHo() { return ho; }
+    public String getTen() { return ten; }
+    public LocalDate getNgaysinh() { return ngaysinh; }
+    public String getGioitinh() { return gioitinh; }
+    public String getDiachi() { return diachi; }
+    public String getSdt() { return sdt; }
+    public kehoachtour getKehoachtour() { return kht; }
 
-    public String getMakhtour() {
-        return makhtour;
-    }
 
-    public String getHo() {
-        return ho;
-    }
+    public void setMahdv(String mahdv) { this.mahdv = mahdv; }
+    public void setMakhtour(String makhtour) { this.makhtour = makhtour; }
+    public void setHo(String ho) { this.ho = ho; }
+    public void setTen(String ten) { this.ten = ten; }
+    public void setNgaysinh(LocalDate ngaysinh) { this.ngaysinh = ngaysinh; }
+    public void setGioitinh(String gioitinh) { this.gioitinh = gioitinh; }
+    public void setDiachi(String diachi) { this.diachi = diachi; }
+    public void setSdt(String sdt) { this.sdt = sdt; }
+    public void setKehoachtour(kehoachtour kht) { this.kht = kht; }
 
-    public String getTen() {
-        return ten;
-    }
-
-    public LocalDate getNgaysinh() {
-        return ngaysinh;
-    }
-
-    public String getGioitinh() {
-        return gioitinh;
-    }
-
-    public String getDiachi() {
-        return diachi;
-    }
-
-    public String getSdt() {
-        return sdt;
-    }
-
-    public void setMahdv(String mahdv) {
-        this.mahdv = mahdv;
-    }
-
-    public void setMakhtour(String makhtour) {
-        this.makhtour = makhtour;
-    }
-
-    public void setHo(String ho) {
-        this.ho = ho;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public void setNgaysinh(LocalDate ngaysinh) {
-        this.ngaysinh = ngaysinh;
-    }
-
-    public void setGioitinh(String gioitinh) {
-        this.gioitinh = gioitinh;
-    }
-
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
+    
     public void nhap() {
-        System.out.println("Nhap ma HDV: ");
+        System.out.print("Nhap ma HDV: ");
         mahdv = sc.nextLine();
-        System.out.println("Nhap ma ke hoach tour: ");
+        System.out.print("Nhap ma ke hoach tour: ");
         makhtour = sc.nextLine();
-        System.out.println("Nhap ho: ");
+        System.out.print("Nhap ho: ");
         ho = sc.nextLine();
-        System.out.println("Nhap ten: ");
+        System.out.print("Nhap ten: ");
         ten = sc.nextLine();
-        System.out.println("Nhap ngay sinh (yyyy-mm-dd): ");
-        ngaysinh = LocalDate.parse(sc.nextLine());
-        System.out.println("Nhap gioi tinh: ");
+        
+        while(true) {
+            System.out.print("Nhap ngay sinh (dd/MM/yyyy): ");
+            try {
+                ngaysinh = LocalDate.parse(sc.nextLine(), kehoachtour.df);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Sai dinh dang ngay!");
+            }
+        }
+        
+        System.out.print("Nhap gioi tinh: ");
         gioitinh = sc.nextLine();
-        System.out.println("Nhap dia chi: ");
+        System.out.print("Nhap dia chi: ");
         diachi = sc.nextLine();
-        System.out.println("Nhap so dien thoai: ");
+        System.out.print("Nhap so dien thoai: ");
         sdt = sc.nextLine();
     }
 
+    
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
-                mahdv, makhtour, ho, ten, ngaysinh, gioitinh, diachi, sdt);
+        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-15s %-20s%n",
+                mahdv,
+                makhtour,
+                ho,
+                ten,
+                ngaysinh.format(kehoachtour.df),
+                gioitinh,
+                sdt,
+                diachi);
     }
 }

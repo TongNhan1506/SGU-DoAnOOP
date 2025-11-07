@@ -1,11 +1,12 @@
 import java.util.Scanner;
 import java.util.Arrays;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.LocalDate;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.time.format.DateTimeParseException;
+
 class dsctkhtour {
     private ctkhtour[] ds;
     private int N = 0;
@@ -27,7 +28,6 @@ class dsctkhtour {
         this.N = dsct.N;
     }
 
-  
     public ctkhtour[] getDs() {
         return ds;
     }
@@ -43,11 +43,10 @@ class dsctkhtour {
     public void setN(int n) {
         this.N = n;
     }
-
    
     public void nhapds() {
         System.out.print("Nhap so luong chi tiet ke hoach tour: ");
-        N = Integer.parseInt(sc.nextLine());
+        N = Integer.parseInt(sc.nextLine()); 
         ds = new ctkhtour[N];
         for (int i = 0; i < N; i++) {
             System.out.println("Nhap chi tiet ke hoach tour thu " + (i + 1) + ":");
@@ -57,114 +56,110 @@ class dsctkhtour {
     }
 
     public void xuatds() {
-        System.out.printf("%-15s %-15s %-15s %-15s%n", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n","Ma ctkh tour", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O", "Tien Di Lai");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
     }
 
-  
-    public int timTheoMa(String makhtour) {
+    public int timTheoMa(String mact) {
         for (int i = 0; i < N; i++) {
-            if (ds[i].getMakhtour().equals(makhtour)) {
+            if (ds[i].getMact().equals(mact)) {
                 return i;
             }
         }
         return -1;
     }
 
-   
-    public ctkhtour timCots(String makhtour) {
-        int idx = timTheoMa(makhtour);
+    public ctkhtour timCots(String mact) {
+        int idx = timTheoMa(mact);
         if (idx != -1)
             return ds[idx];
         return null;
     }
-
  
-public void timTheoNgayChi(String ngaychi) {
-    boolean found = false;
-    System.out.println("\n=== KET QUA TIM KIEM THEO NGAY CHI: " + ngaychi + " ===");
-    System.out.printf("%-15s %-15s %-15s %-15s%n", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O");
+    public void timTheoNgayChi(LocalDate ngaychi) { 
+        boolean found = false;
+        System.out.println("\n=== KET QUA TIM KIEM THEO NGAY CHI: " + ngaychi.format(kehoachtour.df) + " ===");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n","Ma ctkh tour", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O", "Tien Di Lai");
 
-    for (int i = 0; i < N; i++) {
-        if (ds[i].getNgaychi().equalsIgnoreCase(ngaychi)) {
-            ds[i].xuat();
-            found = true;
+        for (int i = 0; i < N; i++) {
+            if (ds[i].getNgaychi().equals(ngaychi)) { 
+                ds[i].xuat();
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println(" Khong tim thay ke hoach tour nao co ngay chi: " + ngaychi.format(kehoachtour.df));
         }
     }
 
-    if (!found) {
-        System.out.println("❌ Khong tim thay ke hoach tour nao co ngay chi: " + ngaychi);
-    }
-}
-
-
-   
     public void themCots(ctkhtour k) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new ctkhtour(k);
         N++;
-        System.out.println("✅ Da them ke hoach tour moi (co tham so).");
+        System.out.println(" Da them ke hoach tour moi (co tham so).");
     }
 
-
-    
-    public void xoaCots(String makhtour) {
-        int idx = timTheoMa(makhtour);
+    public void xoaCots(String makhtour) { 
+        int idx = timTheoMa(makhtour); 
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay ke hoach tour de xoa!");
+            System.out.println(" Khong tim thay ke hoach tour de xoa!");
             return;
         }
-
         for (int i = idx; i < N - 1; i++) {
             ds[i] = ds[i + 1];
         }
-
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa ke hoach tour co ma: " + makhtour);
+        System.out.println(" Da xoa ke hoach tour co ma: " + makhtour);
     }
 
-
-
-public void thongKeTheoMa() {
-    if (N == 0) {
-        System.out.println("❌ Danh sach ke hoach tour rong!");
-        return;
-    }
-
-    System.out.print("Nhap ma ke hoach tour can thong ke: ");
-    String makhtour = sc.nextLine();
-    int count = 0;
-
-    for (int i = 0; i < N; i++) {
-        if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
-            count++;
-        }
-    }
-
-    if (count == 0) {
-        System.out.println("❌ Khong tim thay ke hoach tour co ma: " + makhtour);
-    } else {
-        System.out.println("✅ Ma ke hoach tour '" + makhtour + "' xuat hien " + count + " lan trong danh sach.");
-    }
-}
-
-
-   
-    public void suaKhtour() {
-        System.out.print("Nhap ma ke hoach tour can sua: ");
-        String makhtour = sc.nextLine();
-        int idx = timTheoMa(makhtour);
-
-        if (idx == -1) {
-            System.out.println("❌ Khong tim thay ke hoach tour co ma: " + makhtour);
+    public void thongKeTheoMa() {
+        if (N == 0) {
+            System.out.println(" Danh sach ke hoach tour rong!");
             return;
         }
+        System.out.print("Nhap ma ke hoach tour can thong ke: ");
+        String makhtour = sc.nextLine();
+        int count = 0;
+        for (int i = 0; i < N; i++) {
+            if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
+                count++;
+            }
+        }
+        if (count == 0) {
+            System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
+        } else {
+            System.out.println(" Ma ke hoach tour '" + makhtour + "' xuat hien " + count + " lan trong danh sach.");
+        }
+    }
 
+    private int nhapSoNguyen(String message) {
+        while(true){
+            System.out.println(message);
+            try {
+                int num = Integer.parseInt(sc.nextLine());
+                 if(num < 0){
+                    System.out.println("Phai nhap gia tri lon hon 0, vui long nhap lai.");
+                    continue;
+                }
+                return num;
+            } catch (NumberFormatException e) {
+                System.out.println("Vui long nhap so hop le.");
+            }
+        }
+    }
+   
+    public void suaKhtour() {
+        System.out.print("Nhap ma chi tiet ke hoach tour can sua: ");
+        String mact = sc.nextLine();
+        int idx = timTheoMa(mact); 
 
-        
+        if (idx == -1) {
+            System.out.println(" Khong tim thay ke hoach tour co ma: " + mact);
+            return;
+        }
 
         ctkhtour k = ds[idx];
         int chon;
@@ -173,25 +168,44 @@ public void thongKeTheoMa() {
             System.out.println("1. Ngay chi");
             System.out.println("2. Tien an");
             System.out.println("3. Tien o");
+            System.out.println("4. Tien di lai");
             System.out.println("0. Thoat sua");
             System.out.print("Nhap lua chon: ");
-            chon = Integer.parseInt(sc.nextLine());
+            try {
+                chon = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                chon = -1; 
+            }
 
             switch (chon) {
                 case 1:
-                    System.out.print("Nhap ngay chi moi: ");
-                    k.setNgaychi(sc.nextLine());
-                    System.out.println("✅ Da sua ngay chi!");
+                    while(true){
+                        System.out.print("Nhap ngay chi moi (dd/MM/yyyy): ");
+                        String ngay = sc.nextLine();
+                        try {
+                            LocalDate ngaymoi = LocalDate.parse(ngay, kehoachtour.df);
+                            k.setNgaychi(ngaymoi);
+                            System.out.println(" Da sua ngay chi!");
+                            break;
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Sai dinh dang ngay!");
+                        }
+                    }
                     break;
                 case 2:
-                    System.out.print("Nhap tien an moi: ");
-                    k.setTienan(sc.nextLine());
-                    System.out.println("✅ Da sua tien an!");
+                    int tienan = nhapSoNguyen("Nhap tien an moi: "); 
+                    k.setTienan(tienan);
+                    System.out.println(" Da sua tien an!");
                     break;
                 case 3:
-                    System.out.print("Nhap tien o moi: ");
-                    k.setTieno(sc.nextLine());
-                    System.out.println("✅ Da sua tien o!");
+                    int tieno = nhapSoNguyen("Nhap tien o moi: "); 
+                    k.setTieno(tieno);
+                    System.out.println(" Da sua tien o!");
+                    break;
+                case 4:
+                    int tiendilai = nhapSoNguyen("Nhap tien di lai moi: "); 
+                    k.setTiendilai(tiendilai);
+                    System.out.println(" Da sua tien di lai!");
                     break;
                 case 0:
                     System.out.println("Thoat sua thong tin.");
@@ -201,47 +215,53 @@ public void thongKeTheoMa() {
             }
         } while (chon != 0);
     }
+    
     public void docFile(String file){
         try {
-            FileInputStream fis =new FileInputStream(file);
-            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            BufferedReader br=new BufferedReader(new FileReader(file));
             int n=0;
-            ds=new ctkhtour[n];
+            ds=new ctkhtour[100];
             String line="";
 
             while((line=br.readLine())!=null){
-                String[] part=line.split(",");
-                if(part.length>=4){
-                String makhtour=part[0];
-                String ngaychi=part[1];
-                String tienan=part[2];
-                String tieno=part[3];
+                String[] part=line.split("\\|");
+                
+                if(part.length>=6){ 
+                    String mact=part[0];
+                    String makhtour=part[1];
+                    LocalDate ngaychi=LocalDate.parse(part[2], kehoachtour.df);
+                    int tienan=Integer.parseInt(part[3]);
+                    int tieno=Integer.parseInt(part[4]);
+                    int tiendilai=Integer.parseInt(part[5]);
 
-                ds[n++]=new ctkhtour(makhtour,ngaychi,tienan,tieno);
+                    ds[n++]=new ctkhtour(mact,makhtour,ngaychi,tienan,tieno, tiendilai);
+                }
             }
-        }
-        N=n;
-        ds=Arrays.copyOf(ds,N);
-        br.close();
-        System.out.println("Da doc "+N+" chi tiet ke hoach tour tu file "+file);
+            N=n;
+            ds=Arrays.copyOf(ds,N);
+            br.close();
+            System.out.println("Da doc "+N+" chi tiet ke hoach tour tu file "+file);
         }
         catch(Exception e){
-            System.out.println("Loi ghi file "+e.getMessage());
+            System.out.println("Loi doc file "+e.getMessage());
             e.printStackTrace();
         }
     }
+    
     public void ghiFile(String file){
         try{
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            BufferedWriter bw=new BufferedWriter(new FileWriter(file));
             for(int i=0;i<N;i++){
                 ctkhtour c=ds[i];
                 String line="";
 
                 line=String.join("|",
+                c.getMact(),
                 c.getMakhtour(),
-                c.getNgaychi(),
-                c.getTienan(),
-                c.getTieno());
+                c.getNgaychi().format(kehoachtour.df),
+                String.valueOf(c.getTienan()),
+                String.valueOf(c.getTieno()),
+                String.valueOf(c.getTiendilai()));
                 bw.write(line);
                 bw.newLine();
             }
@@ -252,5 +272,22 @@ public void thongKeTheoMa() {
             System.out.println("Loi ghi file "+e.getMessage());
             e.printStackTrace();
         }
+    }
+    
+    public void linkData(dskehoachtour DSKHT) {
+        if (DSKHT == null || DSKHT.getN() == 0) {
+            System.out.println("Loi: Khong the lien ket CTKH tour vi DSKHT rong.");
+            return;
+        }
+        int count = 0;
+        for (int i = 0; i < N; i++) {
+            String makhtour_id = ds[i].getMakhtour();
+            kehoachtour kht_obj = DSKHT.timKHT(makhtour_id); 
+            if (kht_obj != null) {
+                ds[i].setKehoachtour(kht_obj);
+                count++;
+            }
+        }
+        System.out.println("Da lien ket xong: " + count + "/" + N + " chi tiet KHT.");
     }
 }

@@ -80,13 +80,29 @@ abstract class tour implements ITour {
         this.diadiemden=diadiemden;
     }
     public void nhap() {
-        System.out.println("Nhap ma tour: ");
-        matour = sc.nextLine();
+        final String t="^T[0-9]{3}$";
+        while(true){
+            System.out.println("Nhap ma tour (co dinh dang TXXX, VD: T000)");
+            matour=sc.nextLine();
+            if(matour.matches(t)){break;}
+            System.out.println("Loi dinh dang, vui long nhap lai.");
+        }
         System.out.println("Nhap ten tour: ");
         tentour = sc.nextLine();
-        System.out.println("Nhap don gia: ");
-        dongia = sc.nextInt();
-        sc.nextLine();
+        while(true){
+            System.out.println("Nhap don gia: ");
+            String gia=sc.nextLine();
+            try{
+                dongia=Integer.parseInt(gia);
+                if(dongia<0){
+                    System.out.println("Don gia phai lon hon 0, vui long nhap lai.");
+                    continue;
+                }
+                break;
+            }catch(NumberFormatException e){
+                System.out.println("Loi don gia ko phai so nguyen.");
+            }
+        }
         System.out.println("Nhap thu tuc: ");
         thutuc = sc.nextLine();
         System.out.println("Nhap dia diem KH: ");
@@ -96,7 +112,7 @@ abstract class tour implements ITour {
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s\n",
+        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s",
                 matour, tentour, dongia, thutuc, diadiemKH,diadiemden);
     }
 }
