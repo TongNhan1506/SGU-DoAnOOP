@@ -283,8 +283,8 @@ public class dstour {
                 String thutuc = parts[4].trim();
                 String diadiem = parts[5].trim();
                 String diadiemden =parts[6].trim();
-                String qg_or_tt = parts[6].trim();
-                String ds_or_nt = parts[7].trim();
+                String qg_or_tt = parts[7].trim();
+                String ds_or_nt = parts[8].trim();
 
                 if (loai.equalsIgnoreCase("TN")) {
                     ds[n++] = new tourtrongnuoc(ma, ten, gia, thutuc, diadiem,diadiemden, qg_or_tt, ds_or_nt);

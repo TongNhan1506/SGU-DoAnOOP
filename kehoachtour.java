@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
@@ -18,6 +19,9 @@ class kehoachtour {
     private int tongtienve;
     private tour t;
     private Scanner sc = new Scanner(System.in);
+
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     public int getTongTienTheoCacKhoan() {
         return tongchi + tongan + tongo + tongdilai + tongtienve;
@@ -186,10 +190,10 @@ class kehoachtour {
         makhtour = sc.nextLine();
         System.out.println("Nhap ma tour: ");
         matour = sc.nextLine();
-        System.out.println("Nhap ngay di (yyyy-mm-dd): ");
-        ngaydi = LocalDate.parse(sc.nextLine());
-        System.out.println("Nhap ngay ve (yyyy-mm-dd): ");
-        ngayve = LocalDate.parse(sc.nextLine());
+        System.out.println("Nhap ngay di (dd/mm/yyyy): ");
+        ngaydi = LocalDate.parse(sc.nextLine(), dtf);
+        System.out.println("Nhap ngay ve (dd/mm/yyyy): ");
+        ngayve = LocalDate.parse(sc.nextLine(), dtf);
         System.out.println("Nhap tong so ve: ");
         tongsove = sc.nextInt();
         System.out.println("Nhap so ve con lai: ");
@@ -212,7 +216,7 @@ class kehoachtour {
 
     public void xuat() {
         System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi, ngayve, tongsove, soveconlai, tongchi, tongan, tongo,
+                makhtour, matour, ngaydi.format(dtf), ngayve.format(dtf), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
     

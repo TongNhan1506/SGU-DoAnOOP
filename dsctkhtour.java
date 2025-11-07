@@ -238,7 +238,6 @@ public void thongKeTheoMa() {
                 String line="";
 
                 line=String.join("|",
-                c.getMact(),
                 c.getMakhtour(),
                 c.getNgaychi(),
                 c.getTienan(),
