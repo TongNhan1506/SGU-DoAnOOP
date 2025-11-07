@@ -2,7 +2,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-class HDV {
+class hdv {
     private String mahdv;
     private String makhtour;
     private String ho;
@@ -15,10 +15,10 @@ class HDV {
 
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public HDV() {
+    public hdv() {
     }
 
-    public HDV(kehoachtour khtour, String mahdv, String makhtour, String ho, String ten, 
+    public hdv(kehoachtour khtour, String mahdv, String makhtour, String ho, String ten, 
             LocalDate ngaysinh, String gioitinh, String diachi, String sdt) {
         this.mahdv = mahdv;
         this.makhtour = khtour.getMakhtour();
@@ -29,7 +29,7 @@ class HDV {
         this.diachi = diachi;
         this.sdt = sdt;
     }
-    public HDV(String mahdv,String makhtour,String ho,String ten,LocalDate ngaysinh,String gioitinh,String diachi,String sdt){
+    public hdv(String mahdv,String makhtour,String ho,String ten,LocalDate ngaysinh,String gioitinh,String diachi,String sdt){
         this.mahdv=mahdv;
         this.makhtour=makhtour;
         this.ho=ho;
@@ -39,7 +39,7 @@ class HDV {
         this.diachi=diachi;
         this.sdt=sdt;
     }
-    public HDV(HDV h) {
+    public hdv(hdv h) {
         this.mahdv = h.mahdv;
         this.makhtour = h.makhtour;
         this.ho = h.ho;
@@ -138,3 +138,4 @@ class HDV {
                 mahdv, makhtour, ho, ten, ngaysinh.format(dtf), gioitinh, diachi, sdt);
     }
 }
+
