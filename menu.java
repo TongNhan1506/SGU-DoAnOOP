@@ -587,7 +587,7 @@ public class menu {
                         dskht.ghiFile("dskehoachtour.txt");
                         dshoadon.ghiFile("dshoadon.txt");
                         break;
-                    case 6:
+                    case 7:
                         System.out.print("Nhap ma hoa don can sua: ");
                         String mhd = sc.nextLine();
                         dshoadon.suaHD(mhd);

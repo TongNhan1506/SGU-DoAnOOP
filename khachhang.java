@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 class khachhang {
@@ -10,6 +11,9 @@ class khachhang {
     private String diachi;
     private String sdt;
     private Scanner sc = new Scanner(System.in);
+
+    // Định dạng ngày theo dd/MM/yyyy
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public khachhang() {
     }
@@ -97,8 +101,8 @@ class khachhang {
         ho = sc.nextLine();
         System.out.println("Nhap ten: ");
         ten = sc.nextLine();
-        System.out.println("Nhap ngay sinh (yyyy-mm-dd): ");
-        ngaysinh = LocalDate.parse(sc.nextLine());
+        System.out.println("Nhap ngay sinh (dd/MM/yyyy): ");
+        ngaysinh = LocalDate.parse(sc.nextLine(), dtf);
         System.out.println("Nhap gioi tinh: ");
         gioitinh = sc.nextLine();
         System.out.println("Nhap dia chi: ");
@@ -109,6 +113,6 @@ class khachhang {
 
     public void xuat() {
         System.out.printf("%-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
-                makh, ho, ten, ngaysinh, gioitinh, diachi, sdt);
+                makh, ho, ten, ngaysinh.format(dtf), gioitinh, diachi, sdt);
     }
 }
