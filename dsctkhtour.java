@@ -237,7 +237,7 @@ public void thongKeTheoMa() {
                 ctkhtour c=ds[i];
                 String line="";
 
-                line=String.join(",",
+                line=String.join("|",
                 c.getMakhtour(),
                 c.getNgaychi(),
                 c.getTienan(),

@@ -209,10 +209,10 @@ public void thongKeTheoMaTour() {
                     h.setDiachi(sc.nextLine());
                     break;
                 case 0:
-                    System.out.println("⬅ Thoat sua thong tin.");
+                    System.out.println(" Thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
@@ -261,7 +261,7 @@ public void thongKeTheoMaTour() {
             for(int i=0;i<N;i++){
                 HDV h=ds[i];
                 String line="";
-                line=String.join(",",
+                line=String.join("|",
                 h.getMahdv(),
                 h.getMakhtour(),
                 h.getHo(),

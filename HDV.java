@@ -1,4 +1,4 @@
-
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -12,6 +12,8 @@ class HDV {
     private String diachi;
     private String sdt;
     private Scanner sc = new Scanner(System.in);
+
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public HDV() {
     }
@@ -121,8 +123,8 @@ class HDV {
         ho = sc.nextLine();
         System.out.println("Nhap ten: ");
         ten = sc.nextLine();
-        System.out.println("Nhap ngay sinh (yyyy-mm-dd): ");
-        ngaysinh = LocalDate.parse(sc.nextLine());
+        System.out.println("Nhap ngay sinh (dd/mm/yyyy): ");
+        ngaysinh = LocalDate.parse(sc.nextLine(),dtf);
         System.out.println("Nhap gioi tinh: ");
         gioitinh = sc.nextLine();
         System.out.println("Nhap dia chi: ");
@@ -133,6 +135,6 @@ class HDV {
 
     public void xuat() {
         System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
-                mahdv, makhtour, ho, ten, ngaysinh, gioitinh, diachi, sdt);
+                mahdv, makhtour, ho, ten, ngaysinh.format(dtf), gioitinh, diachi, sdt);
     }
 }
