@@ -2,10 +2,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 class dshopdong {
     private hopdong[] ds;
     private int N;
@@ -66,7 +64,7 @@ public void timTheoMaTour(String matour) {
         }
     }
     if (!found) {
-        System.out.println("❌ Khong co hop dong nao thuoc tour co ma: " + matour);
+        System.out.println(" Khong co hop dong nao thuoc tour co ma: " + matour);
     }
 }
 
@@ -76,14 +74,14 @@ public void timTheoMaTour(String matour) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new hopdong(h);
         N++;
-        System.out.println("✅ Da them hop dong (tham so) thanh cong!");
+        System.out.println(" Da them hop dong (tham so) thanh cong!");
     }
 
    
     public void xoaHopDongCots(String mahd) {
         int idx = timTheoMa(mahd);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay hop dong co ma: " + mahd);
+            System.out.println(" Khong tim thay hop dong co ma: " + mahd);
             return;
         }
         for (int i = idx; i < N - 1; i++) {
@@ -91,7 +89,7 @@ public void timTheoMaTour(String matour) {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa hop dong (tham so) co ma: " + mahd);
+        System.out.println(" Da xoa hop dong (tham so) co ma: " + mahd);
     }
 
 
@@ -110,9 +108,9 @@ public void thongKeTheoMaTour() {
     }
 
     if (dem == 0) {
-        System.out.println("❌ Khong co hop dong nao thuoc tour co ma: " + matour);
+        System.out.println(" Khong co hop dong nao thuoc tour co ma: " + matour);
     } else {
-        System.out.println("✅ Tong so hop dong cua tour " + matour + " la: " + dem);
+        System.out.println(" Tong so hop dong cua tour " + matour + " la: " + dem);
     }
 }
 
@@ -123,7 +121,7 @@ public void thongKeTheoMaTour() {
         String mahd = sc.nextLine();
         int idx = timTheoMa(mahd);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay hop dong co ma: " + mahd);
+            System.out.println(" Khong tim thay hop dong co ma: " + mahd);
             return;
         }
 
@@ -152,26 +150,25 @@ public void thongKeTheoMaTour() {
                     h.setDieukhoan(sc.nextLine());
                     break;
                 case 0:
-                    System.out.println("⬅ Da thoat sua thong tin.");
+                    System.out.println(" Da thoat sua thong tin.");
                     break;
                 default:
-                    System.out.println("❌ Lua chon khong hop le!");
+                    System.out.println(" Lua chon khong hop le!");
             }
         } while (chon != 0);
 
         ds[idx] = h;
-        System.out.println("✅ Da cap nhat thong tin hop dong co ma: " + mahd);
+        System.out.println(" Da cap nhat thong tin hop dong co ma: " + mahd);
     }
     public void docFile(String file){
         try {
-            FileInputStream fis =new FileInputStream(file);
-            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            BufferedReader br=new BufferedReader(new FileReader(file));
             int n=0;
-            ds=new hopdong[n];
+            ds=new hopdong[100];
             
             String line;
             while((line=br.readLine())!=null){
-                String[] part=line.split(",");
+                String[] part=line.split("\\|");
 
                 if(part.length>=4){
                     String mahd=part[0].trim();
@@ -194,7 +191,7 @@ public void thongKeTheoMaTour() {
     }
     public void ghiFile(String file){
         try {
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            BufferedWriter bw=new BufferedWriter(new FileWriter(file));
             for(int i=0; i<N;i++){
                 hopdong h=ds[i];
 

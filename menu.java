@@ -9,11 +9,14 @@ public class menu {
     private static dsctkhtour dsctkht = new dsctkhtour();
     private static dshopdong dshd = new dshopdong();
     private static dshoadon dshoadon = new dshoadon();
+    private static dscthoadon dsct = new dscthoadon();
+    private static dsdanhgiatour dsdgt = new dsdanhgiatour();
+    private static dsnhahang dsnh = new dsnhahang();
 
     public static void main(String[] args) {
-        khoiTao();
+        loadfile();
         int chon = -1;
-        
+
         while (chon != 0) {
             System.out.println("\n╔════════════════════════════════════════╗");
             System.out.println("║  CHUONG TRINH QUAN LY TOUR DU LICH    ║");
@@ -22,6 +25,7 @@ public class menu {
             System.out.println("1. Quan ly huong dan vien");
             System.out.println("2. Quan ly khach hang");
             System.out.println("3. Quan ly tour du lich");
+            System.out.println("4. Quan ly hoa don (va cap nhat ve)");
             System.out.println("0. Thoat chuong trinh");
             System.out.print("Nhap lua chon cua ban: ");
             try {
@@ -39,9 +43,9 @@ public class menu {
                         quanLyTour();
                         break;
                     }
-                    case 4:{
+                    case 4: {
                         quanLyHoaDon();
-                        break; 
+                        break;
                     }
                     case 0:
                         System.out.println("╔════════════════════════════════════════╗");
@@ -49,11 +53,11 @@ public class menu {
                         System.out.println("╚════════════════════════════════════════╝");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
             }
         }
         sc.close();
@@ -67,6 +71,23 @@ public class menu {
         dsctkht = new dsctkhtour();
         dshd = new dshopdong();
         dshoadon = new dshoadon();
+        dsct = new dscthoadon();
+        dsnh = new dsnhahang();
+        dsdgt = new dsdanhgiatour();
+
+    }
+
+    public static void loadfile() {
+        dshdv.docFile("dshdv.txt");
+        dskh.docFile("dskhachhang.txt");
+        dst.docFile("dstour.txt"); 
+        dskht.docFile("dskehoachtour.txt");
+        dsctkht.docFile("dsctkhtour.txt");
+        dshoadon.docFile("dshoadon.txt");
+        dshd.docFile("dshopdong.txt");
+        dsct.docFile("dscthoadon.txt");
+        dsdgt.docFile("dsdanhgiatour.txt");
+        dsnh.docFile("dsnhahang.txt"); 
     }
 
     public static void quanLyHDV() {
@@ -85,7 +106,7 @@ public class menu {
             System.out.println("8. Thong ke theo ma tour");
             System.out.println("0. Quay lai menu chinh");
             System.out.print("Nhap lua chon cua ban: ");
-            
+
             try {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
@@ -98,14 +119,14 @@ public class menu {
                     case 3:
                         System.out.print("Nhap ma HDV can tim: ");
                         String maHDV = sc.nextLine();
-                        HDV hdv = dshdv.timHDV(maHDV);
+                        hdv hdv = dshdv.timHDV(maHDV);
                         if (hdv != null) {
-                            System.out.println("✅ Tim thay HDV:");
-                            System.out.printf("%-10s %-10s %-10s %-10s %-15s %-15s %-10s %-15s%n",
-                                    "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "SoDT", "GioiTinh", "DiaChi");
+                            System.out.println("Tim thay HDV:");
+                            System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-15s %-20s%n",
+                                    "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "GioiTinh", "SoDT", "DiaChi");
                             hdv.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay HDV co ma " + maHDV);
+                            System.out.println("Khong tim thay HDV co ma " + maHDV);
                         }
                         break;
                     case 4:
@@ -114,7 +135,7 @@ public class menu {
                         dshdv.timTheoTen(tenHDV);
                         break;
                     case 5:
-                        HDV hdvMoi = new HDV();
+                        hdv hdvMoi = new hdv(); 
                         hdvMoi.nhap();
                         dshdv.themHDVCoTs(hdvMoi);
                         break;
@@ -129,13 +150,13 @@ public class menu {
                         dshdv.thongKeTheoMaTour();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai menu chinh...");
+                        System.out.println("Quay lai menu chinh...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -172,12 +193,12 @@ public class menu {
                         String makh = sc.nextLine();
                         khachhang kh = dskh.timKhachHang(makh);
                         if (kh != null) {
-                            System.out.println("✅ Tim thay khach hang:");
-                            System.out.printf("%-10s %-10s %-10s %-15s %-10s %-20s %-15s\n",
-                                    "MaKH", "Ho", "Ten", "NgaySinh", "GioiTinh", "DiaChi", "SDT");
+                            System.out.println("Tim thay khach hang:");
+                            System.out.printf("%-10s %-10s %-10s %-15s %-10s %-15s %-20s\n",
+                                    "MaKH", "Ho", "Ten", "NgaySinh", "GioiTinh", "SDT", "DiaChi");
                             kh.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay khach hang co ma: " + makh);
+                            System.out.println("Khong tim thay khach hang co ma: " + makh);
                         }
                         break;
                     case 4:
@@ -201,13 +222,13 @@ public class menu {
                         dskh.thongKeMaKH();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai menu chinh...");
+                        System.out.println("Quay lai menu chinh...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -223,7 +244,6 @@ public class menu {
             System.out.println("2. Quan ly ke hoach tour");
             System.out.println("3. Quan ly chi tiet ke hoach tour");
             System.out.println("4. Quan ly hop dong");
-            System.out.println("5. Quan ly hoa don");
             System.out.println("6. Thong ke doanh thu");
             System.out.println("0. Quay lai menu chinh");
             System.out.print("Nhap lua chon cua ban: ");
@@ -232,7 +252,7 @@ public class menu {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
                     case 1:
-                        quanLyDanhSachTour();
+                        System.out.println("Chuc nang can file dstour.java");
                         break;
                     case 2:
                         quanLyKeHoachTour();
@@ -244,84 +264,25 @@ public class menu {
                         quanLyHopDong();
                         break;
                     case 5:
-                        quanLyHoaDon();
+                        System.out.println("Chuc nang da duoc chuyen ra menu chinh (So 4).");
                         break;
                     case 6:
                         thongKeDoanhThu();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai menu chinh...");
+                        System.out.println("Quay lai menu chinh...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
     }
 
     public static void quanLyDanhSachTour() {
-        int chon;
-        do {
-            System.out.println("\n===== QUAN LY DANH SACH TOUR =====");
-            System.out.println("1. Nhap danh sach tour");
-            System.out.println("2. Xuat danh sach tour");
-            System.out.println("3. Tim kiem tour theo ma");
-            System.out.println("4. Tim kiem tour theo ten");
-            System.out.println("5. Them tour");
-            System.out.println("6. Xoa tour");
-            System.out.println("7. Sua thong tin tour");
-            System.out.println("8. Thong ke theo loai tour");
-            System.out.println("0. Quay lai");
-            System.out.print("Nhap lua chon cua ban: ");
-
-            try {
-                chon = Integer.parseInt(sc.nextLine());
-                switch (chon) {
-                    case 1:
-                        dst.nhapDstour();
-                        break;
-                    case 2:
-                        dst.xuatDstour();
-                        break;
-                    case 3:
-                        System.out.print("Nhap ma tour can tim: ");
-                        dst.timTheoMaTour(sc.nextLine());
-                        break;
-                    case 4:
-                        System.out.print("Nhap ten tour can tim: ");
-                        dst.timTheoTenTour(sc.nextLine());
-                        break;
-                    case 5:
-                        System.out.println("Chon loai tour (1-Trong nuoc, 2-Nuoc ngoai): ");
-                        int loai = Integer.parseInt(sc.nextLine());
-                        tour t = loai == 1 ? new tourtrongnuoc() : new tournuocngoai();
-                        t.nhap();
-                        dst.themTourCoTs(t);
-                        break;
-                    case 6:
-                        System.out.print("Nhap ma tour can xoa: ");
-                        dst.xoaTourCoTs(sc.nextLine());
-                        break;
-                    case 7:
-                        dst.suaTour();
-                        break;
-                    case 8:
-                        dst.thongKeTheoLoaiTour();
-                        break;
-                    case 0:
-                        System.out.println("⬅ Quay lai...");
-                        break;
-                    default:
-                        System.out.println("❌ Lua chon khong hop le!");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
-                chon = -1;
-            }
-        } while (chon != 0);
     }
 
     public static void quanLyKeHoachTour() {
@@ -334,7 +295,7 @@ public class menu {
             System.out.println("4. Them ke hoach tour");
             System.out.println("5. Xoa ke hoach tour");
             System.out.println("6. Sua ke hoach tour");
-            System.out.println("7. Thong ke theo ma tour");
+            System.out.println("7. Thong ke theo so ve con lai");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
@@ -346,19 +307,18 @@ public class menu {
                         break;
                     case 2:
                         dskht.xuatDsKHT();
-                        dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 3:
                         System.out.print("Nhap ma ke hoach tour can tim: ");
                         kehoachtour kht = dskht.timKHT(sc.nextLine());
                         if (kht != null) {
-                            System.out.println("✅ Tim thay ke hoach tour:");
-                            System.out.printf("%-10s %-10s %-12s %-12s %-8s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-                                    "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Don gia", "Tong ve",
-                                    "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV");
+                            System.out.println("Tim thay ke hoach tour:");
+                            System.out.printf("%-15s %-10s %-12s %-12s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
+                                    "MaKHT", "MaTour", "Ngay Di", "Ngay Ve", "Tong Ve",
+                                    "Ve Con", "Tong Chi", "An", "O", "Di Lai", "MaHDV", "Tien Ve");
                             kht.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay ke hoach tour");
+                            System.out.println("Khong tim thay ke hoach tour");
                         }
                         break;
                     case 4:
@@ -377,13 +337,13 @@ public class menu {
                         dskht.thongketheosove();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai...");
+                        System.out.println("Quay lai...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -395,12 +355,11 @@ public class menu {
             System.out.println("\n===== QUAN LY CHI TIET KE HOACH TOUR =====");
             System.out.println("1. Nhap chi tiet ke hoach tour");
             System.out.println("2. Xuat chi tiet ke hoach tour");
-            System.out.println("3. Tim kiem theo ma ke hoach tour");
-            System.out.println("4. Tim kiem theo ngay chi");
+            System.out.println("3. Tim kiem theo ma chi tiet");
             System.out.println("5. Them chi tiet ke hoach tour");
             System.out.println("6. Xoa chi tiet ke hoach tour");
             System.out.println("7. Sua chi tiet ke hoach tour");
-            System.out.println("8. Thong ke theo ma");
+            System.out.println("8. Thong ke theo ma KHT");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
@@ -414,19 +373,18 @@ public class menu {
                         dsctkht.xuatds();
                         break;
                     case 3:
-                        System.out.print("Nhap ma ke hoach tour can tim: ");
+                        System.out.print("Nhap ma CT ke hoach tour can tim: ");
                         ctkhtour ct = dsctkht.timCots(sc.nextLine());
                         if (ct != null) {
-                            System.out.println("✅ Tim thay chi tiet ke hoach tour:");
-                            System.out.printf("%-15s %-15s %-15s %-15s%n", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O");
+                            System.out.println("Tim thay chi tiet ke hoach tour:");
+                            System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n", "Ma ctkh tour", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O", "Tien Di Lai");
                             ct.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay chi tiet ke hoach tour");
+                            System.out.println("Khong tim thay chi tiet ke hoach tour");
                         }
                         break;
                     case 4:
-                        System.out.print("Nhap ngay chi can tim: ");
-                        dsctkht.timTheoNgayChi(sc.nextLine());
+                        System.out.println("Chuc nang tim theo ngay dang bao tri.");
                         break;
                     case 5:
                         ctkhtour ctMoi = new ctkhtour();
@@ -434,7 +392,7 @@ public class menu {
                         dsctkht.themCots(ctMoi);
                         break;
                     case 6:
-                        System.out.print("Nhap ma ke hoach tour can xoa: ");
+                        System.out.print("Nhap ma CT ke hoach tour can xoa: ");
                         dsctkht.xoaCots(sc.nextLine());
                         break;
                     case 7:
@@ -444,13 +402,13 @@ public class menu {
                         dsctkht.thongKeTheoMa();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai...");
+                        System.out.println("Quay lai...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -484,11 +442,11 @@ public class menu {
                         System.out.print("Nhap ma hop dong can tim: ");
                         hopdong hd = dshd.timHopDong(sc.nextLine());
                         if (hd != null) {
-                            System.out.println("✅ Tim thay hop dong:");
+                            System.out.println("Tim thay hop dong:");
                             System.out.printf("%-15s %-15s %-15s %-15s\n", "Ma HD", "Ma tour", "Ma KH", "Dieu khoan");
                             hd.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay hop dong");
+                            System.out.println("Khong tim thay hop dong");
                         }
                         break;
                     case 4:
@@ -511,13 +469,13 @@ public class menu {
                         dshd.thongKeTheoMaTour();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai...");
+                        System.out.println("Quay lai...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -527,13 +485,13 @@ public class menu {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOA DON =====");
-            System.out.println("1. Nhap danh sach hoa don");
+            System.out.println("1. Nhap danh sach hoa don (Khong cap nhat ve)");
             System.out.println("2. Xuat danh sach hoa don");
             System.out.println("3. Tim kiem hoa don theo ma");
             System.out.println("4. Tim kiem hoa don theo ma khach hang");
-            System.out.println("5. Them hoa don");
-            System.out.println("6. Xoa hoa don");
-            System.out.println("7. Sua hoa don");
+            System.out.println("5. Them hoa don (Tu dong cap nhat ve)");
+            System.out.println("6. Xoa hoa don (Tu dong cap nhat ve)");
+            System.out.println("7. Sua hoa don (Tu dong cap nhat ve)");
             System.out.println("8. Thong ke theo ma khach hang");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
@@ -543,10 +501,7 @@ public class menu {
                 switch (chon) {
                     case 1:
                         dshoadon.nhapDsHD();
-                        for(int i=0;i<dshoadon.getN();i++){
-                            hoadon hd=dshoadon.getDs()[i];
-                            capnhatsove(hd.getMakhtour(),hd.getSove(),"them");
-                        }
+                        System.out.println("Canh bao: So ve chua duoc cap nhat. Hay chay chuc nang 5, 6, 7.");
                         break;
                     case 2:
                         dshoadon.xuatDsHD();
@@ -555,11 +510,12 @@ public class menu {
                         System.out.print("Nhap ma hoa don can tim: ");
                         hoadon hd = dshoadon.timHD(sc.nextLine());
                         if (hd != null) {
-                            System.out.println("✅ Tim thay hoa don:");
-                            System.out.printf("%-10s %-10s %-12s %-10s\n", "MaHD", "MaKH", "MaKHTour", "TongTien");
+                            System.out.println("Tim thay hoa don:");
+                            System.out.printf("%-10s %-10s %-10s %-12s %-10d %-15d\n", 
+                                "MaHD", "MaKH", "MaKHTour", "NgayLap", "SoVe", "TongTien");
                             hd.xuat();
                         } else {
-                            System.out.println("❌ Khong tim thay hoa don");
+                            System.out.println("Khong tim thay hoa don");
                         }
                         break;
                     case 4:
@@ -569,30 +525,40 @@ public class menu {
                     case 5:
                         hoadon hd1 = new hoadon();
                         hd1.nhap();
-                        if(dshoadon.timHD(hd1.getMahd())!=null){
+                        if (dshoadon.timHD(hd1.getMahd()) != null) {
                             System.out.println(" Ma hoa don da ton tai, khong the them!");
                             break;
                         }
                         dshoadon.themHDCoTs(hd1);
-                        capnhatsove(hd1.getMakhtour(),hd1.getSove(),"them");
+                        capnhatsove(hd1.getMakhtour()); 
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");
                         break;
                     case 6:
                         System.out.print("Nhap ma hoa don can xoa: ");
-                        String mahoadon=sc.nextLine();
-                        hoadon hd2=dshoadon.timHD(mahoadon);
-                        capnhatsove(hd2.getMakhtour(), hd2.getSove(),"xoa");
+                        String mahoadon = sc.nextLine();
+                        hoadon hd2 = dshoadon.timHD(mahoadon);
+                        if (hd2 == null) {
+                             System.out.println("Loi: Khong tim thay hoa don.");
+                             break;
+                        }
+                        String maKHT = hd2.getMakhtour();
                         dshoadon.xoaHDCoTs(mahoadon);
+                        capnhatsove(maKHT); 
                         dskht.ghiFile("dskehoachtour.txt");
                         dshoadon.ghiFile("dshoadon.txt");
                         break;
                     case 7:
                         System.out.print("Nhap ma hoa don can sua: ");
                         String mhd = sc.nextLine();
-                        dshoadon.suaHD(mhd);
                         hoadon hd3 = dshoadon.timHD(mhd);
-                        capnhatsove(hd3.getMakhtour(), hd3.getSove(),"sua");
+                        if (hd3 == null) {
+                             System.out.println("Loi: Khong tim thay hoa don.");
+                             break;
+                        }
+                        String maKHT_Sua = hd3.getMakhtour();
+                        dshoadon.suaHD(mhd);
+                        capnhatsove(maKHT_Sua); 
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");
                         break;
@@ -600,13 +566,13 @@ public class menu {
                         dshoadon.thongKeTheoMaKH();
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai...");
+                        System.out.println("Quay lai...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
@@ -644,49 +610,30 @@ public class menu {
                         if (kht != null) {
                             kht.thongKeTienTheoNgay();
                         } else {
-                            System.out.println("❌ Khong tim thay ke hoach tour!");
+                            System.out.println("Khong tim thay ke hoach tour!");
                         }
                         break;
                     case 0:
-                        System.out.println("⬅ Quay lai...");
+                        System.out.println("Quay lai...");
                         break;
                     default:
-                        System.out.println("❌ Lua chon khong hop le!");
+                        System.out.println("Lua chon khong hop le!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Vui long nhap so!");
+                System.out.println("Vui long nhap so!");
                 chon = -1;
             }
         } while (chon != 0);
     }
-    public static void capnhatsove(String maKHTour, int soveThayDoi, String mode) {
-    // Tìm kế hoạch tour tương ứng
-    int index = dskht.timTheoMa(maKHTour);
-    if (index == -1) {
-        System.out.println(" Không tìm thấy kế hoạch tour có mã: " + maKHTour);
-        return;
-    }
 
-    kehoachtour kht = dskht.getDs()[index];
+    public static void capnhatsove(String maKHTour) {
+        int index = dskht.timTheoMa(maKHTour);
+        if (index == -1) {
+            System.out.println("Loi cap nhat ve: Khong tim thay ke hoach tour " + maKHTour);
+            return;
+        }
+        kehoachtour kht = dskht.getDs()[index];
 
-    // --- 1️⃣ Trường hợp thêm hóa đơn mới ---
-    if (mode.equalsIgnoreCase("them")) {
-        int soveconlai = kht.getSoveconlai() - soveThayDoi;
-        if (soveconlai < 0) soveconlai = 0;
-        kht.setSoveconlai(soveconlai);
-    }
-
-    // --- 2️⃣ Trường hợp xóa hóa đơn ---
-    else if (mode.equalsIgnoreCase("xoa")) {
-        int soveconlai = kht.getSoveconlai() + soveThayDoi;
-        if (soveconlai > kht.getTongsove())
-            soveconlai = kht.getTongsove();
-        kht.setSoveconlai(soveconlai);
-    }
-
-    // --- 3️⃣ Trường hợp sửa hóa đơn ---
-    else if (mode.equalsIgnoreCase("sua")) {
-        // Khi sửa, ta tính lại toàn bộ vé đã bán cho kế hoạch đó
         int tongVeBan = 0;
         for (int j = 0; j < dshoadon.getN(); j++) {
             hoadon hd = dshoadon.getDs()[j];
@@ -694,16 +641,15 @@ public class menu {
                 tongVeBan += hd.getSove();
             }
         }
+
         int soveconlai = kht.getTongsove() - tongVeBan;
-        if (soveconlai < 0) soveconlai = 0;
+        if (soveconlai < 0) {
+            soveconlai = 0;
+        }
         kht.setSoveconlai(soveconlai);
+
+        dskht.getDs()[index] = kht;
+        System.out.println("Da cap nhat so ve cho KHT: " + maKHTour + ". Con lai: " + soveconlai);
     }
-
-    // --- 4️⃣ Cập nhật lại vào danh sách ---
-    dskht.getDs()[index] = kht;
-    System.out.println("✅ Đã cập nhật số vé cho kế hoạch " + maKHTour + " (" + mode + ")");
-}
-
-
-   
+    
 }
