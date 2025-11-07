@@ -11,7 +11,6 @@ class khachhang {
     private String diachi;
     private String sdt;
     private Scanner sc = new Scanner(System.in);
-
     public khachhang() {
     }
 

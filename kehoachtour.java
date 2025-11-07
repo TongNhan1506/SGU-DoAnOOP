@@ -1,7 +1,7 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 class kehoachtour {
     private String makhtour;
@@ -19,6 +19,9 @@ class kehoachtour {
     private tour t;
     public static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Scanner sc = new Scanner(System.in);
+
+    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     public int getTongTienTheoCacKhoan() {
         return tongchi + tongan + tongo + tongdilai + tongtienve;
@@ -236,7 +239,7 @@ class kehoachtour {
 
     public void xuat() {
         System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi, ngayve, tongsove, soveconlai, tongchi, tongan, tongo,
+                makhtour, matour, ngaydi.format(dtf), ngayve.format(dtf), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
     

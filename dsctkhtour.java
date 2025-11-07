@@ -256,7 +256,6 @@ class dsctkhtour {
                 String line="";
 
                 line=String.join("|",
-                c.getMact(),
                 c.getMakhtour(),
                 c.getNgaychi().format(kehoachtour.df),
                 String.valueOf(c.getTienan()),

@@ -15,7 +15,7 @@ class hdv {
     private kehoachtour kht;
     private Scanner sc = new Scanner(System.in);
 
-    public hdv() {
+    public hdv(){
     }
 
     public hdv(String mahdv, String makhtour, String ho, String ten, LocalDate ngaysinh, String gioitinh, String diachi, String sdt) {
@@ -29,7 +29,6 @@ class hdv {
         this.sdt = sdt;
         this.kht = null;
     }
-
     public hdv(hdv h) {
         this.mahdv = h.mahdv;
         this.makhtour = h.makhtour;
