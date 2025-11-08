@@ -596,47 +596,24 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║       THONG KE DOANH THU               ║");
+            System.out.println("║        THONG KE                        ║");
             System.out.println("╚════════════════════════════════════════╝");
-            System.out.println("1. Thong ke doanh thu theo tour");
-            System.out.println("2. Thong ke doanh thu theo khach hang");
-            System.out.println("3. Thong ke chi phi theo ke hoach tour");
-            System.out.println("4. Thong ke doanh thu theo thang");
-            System.out.println("5. Thong ke doanh thu theo quy");
-            System.out.println("6. Thong ke ti le hoa don nam 2025");
+            System.out.println("1. Thong ke doanh thu theo thang");
+            System.out.println("2. Thong ke doanh thu theo quy");
+            System.out.println("3. Thong ke ti le hoa don nam 2025");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
             try {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
-                    case 1:
-                        System.out.println("=== THONG KE DOANH THU THEO TOUR ===");
-                        System.out.print("Nhap ma tour: ");
-                        String maTour = sc.nextLine();
-                        break;
-                    case 2:
-                        System.out.println("\n=== THONG KE DOANH THU THEO KHACH HANG ===");
-                        dshoadon.thongKeTheoMaKH();
-                        break;
-                    case 3:
-                        System.out.println("\n=== THONG KE CHI PHI THEO KE HOACH TOUR ===");
-                        System.out.print("Nhap ma ke hoach tour: ");
-                        String maKHT = sc.nextLine();
-                        kehoachtour kht = dskht.timKHT(maKHT);
-                        if (kht != null) {
-                            kht.thongKeTienTheoNgay();
-                        } else {
-                            System.out.println("Khong tim thay ke hoach tour!");
-                        }
-                        break;
-                        case 4:
+                        case 1:
                         dskht.thongKeDoanhThuTheoThang(dshoadon);
                         break;
-                        case 5:
+                        case 2:
                         dskht.thongKeDoanhThuTheoQuy(dshoadon);
                         break;
-                        case 6:
+                        case 3:
 
                         dskhachhang dsKH = new dskhachhang();
                         dsKH.thongketisuathoadon2025(dshoadon);
