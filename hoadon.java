@@ -78,21 +78,27 @@ class hoadon {
 
 
     public void nhap() {
+        String hd="^HD[0-9]{3}$";
+        while(true){
         System.out.println("Nhap ma hoa don: ");
         mahoadon = sc.nextLine();
+        if(mahoadon.matches(hd)){break;}
+        }
         System.out.println("Nhap ma khach hang: ");
         makh = sc.nextLine();
         System.out.println("Nhap ma ke hoach tour: ");
         makhtour = sc.nextLine();
-        System.out.println("Nhap ngay lap (dd/MM/yyyy): ");
+        while(true)
+        {System.out.println("Nhap ngay lap (dd/MM/yyyy): ");
         String dateInput = sc.nextLine();
         try {
             ngaylap=LocalDate.parse(dateInput,kehoachtour.df);
+            break;
         }
         catch(DateTimeParseException e){    
             System.out.println("Loi dinh dang ngay khong dung "+e.getMessage());
             e.printStackTrace();
-        }
+        }}
         System.out.println("Nhap so ve: ");
         sove = sc.nextInt();
         System.out.println("Nhap tong tien: ");

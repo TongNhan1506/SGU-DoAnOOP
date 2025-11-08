@@ -242,27 +242,7 @@ class kehoachtour {
                 makhtour, matour, ngaydi.format(dtf), ngayve.format(dtf), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
-    
 
-    public void thongKeTienTheoNgay() {
-        long songay = getSoNgay();
-        int tongTienMotNgay = getTongTienTheoNgay();
-        long tongTienToanTour = tongTienMotNgay * songay;
-        int tongTienCacKhoan = getTongTienTheoCacKhoan();
-        System.out.println("\n==== THONG KE TONG TIEN SU DUNG THEO NGAY ====");
-        System.out.println("Ma ke hoach tour: " + makhtour);
-        System.out.println("So ngay tour: " + songay);
-        System.out.println("\nChi phi hang ngay:");
-        System.out.println("- Chi phi an: " + tongan);
-        System.out.println("- Chi phi o: " + tongo);
-        System.out.println("- Chi phi di lai: " + tongdilai);
-        System.out.println("- Chi phi khac: " + tongchi);
-        System.out.println("=> Tong chi phi 1 ngay: " + tongTienMotNgay);
-        System.out.println("\nTong chi phi:");
-        System.out.println("- Chi phi cho toan tour: " + tongTienToanTour);
-        System.out.println("- Tong tien ve: " + tongtienve);
-        System.out.println("=> Tong chi phi toan bo: " + tongTienCacKhoan);
-    }
     private int nhapsonguyen(String message){
         while(true){
             System.out.println(message);
