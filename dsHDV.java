@@ -351,17 +351,4 @@ class dsHDV {
         }
     }
     
-    public void linkData(dskehoachtour DSKHT) {
-        if (DSKHT == null) { return; }
-        int count = 0;
-        for (int i = 0; i < N; i++) {
-            String makhtour_id = ds[i].getMakhtour();
-            kehoachtour kht_obj = DSKHT.timKHT(makhtour_id);
-            if (kht_obj != null) {
-                ds[i].setKehoachtour(kht_obj);
-                count++;
-            }
-        }
-        System.out.println("Da lien ket xong: " + count + "/" + N + " HDV.");
-    }
 }
