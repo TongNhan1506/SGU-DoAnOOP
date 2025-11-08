@@ -224,7 +224,7 @@ class kehoachtour {
         }
         }
         tongsove=nhapsonguyen("Nhap tong so ve: ");
-        soveconlai = nhapsonguyen("Nhap so ve: ");
+        soveconlai=tongsove;
         tongchi = nhapsonguyen("Nhap tong chi: ");
         tongan = nhapsonguyen("Nhap tong an: ");
         tongo=nhapsonguyen("Nhap tong o: ");

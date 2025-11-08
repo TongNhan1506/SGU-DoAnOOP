@@ -71,7 +71,7 @@ class ctkhtour{
     }
     
     public void nhap(){
-        String ct="^CT[0-9]$";
+        String ct="^CT[0-9]{3}$";
         while(true)
         {
         System.out.println("Nhap ma chi tiet ke hoach tour ");

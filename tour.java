@@ -97,7 +97,8 @@ abstract class tour implements ITour {
         }
     }
     
-    public abstract String getThongtinmorong();
+    public abstract String getThongtinmorong1();
+    public abstract String getThongtinmorong2();
 
     public void nhap() {
         final String t="^T[0-9]{3}$";
@@ -118,10 +119,16 @@ abstract class tour implements ITour {
         diadiemden=sc.nextLine();
     }
 
-    public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s",
-                matour, tentour, dongia, thutuc, diadiemKH,diadiemden);
-        System.out.printf("%-15s %-15s\n",getThongtinmorong());
+   public void xuat() {
+        System.out.printf("%-10s %-25s %-10d %-15s %-15s %-15s %-15s %-15s\n",
+                matour,
+                tentour,
+                dongia,
+                thutuc,
+                diadiemKH,
+                diadiemden,
+                getThongtinmorong1(),
+                getThongtinmorong2());
     }
 }
 

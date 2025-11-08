@@ -43,7 +43,11 @@ public class tourtrongnuoc extends tour {
     }
 
     @Override
-    public String getThongtinmorong() {
-        return tinhthanh + " " + dacsan;
+    public String getThongtinmorong1() {
+        return tinhthanh;
+    }
+    @Override
+    public String getThongtinmorong2() {
+        return dacsan;
     }
 }

@@ -278,26 +278,26 @@ public void thongKeTheoMaKHTour() {
         }
     }
     public void ghiFile(String file){
-        try{
-            BufferedWriter bw=new BufferedWriter(new FileWriter(file));
-            for(int i=0;i<N;i++){
-                danhgiatour d=ds[i];
-                String line="";
-                line=String.join("|",
-                d.getMadg(),
-                d.getMakhtour(),
-                d.getTenkh(),
-                String.valueOf(d.getSao()),
-                d.getTenkh());
-                bw.write(line);
-                bw.newLine();
-            }
-        bw.close();
-        System.out.println("Da ghi "+N+"vao file "+file);
+    try{
+        BufferedWriter bw=new BufferedWriter(new FileWriter(file));
+        for(int i=0;i<N;i++){
+            danhgiatour d=ds[i];
+            String line="";
+            line=String.join("|",
+            d.getMadg(),
+            d.getMakhtour(),
+            d.getTenkh(),
+            String.valueOf(d.getSao()),
+            d.getNhanxet());
+            bw.write(line);
+            bw.newLine();
         }
-        catch(Exception e){
-            System.out.println("Loi ghi file "+e.getMessage());
-            e.printStackTrace();
-        }
+    bw.close();
+    System.out.println("Da ghi "+N+" danh gia vao file "+file);
     }
+    catch(Exception e){
+        System.out.println("Loi ghi file "+e.getMessage());
+        e.printStackTrace();
+    }
+}
 }
