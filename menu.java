@@ -221,7 +221,9 @@ public class menu {
                         dskh.xoaKhachHang(sc.nextLine());
                         break;
                     case 7:
-                        dskh.suaKhachHang();
+                        System.out.println("Nhap ma khach hang can sua: ");
+                        String mkh=sc.nextLine();
+                        dskh.suaKhachHang(mkh);
                         break;
                     case 8:
                         dskh.thongKeMaKH();
@@ -336,7 +338,10 @@ public class menu {
                         dskht.xoaKHTCoTs(sc.nextLine());
                         break;
                     case 6:
-                        dskht.suaKHT();
+                        System.out.println("Nhap ma kht can sua: ");
+                        String mkht=sc.nextLine();
+                        dskht.suaKHT(mkht);
+                        dskht.capnhatsove(mkht,dshoadon);
                         break;
                     case 7:
                         dskht.thongketheosove();
@@ -470,7 +475,9 @@ public class menu {
                         dshd.xoaHopDongCots(sc.nextLine());
                         break;
                     case 7:
-                        dshd.suaHopDong();
+                        System.out.println("Nhap vao na hop dong can sua: ");
+                        String mahd=sc.nextLine();
+                        dshd.suaHopDong(mahd);
                         break;
                     case 8:
                         dshd.thongKeTheoMaTour();
@@ -537,7 +544,7 @@ public class menu {
                             break;
                         }
                         dshoadon.themHDCoTs(hd1);
-                        capnhatsove(hd1.getMakhtour()); 
+                        dskht.capnhatsove(hd1.getMakhtour(),dshoadon); 
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");
                         break;
@@ -551,7 +558,7 @@ public class menu {
                         }
                         String maKHT = hd2.getMakhtour();
                         dshoadon.xoaHDCoTs(mahoadon);
-                        capnhatsove(maKHT); 
+                        dskht.capnhatsove(maKHT,dshoadon); 
                         dskht.ghiFile("dskehoachtour.txt");
                         dshoadon.ghiFile("dshoadon.txt");
                         break;
@@ -565,7 +572,7 @@ public class menu {
                         }
                         String maKHT_Sua = hd3.getMakhtour();
                         dshoadon.suaHD(mhd,dskht);
-                        capnhatsove(maKHT_Sua); 
+                        dskht.capnhatsove(maKHT_Sua,dshoadon); 
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");
                         break;
@@ -589,47 +596,24 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║       THONG KE DOANH THU               ║");
+            System.out.println("║        THONG KE                        ║");
             System.out.println("╚════════════════════════════════════════╝");
-            System.out.println("1. Thong ke doanh thu theo tour");
-            System.out.println("2. Thong ke doanh thu theo khach hang");
-            System.out.println("3. Thong ke chi phi theo ke hoach tour");
-            System.out.println("4. Thong ke doanh thu theo thang");
-            System.out.println("5. Thong ke doanh thu theo quy");
-            System.out.println("6. Thong ke ti le hoa don nam 2025");
+            System.out.println("1. Thong ke doanh thu theo thang");
+            System.out.println("2. Thong ke doanh thu theo quy");
+            System.out.println("3. Thong ke ti le hoa don nam 2025");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
             try {
                 chon = Integer.parseInt(sc.nextLine());
                 switch (chon) {
-                    case 1:
-                        System.out.println("=== THONG KE DOANH THU THEO TOUR ===");
-                        System.out.print("Nhap ma tour: ");
-                        String maTour = sc.nextLine();
-                        break;
-                    case 2:
-                        System.out.println("\n=== THONG KE DOANH THU THEO KHACH HANG ===");
-                        dshoadon.thongKeTheoMaKH();
-                        break;
-                    case 3:
-                        System.out.println("\n=== THONG KE CHI PHI THEO KE HOACH TOUR ===");
-                        System.out.print("Nhap ma ke hoach tour: ");
-                        String maKHT = sc.nextLine();
-                        kehoachtour kht = dskht.timKHT(maKHT);
-                        if (kht != null) {
-                            kht.thongKeTienTheoNgay();
-                        } else {
-                            System.out.println("Khong tim thay ke hoach tour!");
-                        }
-                        break;
-                        case 4:
+                        case 1:
                         dskht.thongKeDoanhThuTheoThang(dshoadon);
                         break;
-                        case 5:
+                        case 2:
                         dskht.thongKeDoanhThuTheoQuy(dshoadon);
                         break;
-                        case 6:
+                        case 3:
 
                         dskhachhang dsKH = new dskhachhang();
                         dsKH.thongketisuathoadon2025(dshoadon);
@@ -646,32 +630,6 @@ public class menu {
                 chon = -1;
             }
         } while (chon != 0);
-    }
-
-    public static void capnhatsove(String maKHTour) {
-        int index = dskht.timTheoMa(maKHTour);
-        if (index == -1) {
-            System.out.println("Loi cap nhat ve: Khong tim thay ke hoach tour " + maKHTour);
-            return;
-        }
-        kehoachtour kht = dskht.getDs()[index];
-
-        int tongVeBan = 0;
-        for (int j = 0; j < dshoadon.getN(); j++) {
-            hoadon hd = dshoadon.getDs()[j];
-            if (hd.getMakhtour().equalsIgnoreCase(maKHTour)) {
-                tongVeBan += hd.getSove();
-            }
-        }
-
-        int soveconlai = kht.getTongsove() - tongVeBan;
-        if (soveconlai < 0) {
-            soveconlai = 0;
-        }
-        kht.setSoveconlai(soveconlai);
-
-        dskht.getDs()[index] = kht;
-        System.out.println("Da cap nhat so ve cho KHT: " + maKHTour + ". Con lai: " + soveconlai);
     }
     
 }
