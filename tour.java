@@ -12,7 +12,7 @@ abstract class tour implements ITour {
     private String thutuc;
     private String diadiemKH;
     private String diadiemden;
-    protected Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
 
     public tour() {
     }
@@ -54,7 +54,7 @@ abstract class tour implements ITour {
     public String getDiadiemKH() {
         return diadiemKH;
     }
-    public String getDiaden(){
+    public String getDiadiemden(){
         return diadiemden;
     }
     public void setMatour(String matour) {
@@ -76,17 +76,40 @@ abstract class tour implements ITour {
     public void setDiadiemKH(String diadiemKH) {
         this.diadiemKH = diadiemKH;
     }
-    public void SetDiadiemden(String diadiemden){
+    public void setDiadiemden(String diadiemden){
         this.diadiemden=diadiemden;
     }
+    public static int nhapsonguyen(String mess){
+        while(true){
+            try{
+                System.out.println(mess);
+                String input =sc.nextLine();
+                int num=Integer.parseInt(input);
+                if(num<0){
+                    System.out.println("Loi nhap gia tri nho hon 0, vui long nhap lai");
+                    continue;
+                }
+                return num;
+            }
+            catch(NumberFormatException e){
+                System.out.println("Nhap sai dinh dang so nguyen");
+            }
+        }
+    }
+    
+    public abstract String getThongtinmorong();
+
     public void nhap() {
-        System.out.println("Nhap ma tour: ");
-        matour = sc.nextLine();
+        final String t="^T[0-9]{3}$";
+        while(true){
+            System.out.println("Nhap ma tour (co dinh dang TXXX, VD: T000)");
+            matour=sc.nextLine();
+            if(matour.matches(t)){break;}
+            System.out.println("Loi dinh dang, vui long nhap lai.");
+        }
         System.out.println("Nhap ten tour: ");
         tentour = sc.nextLine();
-        System.out.println("Nhap don gia: ");
-        dongia = sc.nextInt();
-        sc.nextLine();
+        dongia=nhapsonguyen("Nhap don gia: ");
         System.out.println("Nhap thu tuc: ");
         thutuc = sc.nextLine();
         System.out.println("Nhap dia diem KH: ");
@@ -96,8 +119,9 @@ abstract class tour implements ITour {
     }
 
     public void xuat() {
-        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s\n",
+        System.out.printf("%-10s %-10s %-10s %-15s %-10s %-10s",
                 matour, tentour, dongia, thutuc, diadiemKH,diadiemden);
+        System.out.printf("%-15s %-15s\n",getThongtinmorong());
     }
 }
 

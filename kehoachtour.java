@@ -1,8 +1,8 @@
-
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
-
+import java.time.format.DateTimeParseException;
 class kehoachtour {
     private String makhtour;
     private String matour;
@@ -17,7 +17,9 @@ class kehoachtour {
     private String mahdv;
     private int tongtienve;
     private tour t;
+    public static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Scanner sc = new Scanner(System.in);
+
 
     public int getTongTienTheoCacKhoan() {
         return tongchi + tongan + tongo + tongdilai + tongtienve;
@@ -181,59 +183,83 @@ class kehoachtour {
         this.tongtienve = tongtienve;
     }
 
+    
     public void nhap() {
-        System.out.println("Nhap ma ke hoach tour: ");
-        makhtour = sc.nextLine();
-        System.out.println("Nhap ma tour: ");
-        matour = sc.nextLine();
-        System.out.println("Nhap ngay di (yyyy-mm-dd): ");
-        ngaydi = LocalDate.parse(sc.nextLine());
-        System.out.println("Nhap ngay ve (yyyy-mm-dd): ");
-        ngayve = LocalDate.parse(sc.nextLine());
-        System.out.println("Nhap tong so ve: ");
-        tongsove = sc.nextInt();
-        System.out.println("Nhap so ve con lai: ");
-        soveconlai = sc.nextInt();
-        System.out.println("Nhap tong chi 1 ngay: ");
-        tongchi = sc.nextInt();
-        System.out.println("Nhap tong an 1 ngay: ");
-        tongan = sc.nextInt();
-        System.out.println("Nhap tong o 1 ngay: ");
-        tongo = sc.nextInt();
-        System.out.println("Nhap tong di lai 1 ngay: ");
-        tongdilai = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Nhap ma HDV: ");
+        String mt="^KHT[0-9]{3}$";
+        while(true){
+            System.out.println("Nhap ma ke hoach tour (co dinh dang KHTXXX, VD: KHT001)");
+            makhtour=sc.nextLine();
+            if(makhtour.matches(mt)){break;}
+            System.out.println("Loi dinh dang, vui long nhap lai.");
+        }
+        String t="^T[0-9]{3}$";
+        while(true){
+            System.out.println("Nhap ma tour (co dinh dang TXXX, VD: T001)");
+            matour=sc.nextLine();
+            if(matour.matches(t)){break;}
+            System.out.println("Loi dinh dang, vui long nhap lai.");
+        }
+        while(true){
+        System.out.println("Nhap ngay di (dd/MM/yyyy): ");
+        String ndi=sc.nextLine();
+        try{
+            ngaydi=LocalDate.parse(ndi, df);
+            break;
+        }catch(DateTimeParseException e){
+            System.out.println("Loi dinh dang ngay, vui long nhap lai "+e.getMessage());
+        }}
+        while(true){
+        System.out.println("Nhap ngay ve (dd/mm/yyyy): ");
+        String nve=sc.nextLine();
+        try{
+            ngayve=LocalDate.parse(nve,df);
+            if(ngayve.isBefore(ngaydi)){
+                System.out.println("Ngay ve phai sau hoac bang ngay di, vui long nhap lai.");
+                continue;
+            }
+            break;
+        }catch(DateTimeParseException e)
+        {
+            System.out.println("Loi dinh dang ngay, vui long nhap lai "+e.getMessage());
+        }
+        }
+        tongsove=nhapsonguyen("Nhap tong so ve: ");
+        soveconlai = nhapsonguyen("Nhap so ve: ");
+        tongchi = nhapsonguyen("Nhap tong chi: ");
+        tongan = nhapsonguyen("Nhap tong an: ");
+        tongo=nhapsonguyen("Nhap tong o: ");
+        tongdilai=nhapsonguyen("Nhap tong di lai: ");
+
+        String h="^HDV[0-9]{3}$";
+        while(true)
+        {System.out.println("Nhap ma huong dan vien: ");
         mahdv = sc.nextLine();
-        System.out.println("Nhap tong tien ve: ");
-        tongtienve = sc.nextInt();
-        sc.nextLine();
+        if(mahdv.matches(h)){break;}
+        System.out.println("Nhap sai dinh dang ma huong dan vien, vui long nhap lai.");
+        }
+        tongtienve=nhapsonguyen("Nhap tong tien ve: ");
     }
 
     public void xuat() {
         System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi, ngayve, tongsove, soveconlai, tongchi, tongan, tongo,
+                makhtour, matour, ngaydi.format(df), ngayve.format(df), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
-    
 
-    public void thongKeTienTheoNgay() {
-        long songay = getSoNgay();
-        int tongTienMotNgay = getTongTienTheoNgay();
-        long tongTienToanTour = tongTienMotNgay * songay;
-        int tongTienCacKhoan = getTongTienTheoCacKhoan();
-        System.out.println("\n==== THONG KE TONG TIEN SU DUNG THEO NGAY ====");
-        System.out.println("Ma ke hoach tour: " + makhtour);
-        System.out.println("So ngay tour: " + songay);
-        System.out.println("\nChi phi hang ngay:");
-        System.out.println("- Chi phi an: " + tongan);
-        System.out.println("- Chi phi o: " + tongo);
-        System.out.println("- Chi phi di lai: " + tongdilai);
-        System.out.println("- Chi phi khac: " + tongchi);
-        System.out.println("=> Tong chi phi 1 ngay: " + tongTienMotNgay);
-        System.out.println("\nTong chi phi:");
-        System.out.println("- Chi phi cho toan tour: " + tongTienToanTour);
-        System.out.println("- Tong tien ve: " + tongtienve);
-        System.out.println("=> Tong chi phi toan bo: " + tongTienCacKhoan);
+    private int nhapsonguyen(String message){
+        while(true){
+            System.out.println(message);
+            String input=sc.nextLine();
+            try{
+                int num=Integer.parseInt(input);
+                if(num < 0){
+                    System.out.println("Phai nhap gia tri lon hon 0, vui long nhap lai.");
+                    continue;
+                }
+                return num;
+            }catch(NumberFormatException e){
+                System.out.println("Dinh dang khong hop le, vui long nhap lai.");
+            }
+        }
     }
 }

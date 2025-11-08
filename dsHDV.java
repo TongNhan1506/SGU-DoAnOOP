@@ -1,24 +1,24 @@
 import java.util.Arrays;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.format.DateTimeParseException;
+
 class dsHDV {
-    private HDV[] ds;
+    private hdv[] ds;
     private int N;
     Scanner sc = new Scanner(System.in);
 
    
     public dsHDV() {
-        ds = new HDV[100];
+        ds = new hdv[100];
         N = 0;
     }
 
-    public dsHDV(HDV[] ds, int n) {
+    public dsHDV(hdv[] ds, int n) {
         this.ds = ds;
         this.N = n;
     }
@@ -29,7 +29,7 @@ class dsHDV {
     }
 
   
-    public HDV[] getDs() {
+    public hdv[] getDs() {
         return ds;
     }
 
@@ -37,7 +37,7 @@ class dsHDV {
         return N;
     }
 
-    public void setDs(HDV[] ds) {
+    public void setDs(hdv[] ds) {
         this.ds = ds;
     }
 
@@ -49,34 +49,34 @@ class dsHDV {
     public void nhapDshdv() {
         System.out.print("Nhap so luong HDV: ");
         N = Integer.parseInt(sc.nextLine());
-        ds = new HDV[N];
+        ds = new hdv[N];
         for (int i = 0; i < N; i++) {
             System.out.println("Nhap thong tin HDV thu " + (i + 1) + ": ");
-            ds[i] = new HDV();
+            ds[i] = new hdv();
             ds[i].nhap();
         }
     }
 
     public void xuatDshdv() {
-        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-15s %-10s %-15s%n",
-                "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "SoDT", "GioiTinh", "DiaChi");
+        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-15s %-20s%n",
+                "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "GioiTinh", "SoDT", "DiaChi");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
     }
   
-    public void themCots(HDV h) {
+    public void themCots(hdv h) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = h;
         N++;
-        System.out.println("✅ Da them HDV moi!");
+        System.out.println(" Da them HDV moi!");
     }
 
-    public void themHDVCoTs(HDV h) {
+    public void themHDVCoTs(hdv h) {
         themCots(h);
     }
 
-    public HDV timHDV(String mahdv) {
+    public hdv timHDV(String mahdv) {
         return timCots(mahdv);
     }
    
@@ -89,33 +89,33 @@ class dsHDV {
         return -1;
     }
 
-    public HDV timCots(String maHDV) {
+    public hdv timCots(String maHDV) {
         int idx = timTheoMa(maHDV);
         if (idx != -1) return ds[idx];
         return null;
     }
 
     
-public void timTheoTen(String ten) {
-    boolean found = false;
-    System.out.printf("%-10s %-10s %-10s %-10s %-15s %-15s %-10s %-15s%n",
-            "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "SoDT", "GioiTinh", "DiaChi");
-    for (int i = 0; i < N; i++) {
-        if (ds[i].getTen().equalsIgnoreCase(ten)) {
-            ds[i].xuat();
-            found = true;
+    public void timTheoTen(String ten) {
+        boolean found = false;
+        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-15s %-20s%n",
+                "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "GioiTinh", "SoDT", "DiaChi");
+        for (int i = 0; i < N; i++) {
+            if (ds[i].getTen().equalsIgnoreCase(ten)) {
+                ds[i].xuat();
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println(" Khong tim thay HDV co ten: " + ten);
         }
     }
-    if (!found) {
-        System.out.println("❌ Khong tim thay HDV co ten: " + ten);
-    }
-}
 
 
     public void xoaHDVCoTs(String mahdv) {
         int idx = timTheoMa(mahdv);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay HDV co ma: " + mahdv);
+            System.out.println(" Khong tim thay HDV co ma: " + mahdv);
             return;
         }
 
@@ -124,38 +124,38 @@ public void timTheoTen(String ten) {
         }
         ds = Arrays.copyOf(ds, N - 1);
         N--;
-        System.out.println("✅ Da xoa HDV co ma: " + mahdv);
+        System.out.println(" Da xoa HDV co ma: " + mahdv);
     }
 
 
   
-public void thongKeTheoMaTour() {
-    if (N == 0) {
-        System.out.println("❌ Danh sach HDV rong!");
-        return;
-    }
+    public void thongKeTheoMaTour() {
+        if (N == 0) {
+            System.out.println(" Danh sach HDV rong!");
+            return;
+        }
 
-    System.out.print("Nhap ma tour can thong ke: ");
-    String maTour = sc.nextLine();
+        System.out.print("Nhap ma ke hoach tour can thong ke: ");
+        String makht = sc.nextLine();
 
-    int count = 0;
-    System.out.println("\n=== DANH SACH HDV THUOC TOUR: " + maTour + " ===");
-    System.out.printf("%-10s %-10s %-10s %-10s %-15s %-15s %-10s %-15s%n",
-            "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "SoDT", "GioiTinh", "DiaChi");
+        int count = 0;
+        System.out.println("\n=== DANH SACH HDV THUOC TOUR: " + makht + " ===");
+        System.out.printf("%-10s %-10s %-10s %-10s %-15s %-10s %-15s %-20s%n",
+                "MaHDV", "MaTour", "Ho", "Ten", "NgaySinh", "GioiTinh", "SoDT", "DiaChi");
 
-    for (int i = 0; i < N; i++) {
-        if (ds[i].getMakhtour().equalsIgnoreCase(maTour)) {
-            ds[i].xuat();
-            count++;
+        for (int i = 0; i < N; i++) {
+            if (ds[i].getMakhtour().equalsIgnoreCase(makht)) {
+                ds[i].xuat();
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            System.out.println(" Khong co HDV nao thuoc tour co ma: " + makht);
+        } else {
+            System.out.println(" Tong so HDV phu trach tour '" + makht + "': " + count);
         }
     }
-
-    if (count == 0) {
-        System.out.println("❌ Khong co HDV nao thuoc tour co ma: " + maTour);
-    } else {
-        System.out.println("✅ Tong so HDV phu trach tour '" + maTour + "': " + count);
-    }
-}
 
   
     public void suaHDV() {
@@ -163,11 +163,11 @@ public void thongKeTheoMaTour() {
         String maHDV = sc.nextLine();
         int idx = timTheoMa(maHDV);
         if (idx == -1) {
-            System.out.println("❌ Khong tim thay HDV co ma: " + maHDV);
+            System.out.println(" Khong tim thay HDV co ma: " + maHDV);
             return;
         }
 
-        HDV h = ds[idx];
+        hdv h = ds[idx];
         int chon;
         do {
             System.out.println("\n===== MENU SUA THONG TIN HDV =====");
@@ -193,8 +193,12 @@ public void thongKeTheoMaTour() {
                     h.setTen(sc.nextLine());
                     break;
                 case 3:
-                    System.out.print("Nhap ngay sinh moi: ");
-                    h.setNgaysinh(LocalDate.parse(sc.nextLine()));
+                    System.out.print("Nhap ngay sinh moi (dd/MM/yyyy): ");
+                    try {
+                        h.setNgaysinh(LocalDate.parse(sc.nextLine(), kehoachtour.df));
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Sai dinh dang ngay!");
+                    }
                     break;
                 case 4:
                     System.out.print("Nhap so dien thoai moi: ");
@@ -217,31 +221,95 @@ public void thongKeTheoMaTour() {
         } while (chon != 0);
 
         ds[idx] = h;
-        System.out.println("✅ Da cap nhat thong tin HDV co ma: " + maHDV);
+        System.out.println(" Da cap nhat thong tin HDV co ma: " + maHDV);
     }
+
+    public void suaHDV(String maHDV) {
+        int idx = timTheoMa(maHDV);
+        if (idx == -1) {
+            System.out.println(" Khong tim thay HDV co ma: " + maHDV);
+            return;
+        }
+
+        hdv h = ds[idx];
+        int chon;
+        do {
+            System.out.println("\n===== MENU SUA THONG TIN HDV =====");
+            System.out.println("1. Sua ma ke hoach tour");
+            System.out.println("2. Sua ho ten");
+            System.out.println("3. Sua ngay sinh");
+            System.out.println("4. Sua so dien thoai");
+            System.out.println("5. Sua gioi tinh");
+            System.out.println("6. Sua dia chi");
+            System.out.println("0. Thoat sua");
+            System.out.print("Nhap lua chon: ");
+            chon = Integer.parseInt(sc.nextLine());
+
+            switch (chon) {
+                case 1:
+                    System.out.print("Nhap ma ke hoach tour moi: ");
+                    h.setMakhtour(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("Nhap ho moi: ");
+                    h.setHo(sc.nextLine());
+                    System.out.print("Nhap ten moi: ");
+                    h.setTen(sc.nextLine());
+                    break;
+                case 3:
+                    System.out.print("Nhap ngay sinh moi (dd/MM/yyyy): ");
+                    try {
+                        h.setNgaysinh(LocalDate.parse(sc.nextLine(), kehoachtour.df));
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Sai dinh dang ngay!");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Nhap so dien thoai moi: ");
+                    h.setSdt(sc.nextLine());
+                    break;
+                case 5:
+                    System.out.print("Nhap gioi tinh moi: ");
+                    h.setGioitinh(sc.nextLine());
+                    break;
+                case 6:
+                    System.out.print("Nhap dia chi moi: ");
+                    h.setDiachi(sc.nextLine());
+                    break;
+                case 0:
+                    System.out.println(" Thoat sua thong tin.");
+                    break;
+                default:
+                    System.out.println(" Lua chon khong hop le!");
+            }
+        } while (chon != 0);
+
+        ds[idx] = h;
+        System.out.println(" Da cap nhat thong tin HDV co ma: " + maHDV);
+    }
+    
     public void docFile(String file){
         try {
-            FileInputStream fis = new FileInputStream(file);
-            BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+            BufferedReader br=new BufferedReader(new FileReader(file));
 
             int n=0;
-            ds=new HDV[n];
+            ds=new hdv[100];
 
             String line="";
             while((line=br.readLine())!=null){
-                String[] part=line.split(",");
+                String[] part=line.split("\\|");
 
                 if(part.length>=8){
                     String mahdv=part[0];
                     String makhtour=part[1];
                     String ho=part[2];
                     String ten=part[3];
-                    LocalDate ngaysinh=LocalDate.parse(part[4]);
+                    LocalDate ngaysinh=LocalDate.parse(part[4], kehoachtour.df);
                     String gioitinh=part[5];
                     String diachi=part[6];
                     String sdt=part[7];
                     
-                    ds[n++]=new HDV(mahdv, makhtour, ho, ten, ngaysinh, gioitinh, diachi, sdt);
+                    ds[n++]=new hdv(mahdv, makhtour, ho, ten, ngaysinh, gioitinh, diachi, sdt);
                 }
             
             }
@@ -255,18 +323,19 @@ public void thongKeTheoMaTour() {
             e.printStackTrace();
         }
     }
+    
     public void ghiFile(String file){
         try {   
-            BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+            BufferedWriter bw=new BufferedWriter(new FileWriter(file));
             for(int i=0;i<N;i++){
-                HDV h=ds[i];
+                hdv h=ds[i];
                 String line="";
                 line=String.join("|",
                 h.getMahdv(),
                 h.getMakhtour(),
                 h.getHo(),
                 h.getTen(),
-                String.valueOf(h.getNgaysinh()),
+                h.getNgaysinh().format(kehoachtour.df),
                 h.getGioitinh(),
                 h.getDiachi(),
                 h.getSdt());
@@ -281,4 +350,5 @@ public void thongKeTheoMaTour() {
             e.printStackTrace();
         }
     }
+    
 }
