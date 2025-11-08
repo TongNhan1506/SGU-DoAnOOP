@@ -148,9 +148,7 @@ class dskhachhang {
         System.out.println(" Da xoa khach hang co ma: " + makh);
     }
 
-    public void suaKhachHang() {
-        System.out.print("Nhap ma khach hang can sua: ");
-        String makh = sc.nextLine();
+    public void suaKhachHang(String makh) {
         int idx = timTheoMa(makh);
         if (idx == -1) {
             System.out.println(" Khong tim thay khach hang co ma: " + makh);

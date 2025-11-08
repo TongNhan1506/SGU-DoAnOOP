@@ -238,7 +238,6 @@ class kehoachtour {
         System.out.println("Nhap sai dinh dang ma huong dan vien, vui long nhap lai.");
         }
         tongtienve=nhapsonguyen("Nhap tong tien ve: ");
-        sc.nextLine();
     }
 
     public void xuat() {

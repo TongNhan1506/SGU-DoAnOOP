@@ -1,4 +1,6 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -55,8 +57,8 @@ public class dskehoachtour {
 
     public void xuatDsKHT() {
         System.out.printf("%-10s %-10s %-12s %-12s %-8s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",
-                "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Don gia", "Tong ve",
-                "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV");
+                "MaKHT", "MaTour", "Ngay di", "Ngay ve", "Tong ve",
+                "Ve con", "Tong chi", "An", "O", "Di lai", "MaHDV","Tong tien ve");
         for (int i = 0; i < N; i++) {
             ds[i].xuat();
         }
@@ -113,6 +115,7 @@ public class dskehoachtour {
         N--;
         System.out.println(" Da xoa ke hoach tour co ma: " + makhtour);
     }
+    
     public void thongketheosove(){
         System.out.println("Nhap vao so ve con lai can thong ke: ");
         int soveconlai = Integer.parseInt(sc.nextLine());
@@ -126,6 +129,36 @@ public class dskehoachtour {
             }
         }
     }
+
+    public int  nhapsonguyen(String mess){
+        while(true)
+        {try{
+            System.out.println(mess);
+            String input=sc.nextLine();
+            int num=Integer.parseInt(input);
+            if(num<0){
+                System.out.println("Loi nhap gia tri nho hon");
+                continue;
+            }
+            return num;
+        }catch(NumberFormatException e){
+            System.out.println("Loi dinh dang so, vui long nhap lai.");
+        }}
+    }
+
+    public LocalDate nhapngay(String mess){
+        while(true){
+            try{
+                System.out.println(mess);
+                String input=sc.nextLine();
+                LocalDate ngay=LocalDate.parse(input,kehoachtour.df);
+                return ngay;
+            }catch(DateTimeParseException e){
+                System.out.println("Loi dinh dang ngay, vui long nhap lai.");
+            }
+        }
+    }
+    
     public void suaKHT(String makhtour) {
         int idx = timTheoMa(makhtour);
         if (idx == -1) {
@@ -139,11 +172,10 @@ public class dskehoachtour {
             System.out.println("\n===== SUA THONG TIN KE HOACH TOUR =====");
             System.out.println("1. Sua ma tour");
             System.out.println("2. Sua ngay di / ngay ve");
-            System.out.println("3. Sua ve con");
+            System.out.println("3. Sua Tong so ve");
             System.out.println("4. Sua tong chi / an / o / di lai / tien ve");
             System.out.println("0. Thoat");
-            System.out.print("Nhap lua chon: ");
-            chon = Integer.parseInt(sc.nextLine());
+            chon = nhapsonguyen("Nhap lua chon");
 
             switch (chon) {
                 case 1:
@@ -151,26 +183,27 @@ public class dskehoachtour {
                     k.setMatour(sc.nextLine());
                     break;
                 case 2:
-                    System.out.print("Nhap ngay di moi: ");
-                    k.setNgaydi(LocalDate.parse(sc.nextLine()));
-                    System.out.print("Nhap ngay ve moi: ");
-                    k.setNgayve(LocalDate.parse(sc.nextLine()));
+                    k.setNgaydi(nhapngay("Nhap ngay di:"));
+                    while(true)
+                    {
+                        LocalDate n=nhapngay("Nhap ngay ve");
+                        if(n.isBefore(k.getNgaydi())){
+                            System.out.println("Loi nhap ngay ve truoc ngay di, vui long nhap lai.");
+                            continue;
+                        }
+                        k.setNgayve(n);
+                        break;
+                    }
                     break;
                 case 3:
-                    System.out.print("Nhap so ve con lai moi: ");
-                    k.setSoveconlai(Integer.parseInt(sc.nextLine()));
+                    k.setTongsove(nhapsonguyen("Nhap tong so ve moi: "));
                     break;
                 case 4:
-                    System.out.print("Nhap tong chi moi: ");
-                    k.setTongchi(Integer.parseInt(sc.nextLine()));
-                    System.out.print("Nhap tong an moi: ");
-                    k.setTongan(Integer.parseInt(sc.nextLine()));
-                    System.out.print("Nhap tong o moi: ");
-                    k.setTongo(Integer.parseInt(sc.nextLine()));
-                    System.out.print("Nhap tong di lai moi: ");
-                    k.setTongdilai(Integer.parseInt(sc.nextLine()));
-                    System.out.print("Nhap tong tien ve moi: ");
-                    k.setTongtienve(Integer.parseInt(sc.nextLine()));
+                    k.setTongchi(nhapsonguyen("Nhap tong chi moi: "));
+                    k.setTongan(nhapsonguyen("Nhap tong an moi: "));
+                    k.setTongo(nhapsonguyen("Nhap tong o moi: "));
+                    k.setTongdilai(nhapsonguyen("Nhap tong di lai moi: "));
+                    k.setTongtienve(nhapsonguyen("Nhap tong tien ve moi: "));
                     break;
                 case 0:
                     System.out.println(" Thoat sua thong tin.");
@@ -309,6 +342,34 @@ public class dskehoachtour {
             e.printStackTrace();
         }
     }
+
+    public void capnhatsove(String maKHTour, dshoadon DSHD) {
+
+        int index = this.timTheoMa(maKHTour);
+        if (index == -1) {
+            System.out.println("Loi cap nhat ve: Khong tim thay ke hoach tour " + maKHTour);
+            return;
+        }
+        kehoachtour kht = this.ds[index];
+
+        int tongVeBan = 0;
+        for (int j = 0; j < DSHD.getN(); j++) {
+            hoadon hd = DSHD.getDs()[j];
+            if (hd.getMakhtour().equalsIgnoreCase(maKHTour)) {
+                tongVeBan += hd.getSove();
+            }
+        }
+
+        int soveconlai = kht.getTongsove() - tongVeBan;
+        if (soveconlai < 0) {
+            soveconlai = 0;
+        } 
+        kht.setSoveconlai(soveconlai);
+
+        this.ds[index] = kht;
+        System.out.println("Da cap nhat so ve cho KHT: " + maKHTour + ". Con lai: " + soveconlai);
+    }
+
     public void doanhthu() {
         System.out.println("\n=== THONG KE DOANH THU TOUR ===");
         System.out.printf("%-10s %-10s %-15s %-15s %-15s\n",
