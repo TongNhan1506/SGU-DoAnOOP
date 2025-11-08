@@ -26,6 +26,7 @@ public class menu {
             System.out.println("2. Quan ly khach hang");
             System.out.println("3. Quan ly tour du lich");
             System.out.println("4. Quan ly hoa don (va cap nhat ve)");
+            System.out.println("5. Thong ke doanh thu");
             System.out.println("0. Thoat chuong trinh");
             System.out.print("Nhap lua chon cua ban: ");
             try {
@@ -45,6 +46,10 @@ public class menu {
                     }
                     case 4: {
                         quanLyHoaDon();
+                        break;
+                    }
+                    case 5: {
+                        thongKeDoanhThu();
                         break;
                     }
                     case 0:
@@ -587,6 +592,9 @@ public class menu {
             System.out.println("1. Thong ke doanh thu theo tour");
             System.out.println("2. Thong ke doanh thu theo khach hang");
             System.out.println("3. Thong ke chi phi theo ke hoach tour");
+            System.out.println("4. Thong ke doanh thu theo thang");
+            System.out.println("5. Thong ke doanh thu theo quy");
+            System.out.println("6. Thong ke ti le hoa don nam 2025");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
@@ -613,7 +621,19 @@ public class menu {
                             System.out.println("Khong tim thay ke hoach tour!");
                         }
                         break;
-                    case 0:
+                        case 4:
+                        dskht.thongKeDoanhThuTheoThang(dshoadon);
+                        break;
+                        case 5:
+                        dskht.thongKeDoanhThuTheoQuy(dshoadon);
+                        break;
+                        case 6:
+
+                        dskhachhang dsKH = new dskhachhang();
+                        dsKH.thongketisuathoadon2025(dshoadon);
+
+                        break;
+                        case 0:
                         System.out.println("Quay lai...");
                         break;
                     default:

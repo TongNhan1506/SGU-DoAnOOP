@@ -1,24 +1,24 @@
 import java.util.Scanner;
-class cthd{
+class cthoadon{
     private String mahd;
     private String makh;
     private String makhtour;
-    public cthd(){
+    public cthoadon(){
     }
     
-    public cthd(hoadon h,khachhang kh,kehoachtour kht,String mahd, String makh, String makhtour) {
+    public cthoadon(hoadon h,khachhang kh,kehoachtour kht,String mahd, String makh, String makhtour) {
         this.mahd = h.getMahd();
         this.makh = kh.getMakh();
         this.makhtour = kht.getMakhtour();
     }
 
-    public cthd(String mahd,String makh,String makhtour){
+    public cthoadon(String mahd,String makh,String makhtour){
         this.mahd=mahd;
         this.makh=makh;
         this.makhtour=makhtour;
     }
 
-    public cthd(cthd ct){
+    public cthoadon(cthoadon ct){
         this.mahd = ct.mahd;
         this.makh = ct.makh;
         this.makhtour = ct.makhtour;
