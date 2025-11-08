@@ -19,7 +19,7 @@ public class menu {
 
         while (chon != 0) {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║  CHUONG TRINH QUAN LY TOUR DU LICH    ║");
+            System.out.println("║  CHUONG TRINH QUAN LY TOUR DU LICH     ║");
             System.out.println("╚════════════════════════════════════════╝");
             System.out.println("Chon cac chuc nang quan ly duoi day");
             System.out.println("1. Quan ly huong dan vien");
@@ -54,7 +54,7 @@ public class menu {
                     }
                     case 0:
                         System.out.println("╔════════════════════════════════════════╗");
-                        System.out.println("║  Cam on ban da su dung chuong trinh!  ║");
+                        System.out.println("║  Cam on ban da su dung chuong trinh!   ║");
                         System.out.println("╚════════════════════════════════════════╝");
                         break;
                     default:
@@ -99,7 +99,7 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║      QUAN LY HUONG DAN VIEN           ║");
+            System.out.println("║      QUAN LY HUONG DAN VIEN            ║");
             System.out.println("╚════════════════════════════════════════╝");
             System.out.println("1. Nhap danh sach HDV");
             System.out.println("2. Xuat danh sach HDV");
@@ -171,7 +171,7 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║         QUAN LY KHACH HANG            ║");
+            System.out.println("║         QUAN LY KHACH HANG             ║");
             System.out.println("╚════════════════════════════════════════╝");
             System.out.println("1. Nhap danh sach khach hang");
             System.out.println("2. Xuat danh sach khach hang");
@@ -243,7 +243,7 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║       QUAN LY TOUR DU LICH            ║");
+            System.out.println("║       QUAN LY TOUR DU LICH             ║");
             System.out.println("╚════════════════════════════════════════╝");
             System.out.println("1. Quan ly danh sach tour");
             System.out.println("2. Quan ly ke hoach tour");
@@ -401,7 +401,9 @@ public class menu {
                         dsctkht.xoaCots(sc.nextLine());
                         break;
                     case 7:
-                        dsctkht.suaKhtour();
+                        System.out.println("Nhap ma chi tiet ke hoach tour can sua");
+                        String makht=sc.nextLine();
+                        dsctkht.suaKhtour(makht);
                         break;
                     case 8:
                         dsctkht.thongKeTheoMa();
@@ -562,7 +564,7 @@ public class menu {
                              break;
                         }
                         String maKHT_Sua = hd3.getMakhtour();
-                        dshoadon.suaHD(mhd);
+                        dshoadon.suaHD(mhd,dskht);
                         capnhatsove(maKHT_Sua); 
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");
@@ -587,7 +589,7 @@ public class menu {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
-            System.out.println("║       THONG KE DOANH THU              ║");
+            System.out.println("║       THONG KE DOANH THU               ║");
             System.out.println("╚════════════════════════════════════════╝");
             System.out.println("1. Thong ke doanh thu theo tour");
             System.out.println("2. Thong ke doanh thu theo khach hang");

@@ -1,6 +1,7 @@
-
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 class ctkhtour{
     private String mact;
     private String makhtour;
@@ -30,7 +31,6 @@ class ctkhtour{
         this.tienan=tienan;
         this.tieno=tieno;
         this.tiendilai = tiendilai;
-        this.kht = null; 
     }
     
     public ctkhtour(ctkhtour ct){
@@ -40,7 +40,6 @@ class ctkhtour{
         this.tienan = ct.tienan;
         this.tieno = ct.tieno;
         this.tiendilai = ct.tiendilai;
-        this.kht = ct.kht; 
     }
     
     public String getMact(){ return mact; }
@@ -49,13 +48,7 @@ class ctkhtour{
     public int getTienan() { return tienan; }
     public int getTieno() { return tieno; }
     public int getTiendilai() { return tiendilai; }
-
-    public void setKehoachtour(kehoachtour kht) {
-        this.kht = kht;
-    }
-    public kehoachtour getKehoachtour() {
-        return this.kht;
-    }
+    public int getTongtienchi1ngay(){return tienan+tieno+tiendilai;}
     
     public void setNgaychi(int ngaychi) { this.ngaychi = ngaychi; }
     public void setTienan(int tienan) { this.tienan = tienan; }
@@ -63,7 +56,6 @@ class ctkhtour{
     public void setTiendilai(int tiendilai) { this.tiendilai = tiendilai; }
     public void setMakhtour(String makhtour) { this.makhtour = makhtour; }
     
-    Scanner sc = new Scanner(System.in);
     
     private int nhapSoNguyen(String message) {
         while(true){
@@ -82,11 +74,17 @@ class ctkhtour{
     }
     
     public void nhap(){
+        String ct="^CT[0-9]$";
+        while(true)
+        {
         System.out.println("Nhap ma chi tiet ke hoach tour ");
         mact = sc.nextLine();
+        if(mact.matches(ct)){break;}
+        }
+        String mkht="^KHT[0-9]{3}$";
+        while(true){
         System.out.println("Nhap ma ke hoach tour: ");
-        makhtour = sc.nextLine();
-        
+        makhtour = sc.nextLine();        
         tienan = nhapSoNguyen("Nhap tien an: ");
         tieno = nhapSoNguyen("Nhap tien o: ");
         tiendilai = nhapSoNguyen("Nhap tien di lai: ");

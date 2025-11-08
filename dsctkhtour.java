@@ -22,7 +22,7 @@ class dsctkhtour {
     }
 
     public dsctkhtour(dsctkhtour dsct) {
-        this.ds = dsct.ds;
+        this.ds = Arrays.copyOf(dsct.ds, N);
         this.N = dsct.N;
     }
 
@@ -60,6 +60,7 @@ class dsctkhtour {
         }
     }
 
+
     public int timTheoMa(String mact) {
         for (int i = 0; i < N; i++) {
             if (ds[i].getMact().equals(mact)) {
@@ -75,8 +76,7 @@ class dsctkhtour {
             return ds[idx];
         return null;
     }
-
-
+  
     public void themCots(ctkhtour k) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new ctkhtour(k);
@@ -105,16 +105,25 @@ class dsctkhtour {
         }
         System.out.print("Nhap ma ke hoach tour can thong ke: ");
         String makhtour = sc.nextLine();
+        int ta=0;
+        int to=0;
+        int td=0;
+        int tien=0;
         int count = 0;
         for (int i = 0; i < N; i++) {
             if (ds[i].getMakhtour().equalsIgnoreCase(makhtour)) {
+                ta+=ds[i].getTienan();
+                to+=ds[i].getTieno();
+                td+=ds[i].getTiendilai();
                 count++;
             }
         }
         if (count == 0) {
             System.out.println(" Khong tim thay ke hoach tour co ma: " + makhtour);
         } else {
-            System.out.println(" Ma ke hoach tour '" + makhtour + "' xuat hien " + count + " lan trong danh sach.");
+            tien=ta+to+td;
+            System.out.println(" Ma ke hoach tour '" + makhtour + "' co " + count + " chi tiet.");
+            System.out.println("Tong tien chi phi cho toan bo ke hoach tour nay la "+tien);
         }
     }
 
@@ -133,10 +142,8 @@ class dsctkhtour {
             }
         }
     }
-   
-    public void suaKhtour() {
-        System.out.print("Nhap ma chi tiet ke hoach tour can sua: ");
-        String mact = sc.nextLine();
+
+    public void suaKhtour(String mact) {
         int idx = timTheoMa(mact); 
 
         if (idx == -1) {
@@ -183,7 +190,7 @@ class dsctkhtour {
             }
         } while (chon != 0);
     }
-    
+
     public void docFile(String file){
         try {
             BufferedReader br=new BufferedReader(new FileReader(file));
@@ -237,22 +244,5 @@ class dsctkhtour {
             System.out.println("Loi ghi file "+e.getMessage());
             e.printStackTrace();
         }
-    }
-    
-    public void linkData(dskehoachtour DSKHT) {
-        if (DSKHT == null || DSKHT.getN() == 0) {
-            System.out.println("Loi: Khong the lien ket CTKH tour vi DSKHT rong.");
-            return;
-        }
-        int count = 0;
-        for (int i = 0; i < N; i++) {
-            String makhtour_id = ds[i].getMakhtour();
-            kehoachtour kht_obj = DSKHT.timKHT(makhtour_id); 
-            if (kht_obj != null) {
-                ds[i].setKehoachtour(kht_obj);
-                count++;
-            }
-        }
-        System.out.println("Da lien ket xong: " + count + "/" + N + " chi tiet KHT.");
     }
 }
