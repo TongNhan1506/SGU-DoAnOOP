@@ -20,8 +20,6 @@ class kehoachtour {
     public static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Scanner sc = new Scanner(System.in);
 
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 
     public int getTongTienTheoCacKhoan() {
         return tongchi + tongan + tongo + tongdilai + tongtienve;
@@ -185,15 +183,16 @@ class kehoachtour {
         this.tongtienve = tongtienve;
     }
 
+    
     public void nhap() {
-        final String mt="^KHT[0-9]{3}$";
+        String mt="^KHT[0-9]{3}$";
         while(true){
             System.out.println("Nhap ma ke hoach tour (co dinh dang KHTXXX, VD: KHT001)");
             makhtour=sc.nextLine();
             if(makhtour.matches(mt)){break;}
             System.out.println("Loi dinh dang, vui long nhap lai.");
         }
-        final String t="^T[0-9]{3}$";
+        String t="^T[0-9]{3}$";
         while(true){
             System.out.println("Nhap ma tour (co dinh dang TXXX, VD: T001)");
             matour=sc.nextLine();
@@ -230,16 +229,21 @@ class kehoachtour {
         tongan = nhapsonguyen("Nhap tong an: ");
         tongo=nhapsonguyen("Nhap tong o: ");
         tongdilai=nhapsonguyen("Nhap tong di lai: ");
-        sc.nextLine();
-        System.out.println("Nhap ma HDV: ");
+
+        String h="^HDV[0-9]{3}$";
+        while(true)
+        {System.out.println("Nhap ma huong dan vien: ");
         mahdv = sc.nextLine();
+        if(mahdv.matches(h)){break;}
+        System.out.println("Nhap sai dinh dang ma huong dan vien, vui long nhap lai.");
+        }
         tongtienve=nhapsonguyen("Nhap tong tien ve: ");
         sc.nextLine();
     }
 
     public void xuat() {
         System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi.format(dtf), ngayve.format(dtf), tongsove, soveconlai, tongchi, tongan, tongo,
+                makhtour, matour, ngaydi.format(df), ngayve.format(df), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
 

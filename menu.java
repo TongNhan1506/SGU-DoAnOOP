@@ -26,6 +26,7 @@ public class menu {
             System.out.println("2. Quan ly khach hang");
             System.out.println("3. Quan ly tour du lich");
             System.out.println("4. Quan ly hoa don (va cap nhat ve)");
+            System.out.println("5. Thong ke doanh thu");
             System.out.println("0. Thoat chuong trinh");
             System.out.print("Nhap lua chon cua ban: ");
             try {
@@ -45,6 +46,10 @@ public class menu {
                     }
                     case 4: {
                         quanLyHoaDon();
+                        break;
+                    }
+                    case 5: {
+                        thongKeDoanhThu();
                         break;
                     }
                     case 0:
@@ -396,7 +401,9 @@ public class menu {
                         dsctkht.xoaCots(sc.nextLine());
                         break;
                     case 7:
-                        dsctkht.suaKhtour();
+                        System.out.println("Nhap ma chi tiet ke hoach tour can sua");
+                        String makht=sc.nextLine();
+                        dsctkht.suaKhtour(makht);
                         break;
                     case 8:
                         dsctkht.thongKeTheoMa();
@@ -587,6 +594,8 @@ public class menu {
             System.out.println("1. Thong ke doanh thu theo tour");
             System.out.println("2. Thong ke doanh thu theo khach hang");
             System.out.println("3. Thong ke chi phi theo ke hoach tour");
+            System.out.println("4. Thong ke doanh thu theo thang");
+            System.out.println("5. Thong ke doanh thu theo quy");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 

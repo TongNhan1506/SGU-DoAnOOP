@@ -1,7 +1,6 @@
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.time.format.DateTimeParseException;
-
+import java.util.Scanner;
 class ctkhtour{
     private String mact;
     private String makhtour;
@@ -21,7 +20,7 @@ class ctkhtour{
         this.tieno = tieno;
         this.tiendilai = tiendilai;
     }
-    
+
     public ctkhtour(String mact,String makhtour,LocalDate ngaychi,int tienan,int tieno, int tiendilai){
         this.mact=mact;
         this.makhtour=makhtour;
@@ -79,11 +78,11 @@ class ctkhtour{
         mact = sc.nextLine();
         if(mact.matches(ct)){break;}
         }
-
+        String mkht="^KHT[0-9]{3}$";
         while(true){
         System.out.println("Nhap ma ke hoach tour: ");
         makhtour = sc.nextLine();
-        if(makhtour.matches(ct)){break;}
+        if(makhtour.matches(mkht)){break;}
         }
 
         while(true) {
@@ -105,7 +104,7 @@ class ctkhtour{
         System.out.printf("%-15s %-15s %-15s %-15d %-15d %-15d\n",
             mact,
             makhtour,
-            ngaychi.format(kehoachtour.df),
+            ngaychi,
             tienan,
             tieno,
             tiendilai);

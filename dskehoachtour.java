@@ -309,4 +309,91 @@ public class dskehoachtour {
             e.printStackTrace();
         }
     }
+    public void doanhthu() {
+        System.out.println("\n=== THONG KE DOANH THU TOUR ===");
+        System.out.printf("%-10s %-10s %-15s %-15s %-15s\n",
+                "MaKHT", "MaTour", "So ve da ban", "Gia ve", "Doanh thu");
+        
+        for (int i = 0; i < N; i++) {
+            int soVeDaBan = ds[i].getTongsove() - ds[i].getSoveconlai();
+            int giaVe = ds[i].getTongtienve() / ds[i].getTongsove(); // Giá vé trung bình
+            int doanhThu = soVeDaBan * giaVe;
+            
+            System.out.printf("%-10s %-10s %-15d %-15d %-15d\n",
+                    ds[i].getMakhtour(),
+                    ds[i].getMatour(),
+                    soVeDaBan,
+                    giaVe,
+                    doanhThu);
+        }
+    }
+
+    public void loinhuan() {
+        System.out.println("\n=== THONG KE LOI NHUAN TOUR ===");
+        System.out.printf("%-10s %-10s %-15s %-15s %-15s %-15s\n",
+                "MaKHT", "MaTour", "Doanh thu", "Tong chi phi", "Loi nhuan", "Ti le LN(%)");
+        
+        for (int i = 0; i < N; i++) {
+            int soVeDaBan = ds[i].getTongsove() - ds[i].getSoveconlai();
+            int giaVe = ds[i].getTongtienve() / ds[i].getTongsove();
+            int doanhThu = soVeDaBan * giaVe;
+            int tongChiPhi = ds[i].getTongchi() + ds[i].getTongan() + 
+                           ds[i].getTongo() + ds[i].getTongdilai();
+            int loiNhuan = doanhThu - tongChiPhi;
+
+            System.out.printf("%-10s %-10s %-15d %-15d %-15d %-15.2f\n",
+                    ds[i].getMakhtour(),
+                    ds[i].getMatour(),
+                    doanhThu,
+                    tongChiPhi,
+                    loiNhuan
+                   );
+        }
+    }
+
+    public void thongKeDoanhThuTheoQuy(dshoadon dshd) {
+        System.out.println("\n=== THONG KE DOANH THU THEO QUY ===");
+        int[] doanhThuQuy = new int[4];
+
+        if (dshd == null || dshd.getDs() == null) {
+            System.out.println("Khong co du lieu hoa don de thong ke.");
+            return;
+        }
+
+        for (int i = 0; i < dshd.getN(); i++) {
+            hoadon h = dshd.getDs()[i];
+            if (h == null) continue;
+            int thang = h.getNgaylap().getMonthValue();
+            int quy = (thang - 1) / 3; 
+            doanhThuQuy[quy] += h.getTongtien();
+        }
+        
+        System.out.printf("%-10s %-15s\n", "Quy", "Doanh thu");
+        for (int i = 0; i < 4; i++) {
+            System.out.printf("%-10d %-15d\n", (i + 1), doanhThuQuy[i]);
+        }
+    }
+
+    public void thongKeDoanhThuTheoThang(dshoadon dshd) {
+        System.out.println("\n=== THONG KE DOANH THU THEO THANG ===");
+        int[] doanhThuThang = new int[12];
+
+        if (dshd == null || dshd.getDs() == null) {
+            System.out.println("Khong co du lieu hoa don de thong ke.");
+            return;
+        }
+
+        for (int i = 0; i < dshd.getN(); i++) {
+            hoadon h = dshd.getDs()[i];
+            if (h == null) continue;
+            int thang = h.getNgaylap().getMonthValue();
+            doanhThuThang[thang - 1] += h.getTongtien();
+        }
+        
+        System.out.printf("%-10s %-15s\n", "Thang", "Doanh thu");
+        for (int i = 0; i < 12; i++) {
+            System.out.printf("%-10d %-15d\n", (i + 1), doanhThuThang[i]);
+        }
+    }
+
 }
