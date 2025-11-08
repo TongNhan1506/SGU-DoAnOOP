@@ -34,7 +34,7 @@ public class dstour {
     }
 
     public void xuatDstour() {
-    System.out.printf("%-10s %-20s %-10s %-15s %-15s %-15s %-15s %-15s\n", 
+    System.out.printf("%-10s %-25s %-10s %-15s %-15s %-15s %-15s %-15s\n", 
             "MaTour", "TenTour", "DonGia", "ThuTuc", "DiaDiemKH", "DiaDiemDen", "Tinh/QGia", "DacSan/NgoaiTe");
             
     for (int i = 0; i < N; i++) {

@@ -71,7 +71,7 @@ class hdv {
         if(mahdv.matches(h)){break;}
         System.out.println("Nhap sai dinh dang ma huong dan vien, vui long nhap lai.");
         }
-        String mt="^KHT[0-9]$";
+        String mt="^KHT[0-9]{3}$";
         while(true){
             System.out.println("Nhap ma ke hoach tour (co dinh dang KHTXXX, VD: KHT001)");
             makhtour=sc.nextLine();

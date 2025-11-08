@@ -43,7 +43,11 @@ public class tournuocngoai extends tour {
     }
 
     @Override
-    public String getThongtinmorong() {
-        return quocgia + " " + ngoaite;
+    public String getThongtinmorong1() {
+        return quocgia;
+    }
+    @Override
+    public String getThongtinmorong2() {
+        return ngoaite;
     }
 }
