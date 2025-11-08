@@ -20,8 +20,6 @@ class kehoachtour {
     public static final DateTimeFormatter df =DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Scanner sc = new Scanner(System.in);
 
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 
     public int getTongTienTheoCacKhoan() {
         return tongchi + tongan + tongo + tongdilai + tongtienve;
@@ -185,6 +183,7 @@ class kehoachtour {
         this.tongtienve = tongtienve;
     }
 
+    
     public void nhap() {
         final String mt="^KHT[0-9]{3}$";
         while(true){
@@ -239,7 +238,7 @@ class kehoachtour {
 
     public void xuat() {
         System.out.printf("%-15s %-10s %-12s %-12s %-10d %-10d %-10d %-10d %-10d %-10d %-10s %-10d\n",
-                makhtour, matour, ngaydi.format(dtf), ngayve.format(dtf), tongsove, soveconlai, tongchi, tongan, tongo,
+                makhtour, matour, ngaydi.format(df), ngayve.format(df), tongsove, soveconlai, tongchi, tongan, tongo,
                 tongdilai, mahdv, tongtienve);
     }
     
