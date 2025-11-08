@@ -603,6 +603,7 @@ public class menu {
             System.out.println("3. Thong ke chi phi theo ke hoach tour");
             System.out.println("4. Thong ke doanh thu theo thang");
             System.out.println("5. Thong ke doanh thu theo quy");
+            System.out.println("6. Thong ke ti le hoa don nam 2025");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
 
@@ -618,7 +619,30 @@ public class menu {
                         System.out.println("\n=== THONG KE DOANH THU THEO KHACH HANG ===");
                         dshoadon.thongKeTheoMaKH();
                         break;
-                    case 0:
+                    case 3:
+                        System.out.println("\n=== THONG KE CHI PHI THEO KE HOACH TOUR ===");
+                        System.out.print("Nhap ma ke hoach tour: ");
+                        String maKHT = sc.nextLine();
+                        kehoachtour kht = dskht.timKHT(maKHT);
+                        if (kht != null) {
+                            kht.thongKeTienTheoNgay();
+                        } else {
+                            System.out.println("Khong tim thay ke hoach tour!");
+                        }
+                        break;
+                        case 4:
+                        dskht.thongKeDoanhThuTheoThang(dshoadon);
+                        break;
+                        case 5:
+                        dskht.thongKeDoanhThuTheoQuy(dshoadon);
+                        break;
+                        case 6:
+
+                        dskhachhang dsKH = new dskhachhang();
+                        dsKH.thongketisuathoadon2025(dshoadon);
+
+                        break;
+                        case 0:
                         System.out.println("Quay lai...");
                         break;
                     default:

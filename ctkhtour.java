@@ -1,27 +1,30 @@
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 class ctkhtour{
     private String mact;
     private String makhtour;
-    private LocalDate ngaychi;
+    private int ngaychi;
     private int tienan;
     private int tieno;
     private int tiendilai;
-    private Scanner sc = new Scanner(System.in);
+    private kehoachtour kht;
+
     public ctkhtour(){
     }
-    
-    public ctkhtour(kehoachtour kht, String mact, LocalDate ngaychi, int tienan, int tieno, int tiendilai) {
+
+    public ctkhtour(kehoachtour kht_obj, String mact, int ngaychi, int tienan, int tieno, int tiendilai) {
         this.mact = mact;
-        this.makhtour = kht.getMakhtour();
-        this.ngaychi = ngaychi; 
+        this.kht = kht_obj; 
+        this.makhtour = kht_obj.getMakhtour();
+        this.ngaychi = tienan+tieno+tiendilai; 
         this.tienan = tienan;
         this.tieno = tieno;
         this.tiendilai = tiendilai;
     }
 
-    public ctkhtour(String mact,String makhtour,LocalDate ngaychi,int tienan,int tieno, int tiendilai){
+    public ctkhtour(String mact,String makhtour,int ngaychi,int tienan,int tieno, int tiendilai){
         this.mact=mact;
         this.makhtour=makhtour;
         this.ngaychi=ngaychi;
@@ -41,13 +44,13 @@ class ctkhtour{
     
     public String getMact(){ return mact; }
     public String getMakhtour() { return makhtour; }
-    public LocalDate getNgaychi() { return ngaychi; }
+    public int getNgaychi() { return ngaychi; }
     public int getTienan() { return tienan; }
     public int getTieno() { return tieno; }
     public int getTiendilai() { return tiendilai; }
     public int getTongtienchi1ngay(){return tienan+tieno+tiendilai;}
     
-    public void setNgaychi(LocalDate ngaychi) { this.ngaychi = ngaychi; }
+    public void setNgaychi(int ngaychi) { this.ngaychi = ngaychi; }
     public void setTienan(int tienan) { this.tienan = tienan; }
     public void setTieno(int tieno) { this.tieno = tieno; }
     public void setTiendilai(int tiendilai) { this.tiendilai = tiendilai; }
@@ -81,20 +84,7 @@ class ctkhtour{
         String mkht="^KHT[0-9]{3}$";
         while(true){
         System.out.println("Nhap ma ke hoach tour: ");
-        makhtour = sc.nextLine();
-        if(makhtour.matches(mkht)){break;}
-        }
-
-        while(true) {
-            System.out.println("Nhap ngay chi (dd/MM/yyyy): ");
-            try {
-                ngaychi = LocalDate.parse(sc.nextLine(), kehoachtour.df);
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("Loi dinh dang ngay. Vui long nhap lai.");
-            }
-        }
-        
+        makhtour = sc.nextLine();        
         tienan = nhapSoNguyen("Nhap tien an: ");
         tieno = nhapSoNguyen("Nhap tien o: ");
         tiendilai = nhapSoNguyen("Nhap tien di lai: ");
