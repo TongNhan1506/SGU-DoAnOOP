@@ -54,7 +54,7 @@ abstract class tour implements ITour {
     public String getDiadiemKH() {
         return diadiemKH;
     }
-    public String getDiaden(){
+    public String getDiadiemden(){
         return diadiemden;
     }
     public void setMatour(String matour) {
@@ -76,7 +76,7 @@ abstract class tour implements ITour {
     public void setDiadiemKH(String diadiemKH) {
         this.diadiemKH = diadiemKH;
     }
-    public void SetDiadiemden(String diadiemden){
+    public void setDiadiemden(String diadiemden){
         this.diadiemden=diadiemden;
     }
     public void nhap() {
