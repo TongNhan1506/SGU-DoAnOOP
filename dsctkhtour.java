@@ -2,8 +2,10 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.time.format.DateTimeParseException;
 
 class dsctkhtour {
     private ctkhtour[] ds;
@@ -76,7 +78,8 @@ class dsctkhtour {
             return ds[idx];
         return null;
     }
-  
+
+
     public void themCots(ctkhtour k) {
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new ctkhtour(k);
@@ -155,9 +158,10 @@ class dsctkhtour {
         int chon;
         do {
             System.out.println("\n=== CHON MUC CAN SUA ===");
-            System.out.println("1. Tien an");
-            System.out.println("2. Tien o");
-            System.out.println("3. Tien di lai");
+            System.out.println("1. Ngay chi");
+            System.out.println("2. Tien an");
+            System.out.println("3. Tien o");
+            System.out.println("4. Tien di lai");
             System.out.println("0. Thoat sua");
             System.out.print("Nhap lua chon: ");
             try {
@@ -168,16 +172,30 @@ class dsctkhtour {
 
             switch (chon) {
                 case 1:
+                    while(true){
+                        System.out.print("Nhap ngay chi moi (dd/MM/yyyy): ");
+                        String ngay = sc.nextLine();
+                        try {
+                            LocalDate ngaymoi = LocalDate.parse(ngay, kehoachtour.df);
+                            k.setNgaychi(ngaymoi);
+                            System.out.println(" Da sua ngay chi!");
+                            break;
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Sai dinh dang ngay!");
+                        }
+                    }
+                    break;
+                case 2:
                     int tienan = nhapSoNguyen("Nhap tien an moi: "); 
                     k.setTienan(tienan);
                     System.out.println(" Da sua tien an!");
                     break;
-                case 2:
+                case 3:
                     int tieno = nhapSoNguyen("Nhap tien o moi: "); 
                     k.setTieno(tieno);
                     System.out.println(" Da sua tien o!");
                     break;
-                case 3:
+                case 4:
                     int tiendilai = nhapSoNguyen("Nhap tien di lai moi: "); 
                     k.setTiendilai(tiendilai);
                     System.out.println(" Da sua tien di lai!");
@@ -201,14 +219,15 @@ class dsctkhtour {
             while((line=br.readLine())!=null){
                 String[] part=line.split("\\|");
                 
-                if(part.length>=5){ 
+                if(part.length>=6){ 
                     String mact=part[0];
                     String makhtour=part[1];
-                    int tienan=Integer.parseInt(part[2]);
-                    int tieno=Integer.parseInt(part[3]);
-                    int tiendilai=Integer.parseInt(part[4]);
-                    int ngaychi=Integer.parseInt(part[5]);
-                    ds[n++]=new ctkhtour(mact, makhtour, tienan, tieno, tiendilai,ngaychi);
+                    LocalDate ngaychi=LocalDate.parse(part[2], kehoachtour.df);
+                    int tienan=Integer.parseInt(part[3]);
+                    int tieno=Integer.parseInt(part[4]);
+                    int tiendilai=Integer.parseInt(part[5]);
+
+                    ds[n++]=new ctkhtour(mact,makhtour,ngaychi,tienan,tieno, tiendilai);
                 }
             }
             N=n;
@@ -231,6 +250,7 @@ class dsctkhtour {
 
                 line=String.join("|",
                 c.getMakhtour(),
+                c.getNgaychi().format(kehoachtour.df),
                 String.valueOf(c.getTienan()),
                 String.valueOf(c.getTieno()),
                 String.valueOf(c.getTiendilai()));

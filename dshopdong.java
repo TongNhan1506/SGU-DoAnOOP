@@ -116,9 +116,7 @@ public void thongKeTheoMaTour() {
 
 
    
-    public void suaHopDong() {
-        System.out.print("Nhap ma hop dong can sua: ");
-        String mahd = sc.nextLine();
+    public void suaHopDong(String mahd) {
         int idx = timTheoMa(mahd);
         if (idx == -1) {
             System.out.println(" Khong tim thay hop dong co ma: " + mahd);
