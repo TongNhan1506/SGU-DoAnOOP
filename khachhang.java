@@ -112,9 +112,14 @@ class khachhang {
                 System.out.println("Loi dinh dang ngay. Vui long nhap lai.");
             }
         }
-        
-        System.out.println("Nhap gioi tinh: ");
+        while(true){
+        System.out.println("Nhap gioi tinh ( Nam/Nu ): ");
         gioitinh = sc.nextLine();
+        if(gioitinh.equalsIgnoreCase("Nam") || gioitinh.equalsIgnoreCase("Nu")){
+            break;
+        }
+        System.out.println("Vui long nhap lai gioi tinh.");
+        }
         System.out.println("Nhap dia chi: ");
         diachi = sc.nextLine();
         String s="^0[0-9]{9}";

@@ -95,6 +95,10 @@ public class dskehoachtour {
     }
 
     public void themKHTCoTs(kehoachtour k) {
+        if (timTheoMa(k.getMakhtour()) != -1) {
+            System.out.println("Loi: Ma ke hoach tour '" + k.getMakhtour() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new kehoachtour(k);
         N++;

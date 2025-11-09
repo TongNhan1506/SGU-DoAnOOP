@@ -66,6 +66,10 @@ class dsHDV {
     }
   
     public void themCots(hdv h) {
+        if (timTheoMa(h.getMahdv()) != -1) {
+            System.out.println("Loi: Ma HDV '" + h.getMahdv() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = h;
         N++;
@@ -205,8 +209,15 @@ class dsHDV {
                     h.setSdt(sc.nextLine());
                     break;
                 case 5:
-                    System.out.print("Nhap gioi tinh moi: ");
-                    h.setGioitinh(sc.nextLine());
+                    while(true) {
+                        System.out.println("Nhap gioi tinh (Nam/Nu): ");
+                        String gioitinh = sc.nextLine();
+                        if (gioitinh.equalsIgnoreCase("Nam") || gioitinh.equalsIgnoreCase("Nu")) {
+                            h.setGioitinh(gioitinh);
+                            break;
+                        }
+                        System.out.println("Gia tri khong hop le, vui long chi nhap 'Nam' hoac 'Nu'.");
+                    }
                     break;
                 case 6:
                     System.out.print("Nhap dia chi moi: ");
@@ -269,8 +280,15 @@ class dsHDV {
                     h.setSdt(sc.nextLine());
                     break;
                 case 5:
-                    System.out.print("Nhap gioi tinh moi: ");
-                    h.setGioitinh(sc.nextLine());
+                    while(true) {
+                        System.out.println("Nhap gioi tinh (Nam/Nu): ");
+                        String gioitinh = sc.nextLine();
+                        if (gioitinh.equalsIgnoreCase("Nam") || gioitinh.equalsIgnoreCase("Nu")) {
+                            h.setGioitinh(gioitinh);
+                            break;
+                        }
+                        System.out.println("Gia tri khong hop le, vui long chi nhap 'Nam' hoac 'Nu'.");
+                    }
                     break;
                 case 6:
                     System.out.print("Nhap dia chi moi: ");

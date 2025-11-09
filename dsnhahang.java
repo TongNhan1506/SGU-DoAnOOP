@@ -131,6 +131,10 @@ public class dsnhahang {
     }
 
     public void themNHCoTs(nhahang n) {
+        if (timTheoMa(n.getManh()) != -1) {
+            System.out.println("Loi: Ma nha hang '" + n.getManh() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new nhahang(n);
         N++;

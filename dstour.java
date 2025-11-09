@@ -89,6 +89,7 @@ public class dstour {
         System.out.println("Ma tour da ton tai!");     //Kiểm tra trùng mã
         return;
     }
+    
     ds = Arrays.copyOf(ds, N + 1);
     ds[N] = t;
     N++;

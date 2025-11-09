@@ -109,9 +109,8 @@ class hoadon {
             System.out.println("Loi dinh dang ngay khong dung "+e.getMessage());
             e.printStackTrace();
         }}
-        sove = sc.nextInt();
-        tongtien = sc.nextInt();
-        sc.nextLine();
+        sove=nhapsonguyen("Nhap so ve: ");
+        tongtien =nhapsonguyen("Nhap tong tien: ");
     }
 
     public void xuat() {
