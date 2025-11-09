@@ -80,19 +80,7 @@ public class dskehoachtour {
         return ds[vt];
     }
 
-    public void timTheoMaTour(String matour) {
-        boolean found = false;
-        System.out.printf("%-15s %-15s %-15s %-15s\n", "Ma HD", "Ma tour", "Ma KH", "Dieu khoan");
-        for (int i = 0; i < N; i++) {
-            if (ds[i].getMatour().equalsIgnoreCase(matour)) {
-                ds[i].xuat();
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println(" Khong co hop dong nao thuoc tour co ma: " + matour);
-        }
-    }
+  
 
     public void themKHTCoTs(kehoachtour k) {
         if (timTheoMa(k.getMakhtour()) != -1) {
@@ -339,7 +327,7 @@ public class dskehoachtour {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi "+N+" ke hoach tour vao file "+file);
+            System.out.println("Da cap nhat vao file "+file);
         } catch(Exception e){
             System.out.println("Loi ghi fiel "+e.getMessage());
             e.printStackTrace();
@@ -365,6 +353,9 @@ public class dskehoachtour {
 
         int soveconlai = kht.getTongsove() - tongVeBan;
         if (soveconlai < 0) {
+             System.out.println(" Lỗi : Tổng vé bán (" + tongVeBan +
+                           ") vượt quá số vé có (" + kht.getTongsove() + ").");
+        System.out.println(" Tự động điều chỉnh số vé còn lại về 0.");
             soveconlai = 0;
         } 
         kht.setSoveconlai(soveconlai);

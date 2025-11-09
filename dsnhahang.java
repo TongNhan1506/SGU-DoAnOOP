@@ -340,7 +340,7 @@ public void thongKeTheoMaKHTour() {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi "+N+" nha hang vao file");
+            System.out.println("Da cap nhat vao file "+file);
         } catch(Exception e){
             System.out.println("Loi ghi file "+e.getMessage());
             e.printStackTrace();

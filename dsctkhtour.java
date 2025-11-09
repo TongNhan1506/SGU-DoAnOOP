@@ -279,7 +279,7 @@ class dsctkhtour {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi "+N+" chi tiet ke hoach tour vao file"+file);
+            System.out.println("Da cap nhat vao file "+file);
         }
         catch(Exception e){
             System.out.println("Loi ghi file "+e.getMessage());

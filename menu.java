@@ -609,13 +609,13 @@ public class menu {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOA DON =====");
-            System.out.println("1. Nhap danh sach hoa don (Khong cap nhat ve)");
+            System.out.println("1. Nhap danh sach hoa don ");
             System.out.println("2. Xuat danh sach hoa don");
             System.out.println("3. Tim kiem hoa don theo ma");
             System.out.println("4. Tim kiem hoa don theo ma khach hang");
-            System.out.println("5. Them hoa don (Tu dong cap nhat ve)");
-            System.out.println("6. Xoa hoa don (Tu dong cap nhat ve)");
-            System.out.println("7. Sua hoa don (Tu dong cap nhat ve)");
+            System.out.println("5. Them hoa don ");
+            System.out.println("6. Xoa hoa don ");
+            System.out.println("7. Sua hoa don ");
             System.out.println("8. Thong ke theo ma khach hang");
             System.out.println("0. Quay lai");
             System.out.print("Nhap lua chon cua ban: ");
@@ -625,7 +625,7 @@ public class menu {
                 switch (chon) {
                     case 1:
                         dshoadon.nhapDsHD();
-                        System.out.println("Canh bao: So ve chua duoc cap nhat. Hay chay chuc nang 5, 6, 7.");
+                        System.out.println("Canh bao: So ve chua duoc cap nhat.");
                         break;
                     case 2:
                         dshoadon.xuatDsHD();
@@ -653,7 +653,7 @@ public class menu {
                             System.out.println(" Ma hoa don da ton tai, khong the them!");
                             break;
                         }
-                        dshoadon.themHDCoTs(hd1);
+                        dshoadon.themHDCoTs(hd1,dskht);
                         dskht.capnhatsove(hd1.getMakhtour(), dshoadon);
                         dshoadon.ghiFile("dshoadon.txt");
                         dskht.ghiFile("dskehoachtour.txt");

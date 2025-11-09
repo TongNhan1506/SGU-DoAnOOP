@@ -297,7 +297,7 @@ public void thongKeTheoMaKHTour() {
             bw.newLine();
         }
     bw.close();
-    System.out.println("Da ghi "+N+" danh gia vao file "+file);
+   System.out.println("Da cap nhat vao file "+file);    
     }
     catch(Exception e){
         System.out.println("Loi ghi file "+e.getMessage());

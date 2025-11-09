@@ -277,7 +277,7 @@ class dskhachhang {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi " + N + " khach hang vao file " + file);
+            System.out.println("Da cap nhat vao file "+file);
         } catch (IOException e) {
             System.out.println("Loi ghi file dskhachhang.txt: " + e.getMessage());
             e.printStackTrace();
