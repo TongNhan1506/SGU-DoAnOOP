@@ -3,33 +3,19 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
 public class menu {
-    private   Scanner sc = new Scanner(System.in);
-    private   dsHDV dshdv = new dsHDV();
-    private   dskhachhang dskh = new dskhachhang();
-    private   dstour dst = new dstour();
-    private   dskehoachtour dskht = new dskehoachtour();
-    private   dsctkhtour dsctkht = new dsctkhtour();
-    private   dshopdong dshd = new dshopdong();
-    private   dshoadon dshoadon = new dshoadon();
-    private   dscthoadon dsct = new dscthoadon();
-    private   dsdanhgiatour dsdgt = new dsdanhgiatour();
-    private   dsnhahang dsnh = new dsnhahang();
+    private static Scanner sc = new Scanner(System.in);
+    private static dsHDV dshdv = new dsHDV();
+    private static dskhachhang dskh = new dskhachhang();
+    private static dstour dst = new dstour();
+    private static dskehoachtour dskht = new dskehoachtour();
+    private static dsctkhtour dsctkht = new dsctkhtour();
+    private static dshopdong dshd = new dshopdong();
+    private static dshoadon dshoadon = new dshoadon();
+    private static dscthoadon dsct = new dscthoadon();
+    private static dsdanhgiatour dsdgt = new dsdanhgiatour();
+    private static dsnhahang dsnh = new dsnhahang();
 
-    public menu() {
-        sc = new Scanner(System.in);
-        dshdv = new dsHDV();
-        dskh = new dskhachhang();
-        dst = new dstour();
-        dskht = new dskehoachtour();
-        dsctkht = new dsctkhtour();
-        dshd = new dshopdong();
-        dshoadon = new dshoadon();
-        dsct = new dscthoadon();
-        dsdgt = new dsdanhgiatour();
-        dsnh = new dsnhahang();
-    }
-    
-    public void start() {
+    public static void start() {
         loadfile();
         int chon = -1;
 
@@ -94,7 +80,7 @@ public class menu {
         sc.close();
     }
 
-    public   void loadfile() {
+    public static void loadfile() {
         dshdv.docFile("dshdv.txt");
         dskh.docFile("dskhachhang.txt");
         dst.docFile("dstour.txt");
@@ -107,7 +93,7 @@ public class menu {
         dsnh.docFile("dsnhahang.txt");
     }
 
-    public   void quanLyHDV() {
+    public static void quanLyHDV() {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
@@ -183,7 +169,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyKhachHang() {
+    public static void quanLyKhachHang() {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
@@ -261,7 +247,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyTour() {
+    public static void quanLyTour() {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
@@ -306,7 +292,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyDanhSachTour() {
+    public static void quanLyDanhSachTour() {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
@@ -377,7 +363,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyKeHoachTour() {
+    public static void quanLyKeHoachTour() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY KE HOACH TOUR =====");
@@ -448,7 +434,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyChiTietKeHoachTour() {
+    public static void quanLyChiTietKeHoachTour() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY CHI TIET KE HOACH TOUR =====");
@@ -532,7 +518,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyHopDong() {
+    public static void quanLyHopDong() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOP DONG =====");
@@ -605,7 +591,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyHoaDon() {
+    public static void quanLyHoaDon() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY HOA DON =====");
@@ -702,7 +688,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyNhaHang() {
+    public static void quanLyNhaHang() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY NHA HANG =====");
@@ -761,7 +747,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void quanLyDanhGiaTour() {
+    public static void quanLyDanhGiaTour() {
         int chon;
         do {
             System.out.println("\n===== QUAN LY DANH GIA TOUR =====");
@@ -814,7 +800,7 @@ public class menu {
         } while (chon != 0);
     }
 
-    public   void thongKeDoanhThu() {
+    public static void thongKeDoanhThu() {
         int chon;
         do {
             System.out.println("\n╔════════════════════════════════════════╗");
