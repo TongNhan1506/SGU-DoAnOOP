@@ -361,7 +361,7 @@ class dsHDV {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi "+N+" huong dan vien vao file "+file);
+            System.out.println("Da cap nhat vao file "+file);
         }
         catch(Exception e){
             System.out.println("Loi ghi file "+e.getMessage());

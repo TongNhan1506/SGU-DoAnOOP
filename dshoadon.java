@@ -80,12 +80,21 @@ public class dshoadon {
         }
     }
 
-    public void themHDCoTs(hoadon h) {
+    public void themHDCoTs(hoadon h,dskehoachtour dskht) {
         for(int i=0;i<N;i++){
             if(ds[i].getMahd().equalsIgnoreCase(h.getMahd())){
                 System.out.println(" Ma hoa don da ton tai, khong the them!");
                 return;
             }
+        }
+        kehoachtour kht=dskht.timKHT(h.getMakhtour());
+        if(kht==null){
+            System.out.println("Loi khong tim thay ke hoach tour.");
+            return;
+        }
+        if(h.getSove()>kht.getSoveconlai()){
+            System.out.println("Khong the them hoa don do so ve: "+ h.getSove()+" vuot so luong ve con lai: "+kht.getSoveconlai());
+            return ;
         }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new hoadon(h);
@@ -262,7 +271,7 @@ public class dshoadon {
                 bw.newLine();
             }
             bw.close();
-            System.out.println("Da ghi "+N+" hoa don vao file");
+            System.out.println("Da cap nhat vao file "+file);
         }
         catch(Exception e){
             System.out.println("Loi ghi file "+e.getMessage());
