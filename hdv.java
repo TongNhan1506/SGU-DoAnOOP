@@ -94,8 +94,15 @@ class hdv {
             }
         }
         
-        System.out.print("Nhap gioi tinh: ");
+        while(true){
+        System.out.println("Nhap gioi tinh ( Nam/Nu ): ");
         gioitinh = sc.nextLine();
+        if(gioitinh.equalsIgnoreCase("Nam") || gioitinh.equalsIgnoreCase("Nu")){
+            break;
+        }
+        System.out.println("Vui long nhap lai gioi tinh.");
+        } 
+        
         System.out.print("Nhap dia chi: ");
         diachi = sc.nextLine();
         

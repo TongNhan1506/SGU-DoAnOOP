@@ -128,6 +128,10 @@ class dskhachhang {
     }
 
     public void themKhachHang(khachhang k) {
+        if (timTheoMa(k.getMakh()) != -1) {
+            System.out.println("Loi: Ma khach hang '" + k.getMakh() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new khachhang(k);
         N++;
@@ -179,8 +183,15 @@ class dskhachhang {
                     k.setNgaysinh(nhapNgay("Nhap ngay sinh moi"));
                     break;
                 case 3:
-                    System.out.print("Nhap gioi tinh moi: ");
-                    k.setGioitinh(sc.nextLine());
+                    while(true) {
+                        System.out.println("Nhap gioi tinh (Nam/Nu): ");
+                        String gioitinh = sc.nextLine();
+                        if (gioitinh.equalsIgnoreCase("Nam") || gioitinh.equalsIgnoreCase("Nu")) {
+                            k.setGioitinh(gioitinh);
+                            break;
+                        }
+                        System.out.println("Gia tri khong hop le, vui long chi nhap 'Nam' hoac 'Nu'.");
+                    }
                     break;
                 case 4:
                     System.out.print("Nhap dia chi moi: ");

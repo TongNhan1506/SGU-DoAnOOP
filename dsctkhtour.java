@@ -81,6 +81,10 @@ class dsctkhtour {
 
 
     public void themCots(ctkhtour k) {
+        if (timTheoMa(k.getMact()) != -1) {
+            System.out.println("Loi: Ma chi tiet KHT '" + k.getMact() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new ctkhtour(k);
         N++;

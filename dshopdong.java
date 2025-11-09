@@ -71,6 +71,10 @@ public void timTheoMaTour(String matour) {
 
    
     public void themHopDongCots(hopdong h) {
+        if (timTheoMa(h.getMahd()) != -1) {
+            System.out.println("Loi: Ma hop dong '" + h.getMahd() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new hopdong(h);
         N++;

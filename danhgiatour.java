@@ -86,8 +86,13 @@ class danhgiatour {
         if(madg.matches(mdg)){break;}
         System.out.println("Ma danh gia ko dung dinh dang, vui long nhap lai.");
         }
-        System.out.print("Nhap ma ke hoach tour (khoa ngoai): ");
-        makhtour = sc.nextLine();
+        String mt="^KHT[0-9]{3}$";
+        while(true){
+            System.out.println("Nhap ma ke hoach tour (co dinh dang KHTXXX, VD: KHT001)");
+            makhtour=sc.nextLine();
+            if(makhtour.matches(mt)){break;}
+            System.out.println("Loi dinh dang, vui long nhap lai.");
+        }
         System.out.print("Nhap ten khach hang: ");
         tenkh = sc.nextLine();
         do {
