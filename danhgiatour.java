@@ -79,11 +79,11 @@ class danhgiatour {
 
  
     public void nhap() {
-        String mdg="^DG[0-9]{3}";
+        String m="^DG[0-9]{3}$";
         while(true)
         {System.out.print("Nhap ma danh gia: ");
         madg = sc.nextLine();
-        if(madg.matches(mdg)){break;}
+        if(madg.matches(m)){break;}
         System.out.println("Ma danh gia ko dung dinh dang, vui long nhap lai.");
         }
         String mt="^KHT[0-9]{3}$";
