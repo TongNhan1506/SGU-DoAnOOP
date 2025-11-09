@@ -71,6 +71,22 @@ class dsctkhtour {
         }
         return -1;
     }
+    
+    public void timTheoNgayChi(LocalDate ngaychi) { 
+        boolean found = false;
+        System.out.println("\n=== KET QUA TIM KIEM THEO NGAY CHI: " + ngaychi.format(kehoachtour.df) + " ===");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n","Ma ctkh tour", "Ma KH Tour", "Ngay Chi", "Tien An", "Tien O", "Tien Di Lai");
+
+        for (int i = 0; i < N; i++) {
+            if (ds[i].getNgaychi().equals(ngaychi)) { 
+                ds[i].xuat();
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println(" Khong tim thay ke hoach tour nao co ngay chi: " + ngaychi.format(kehoachtour.df));
+        }
+    }
 
     public ctkhtour timCots(String mact) {
         int idx = timTheoMa(mact);

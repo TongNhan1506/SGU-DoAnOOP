@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-
+import java.util.zip.DataFormatException;
+import java.time.format.DateTimeFormatter;
 public class menu {
     private static Scanner sc = new Scanner(System.in);
     private static dsHDV dshdv = new dsHDV();
@@ -275,7 +279,7 @@ public class menu {
                         quanLyHopDong();
                         break;
                     case 5:
-                        thongKeDoanhThu();
+                        thongKeDoanhThu();;
                         break;
                     case 0:
                         System.out.println("Quay lai menu chinh...");
@@ -469,7 +473,19 @@ public class menu {
                         }
                         break;
                     case 4:
-                        System.out.println("Chuc nang tim theo ngay dang bao tri.");
+                        DateTimeFormatter df=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate ngaychi=null;
+                        while (true) {
+                            try{System.out.println("Nhap ngay can tim : ");
+                            String input=sc.nextLine();
+                            ngaychi=LocalDate.parse(input,df);
+                            break;
+                            }
+                            catch(DateTimeParseException e){
+                                System.out.println("Nhap ngay sai dinh dang vui long nhap lai: ");
+                            }
+                        }
+                        dsctkht.timTheoNgayChi(ngaychi);;
                         break;
                     case 5:
                         ctkhtour ctMoi = new ctkhtour();
