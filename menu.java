@@ -80,20 +80,6 @@ public class menu {
         sc.close();
     }
 
-    public static void khoiTao() {
-        dshdv = new dsHDV();
-        dskh = new dskhachhang();
-        dst = new dstour();
-        dskht = new dskehoachtour();
-        dsctkht = new dsctkhtour();
-        dshd = new dshopdong();
-        dshoadon = new dshoadon();
-        dsct = new dscthoadon();
-        dsnh = new dsnhahang();
-        dsdgt = new dsdanhgiatour();
-
-    }
-
     public static void loadfile() {
         dshdv.docFile("dshdv.txt");
         dskh.docFile("dskhachhang.txt");
