@@ -92,6 +92,10 @@ public void timTheoMaKHTour(String makhtour) {
 
 
     public void themDGCoTs(danhgiatour dg) {
+        if (timTheoMa(dg.getMadg()) != -1) {
+            System.out.println("Loi: Ma danh gia '" + dg.getMadg() + "' da ton tai. Khong the them.");
+            return;
+        }
         ds = Arrays.copyOf(ds, N + 1);
         ds[N] = new danhgiatour(dg); // dùng constructor sao chép để an toàn
         N++;
