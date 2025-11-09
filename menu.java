@@ -78,20 +78,6 @@ public class menu {
         sc.close();
     }
 
-    public static void khoiTao() {
-        dshdv = new dsHDV();
-        dskh = new dskhachhang();
-        dst = new dstour();
-        dskht = new dskehoachtour();
-        dsctkht = new dsctkhtour();
-        dshd = new dshopdong();
-        dshoadon = new dshoadon();
-        dsct = new dscthoadon();
-        dsnh = new dsnhahang();
-        dsdgt = new dsdanhgiatour();
-
-    }
-
     public static void loadfile() {
         dshdv.docFile("dshdv.txt");
         dskh.docFile("dskhachhang.txt");
@@ -269,7 +255,7 @@ public class menu {
             System.out.println("2. Quan ly ke hoach tour");
             System.out.println("3. Quan ly chi tiet ke hoach tour");
             System.out.println("4. Quan ly hop dong");
-            System.out.println("6. Thong ke doanh thu");
+            System.out.println("5. Thong ke doanh thu");
             System.out.println("0. Quay lai menu chinh");
             System.out.print("Nhap lua chon cua ban: ");
 
@@ -289,9 +275,6 @@ public class menu {
                         quanLyHopDong();
                         break;
                     case 5:
-                        System.out.println("Chuc nang da duoc chuyen ra menu chinh (So 4).");
-                        break;
-                    case 6:
                         thongKeDoanhThu();
                         break;
                     case 0:
