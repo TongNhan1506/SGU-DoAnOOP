@@ -15,7 +15,7 @@ public class menu {
     private static dsdanhgiatour dsdgt = new dsdanhgiatour();
     private static dsnhahang dsnh = new dsnhahang();
 
-    public static void main(String[] args) {
+    public static void start() {
         loadfile();
         int chon = -1;
 
